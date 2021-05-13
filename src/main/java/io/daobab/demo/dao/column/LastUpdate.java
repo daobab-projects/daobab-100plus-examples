@@ -20,6 +20,7 @@ public interface LastUpdate<E extends EntityMap> extends EntityRelationMap<E> {
         return getColumnParam("LastUpdate");
     }
 
+    @SuppressWarnings("unchecked")
     default E setLastUpdate(Timestamp val) {
         setColumnParam("LastUpdate", val);
         return (E) this;

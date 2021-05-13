@@ -1,8 +1,8 @@
 package io.daobab.demo;
 
 import io.daobab.demo.dao.SakilaTables;
-import io.daobab.demo.example.base.InMemoryAppender;
-import io.daobab.demo.example.base.ServiceBase;
+import io.daobab.demo.base.InMemoryAppender;
+import io.daobab.demo.base.ServiceBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
