@@ -4,6 +4,8 @@ import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Customer;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 /**
  * ---------------------------------------------------------
@@ -49,4 +51,5 @@ public class WhereManyConditions extends ServiceBase<Customer> {
                         .equal(t.colLastName(), "WILSON"))
                 .findOne();
     }
+
 }
