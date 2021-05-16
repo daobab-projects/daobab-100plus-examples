@@ -42,12 +42,12 @@ public class Controller implements SakilaTables {
     @GetMapping("/")
     public String page() {
         String rv = load();
-        rv = rv.replaceAll("_S_SERVICES_E_", getServices(null));
-        return rv.replaceAll("_S_LOG_E_", inMemoryConsole.getHistory());
+        rv = rv.replace("_S_SERVICES_E_", getServices(null));
+        return rv.replace("_S_LOG_E_", inMemoryConsole.getHistory());
     }
 
     private String getServices(String selected) {
-        var sb = new StringBuffer();
+        var sb = new StringBuilder();
         sb.append("<option" + (selected == null ? " selected " : "") + ">Choose Daobab example to execute</option>");
         for (var service : examples) {
 
@@ -59,12 +59,13 @@ public class Controller implements SakilaTables {
 
     @GetMapping("/test")
     public String test(@RequestParam(value = "name", required = false) String no) {
+        System.out.println("wywoluje "+no);
         inMemoryConsole.clear();
-        if (no == null == false) executeExampleNo(no);
+        if (no != null) executeExampleNo(no);
 
         String rv = load();
-        rv = rv.replaceAll("_S_SERVICES_E_", getServices(no));
-        return rv.replaceAll("_S_LOG_E_", inMemoryConsole.getHistory());
+        rv = rv.replace("_S_SERVICES_E_", getServices(no));
+        return rv.replace("_S_LOG_E_", inMemoryConsole.getHistory());
     }
 
     @GetMapping("/log")
@@ -75,8 +76,8 @@ public class Controller implements SakilaTables {
 
     public String load() {
         try {
-            String content = new Scanner(new ClassPathResource("page.html").getInputStream(), "UTF-8").useDelimiter("\\A").next();
-            return content;//DictTemplateKey.TEMP_APP_URL.replaceAll(content,getURL());
+            return new Scanner(new ClassPathResource("page.html").getInputStream(), "UTF-8").useDelimiter("\\A").next();
+//            return content;//DictTemplateKey.TEMP_APP_URL.replaceAll(content,getURL());
         } catch (Exception e) {
             e.printStackTrace();
             return "";
