@@ -6,6 +6,7 @@ import io.daobab.demo.example.b_beginner.*;
 import io.daobab.demo.example.c_talented.*;
 import io.daobab.demo.example.d_proficient.*;
 import io.daobab.demo.example.e_expert.*;
+import io.daobab.error.DaobabSQLException;
 import io.daobab.error.MandatoryWhere;
 import io.daobab.error.SqlInjectionDetected;
 import org.junit.Assert;
@@ -305,7 +306,7 @@ public class GlobalTest implements THelper {
 
     @Test
     public void testInsertSelect(){
-        validation(callExample(InsertSelect.class));
+        Assert.assertThrows(DaobabSQLException.class, () -> callExample(InsertSelect.class));
     }
 
     @Test
@@ -409,7 +410,7 @@ public class GlobalTest implements THelper {
     }
 
     @Test
-    public void testE075(){
+    public void testTransactionWrapperVoid(){
         validation(callExample(TransactionWrapperVoid.class));
     }
 
@@ -434,17 +435,17 @@ public class GlobalTest implements THelper {
     }
 
     @Test
-    public void testE080(){
+    public void testWhereNotNullIsNull(){
         validation(callExample(WhereNotNullIsNull.class));
     }
 
     @Test
-    public void testE081(){
+    public void testConditionalWhere(){
         validation(callExample(ConditionalWhere.class));
     }
 
     @Test
-    public void testE082(){
+    public void testConditionIfNotNull(){
         validation(callExample(ConditionIfNotNull.class));
     }
 
@@ -454,142 +455,142 @@ public class GlobalTest implements THelper {
     }
 
     @Test
-    public void testE084(){
+    public void testMetaDataColumnDatatype(){
         validation(callExample(MetaDataColumnDatatype.class));
     }
 
     @Test
-    public void testE085(){
+    public void testMetaDataAsQueryTarget(){
         validation(callExample(MetaDataAsQueryTarget.class));
     }
 
     @Test
-    public void testE086(){
+    public void testMultiEntity(){
         validation(callExample(MultiEntity.class));
     }
 
     @Test
-    public void testE087(){
+    public void testPrimaryKeyFindManyToManyRelated(){
         validation(callExample(PrimaryKeyFindManyToManyRelated.class));
     }
 
     @Test
-    public void testE088(){
+    public void testPrimaryKeyFindManyToManyRelatedColumns(){
         validation(callExample(PrimaryKeyFindManyToManyRelatedColumns.class));
     }
 
     @Test
-    public void testE089(){
+    public void testPrimaryKeyFindOneToOneRelated(){
         validation(callExample(PrimaryKeyFindOneToOneRelated.class));
     }
 
     @Test
-    public void testE090(){
+    public void testPrimaryKeyFindOneToOneRelatedColumns(){
         validation(callExample(PrimaryKeyFindOneToOneRelatedColumns.class));
     }
 
     @Test
-    public void testE091(){
+    public void testQueryMultiEntity(){
         validation(callExample(QueryMultiEntity.class));
     }
 
     @Test
-    public void testE092(){
+    public void testRemotePlate(){
         validation(callExample(RemotePlate.class));
     }
 
     @Test
-    public void testE093(){
+    public void testRemoteSecurityForbiddenColumns(){
         callExample(RemoteSecurityForbiddenColumns.class);
     }
 
     @Test
-    public void testE094(){
+    public void testRemoteSecurityForbiddenEntities(){
         validation(callExample(RemoteSecurityForbiddenEntities.class));
     }
 
     @Test
-    public void testE095(){
+    public void testRemoteSelectManyCells(){
         validation(callExample(RemoteSelectManyCells.class));
     }
 
     @Test
-    public void testE096(){
+    public void testRemoteSelectManyColumns(){
         validation(callExample(RemoteSelectManyColumns.class));
     }
 
     @Test
-    public void testE097(){
+    public void testRemoteSelectManyEntities(){
         validation(callExample(RemoteSelectManyEntities.class));
     }
 
     @Test
-    public void testE098(){
+    public void testRemoteSelectOneEntity(){
         validation(callExample(RemoteSelectOneEntity.class));
     }
 
     @Test
-    public void testE099(){
+    public void testResultPostProcessor(){
         validation(callExample(ResultPostProcessor.class));
     }
 
     @Test
-    public void testE100() {
+    public void testTransactionPropagation() {
         validation(callExample(TransactionPropagation.class));
     }
 
     @Test
-    public void testE101() {
+    public void testSqlInjectionProtection() {
         Assert.assertThrows(SqlInjectionDetected.class, () -> callExample(SqlInjectionProtection.class));
     }
 
     @Test
-    public void testE102() {
+    public void testAbstractQueryAddressRelatedItems() {
         callExample(AbstractQueryAddressRelatedItems.class);
     }
 
     @Test
-    public void testE103() {
+    public void testAbstractQueryLastRecord() {
         callExample(AbstractQueryLastRecord.class);
     }
 
     @Test
-    public void testE104() {
+    public void testEagerLoading() {
         callExample(EagerLoading.class);
     }
 
     @Test
-    public void testE106() {
+    public void testEmbeddedColumns() {
         callExample(EmbeddedColumns.class);
     }
 
     @Test
-    public void testE107() {
+    public void testAccidentalDeleteProtection() {
         Assert.assertThrows(MandatoryWhere.class, () -> callExample(AccidentalDeleteProtection.class));
     }
 
     @Test
-    public void testE108() {
+    public void testEEnhancedEntity() {
         callExample(EnhancedEntity.class);
     }
 
     @Test
-    public void testE109() {
+    public void testLazyLoading() {
         callExample(LazyLoading.class);
     }
 
     @Test
-    public void testE110() {
+    public void testLinkingEntitiesByWhere() {
         callExample(LinkingEntitiesByWhere.class);
     }
     @Test
-    public void testE111() {
+    public void testOptimisticConcurrencyControlForPrimaryKey() {
         callExample(OptimisticConcurrencyControlForPrimaryKey.class);
     }
-    public void testE112() {
+    public void testQueryOptimisation() {
         callExample(QueryOptimisation.class);
     }
-    public void testE113() {
+    public void testValidateSchemaCompliant() {
         callExample(ValidateSchemaCompliant.class);
     }
 

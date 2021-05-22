@@ -1,9 +1,7 @@
 package io.daobab.demo;
 
 import io.daobab.generator.DaobabGenerator;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
 public class ExampleGenerator {
 
     public static void main(String[] args) {

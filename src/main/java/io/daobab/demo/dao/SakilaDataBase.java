@@ -9,11 +9,14 @@ import io.daobab.target.database.SqlQueryResolver;
 import io.daobab.target.protection.Access;
 import org.h2.tools.RunScript;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
@@ -84,10 +87,13 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
 
         try {
             var con = ds.getConnection();
-            var script = new File(SakilaDataBase.class.getResource("/schema.sql").getFile());
-            RunScript.execute(con, new FileReader(script));
-            var script2 = new File(SakilaDataBase.class.getResource("/data.sql").getFile());
-            RunScript.execute(con, new FileReader(script2));
+
+            RunScript.execute(con,new BufferedReader(
+                    new InputStreamReader(new ClassPathResource("schema.sql").getInputStream())));
+
+            RunScript.execute(con,new BufferedReader(
+                    new InputStreamReader(new ClassPathResource("data.sql").getInputStream())));
+
 
         } catch (Exception e) {
             e.printStackTrace();
