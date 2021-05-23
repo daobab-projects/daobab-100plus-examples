@@ -595,4 +595,8 @@ public class GlobalTest implements THelper {
     }
 
 
+    @Test
+    public void testQueryModification() {
+        callExample(QueryModification.class);
+    }
 }

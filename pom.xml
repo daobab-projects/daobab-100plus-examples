@@ -70,6 +70,7 @@
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
 
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
@@ -88,14 +89,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<compilerArguments>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</compilerArguments>
+					<release>${java.version}</release>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
