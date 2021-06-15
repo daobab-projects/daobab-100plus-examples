@@ -1,8 +1,8 @@
 package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.statement.FunctionWhisperer;
-import io.daobab.target.meta.MetaSpecificsTables;
+import io.daobab.statement.function.FunctionWhispererH2;
+import io.daobab.target.meta.MetaDataTables;
 import io.daobab.target.multi.MultiEntityTarget;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import static java.lang.String.format;
  */
 @SuppressWarnings("DuplicatedCode")
 @Component
-public class MultiEntity extends ServiceBase<Void> implements MetaSpecificsTables, FunctionWhisperer {
+public class MultiEntity extends ServiceBase<Void> implements MetaDataTables, FunctionWhispererH2 {
 
 
     @Override

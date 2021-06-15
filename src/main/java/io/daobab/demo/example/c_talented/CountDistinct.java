@@ -1,7 +1,7 @@
 package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.statement.FunctionWhisperer;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class CountDistinct extends ServiceBase<Long> implements FunctionWhisperer {
+public class CountDistinct extends ServiceBase<Long> implements FunctionWhispererH2 {
 
     @Override
     public Long call() {
@@ -23,7 +23,7 @@ public class CountDistinct extends ServiceBase<Long> implements FunctionWhispere
     public Long way2() {
         var c = tabCustomer;
         return db
-                .select(countDistinct(c.colID()))
+                .select(count(distinct(c.colID())))
                 .whereGreater(c.colID(), 10)
                 .findOne();
     }

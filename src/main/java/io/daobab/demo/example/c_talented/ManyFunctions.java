@@ -2,9 +2,8 @@ package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.FlatPlate;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
-
-import static io.daobab.statement.Function.*;
 
 /**
  * ---------------------------------------------------------
@@ -13,7 +12,7 @@ import static io.daobab.statement.Function.*;
  * - How to use many sql functions
  */
 @Component
-public class ManyFunctions extends ServiceBase<FlatPlate> {
+public class ManyFunctions extends ServiceBase<FlatPlate> implements FunctionWhispererH2 {
 
     @Override
     public FlatPlate call() {

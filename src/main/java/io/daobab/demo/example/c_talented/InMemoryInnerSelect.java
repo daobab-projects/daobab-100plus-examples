@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static io.daobab.demo.dao.Lang.English;
-import static io.daobab.demo.dao.Lang.French;
+import static io.daobab.demo.dao.Lang.*;
 
 /**
  * ---------------------------------------------------------
@@ -18,7 +17,6 @@ import static io.daobab.demo.dao.Lang.French;
 @Component
 public class InMemoryInnerSelect extends ServiceBase<List<Film>> {
 
-
     @Override
     public List<Film> call() {
         var l = tabLanguage;
@@ -28,7 +26,6 @@ public class InMemoryInnerSelect extends ServiceBase<List<Film>> {
         return db.select(t)
                 .whereIn(t.colLanguageId(), buffer.select(l.colID()).whereIn(l.colName(), English, French))
                 .findMany();
-
     }
 
 

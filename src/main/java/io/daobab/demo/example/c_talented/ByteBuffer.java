@@ -1,7 +1,7 @@
 package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.target.meta.MetaSpecificsTables;
+import io.daobab.target.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class ByteBuffer extends ServiceBase<Void> implements MetaSpecificsTables {
+public class ByteBuffer extends ServiceBase<Void> implements MetaDataTables {
 
 
     @Override

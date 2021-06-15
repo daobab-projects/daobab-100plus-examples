@@ -8,7 +8,7 @@ public enum Lang {
     Japanese,
     Mandarin,
     French,
-    German;
+    German
 
 
 }

@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 public class InMemoryAppender extends AppenderBase<ILoggingEvent> implements ParserGeneral {
 
     //:(
-    private static ConcurrentMap<Long, ILoggingEvent> eventMap = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Long, ILoggingEvent> eventMap = new ConcurrentHashMap<>();
 
     @Override
     protected void append(ILoggingEvent event) {
@@ -35,7 +35,7 @@ public class InMemoryAppender extends AppenderBase<ILoggingEvent> implements Par
     public String getHistory() {
         var timeborder = System.currentTimeMillis() - 5 * 60 * 1000 + 1000; //5 min
         var map = eventMap;
-        var sb = new StringBuffer();
+        var sb = new StringBuilder();
 
 
         var keys = new TreeSet<Long>();

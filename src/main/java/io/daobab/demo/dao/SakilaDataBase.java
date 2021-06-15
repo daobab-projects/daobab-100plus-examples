@@ -3,19 +3,23 @@ package io.daobab.demo.dao;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import io.daobab.demo.dao.procedure.SomeIn;
+import io.daobab.demo.dao.procedure.SomeOut;
+import io.daobab.demo.dao.table.Rental;
 import io.daobab.model.Entity;
+import io.daobab.model.IdGeneratorSupplier;
 import io.daobab.target.database.DataBaseTarget;
 import io.daobab.target.database.SqlQueryResolver;
 import io.daobab.target.protection.Access;
 import org.h2.tools.RunScript;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +37,9 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
     @Value("${spring.datasource.driverClassName}")
     private String driverClassName;
 
+    @Autowired
+    private RentalGenerator rentalGenerator;
+
     @Override
     protected DataSource initDataSource() {
 
@@ -48,10 +55,12 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
             createDatabaseContent(db);
         }
 
-        getAccessProtector().setColumnAccess(tabActor.colLastName(), Access.NO_INSERT, Access.NO_UPDATE);
-
-
         return db;
+    }
+
+    @PostConstruct
+    public void init(){
+        getAccessProtector().setColumnAccess(tabActor.colLastName(), Access.NO_INSERT, Access.NO_UPDATE);
     }
 
     @Override
@@ -78,7 +87,6 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
                 tabRental,
                 tabStaff,
                 tabStore
-
         );
     }
 
@@ -94,7 +102,6 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
             RunScript.execute(con,new BufferedReader(
                     new InputStreamReader(new ClassPathResource("data.sql").getInputStream())));
 
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Database initialize script error");
@@ -102,5 +109,16 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
 
     }
 
+    public SomeOut test(SomeIn in){
+        return callProcedure("test",in,new SomeOut());
+    }
 
+    @Override
+    public <E extends Entity> IdGeneratorSupplier<?> getPrimaryKeyGenerator(E entity) {
+
+        if (entity.getClass().equals(Rental.class)){
+                return rentalGenerator;
+        }
+        return null;
+    }
 }

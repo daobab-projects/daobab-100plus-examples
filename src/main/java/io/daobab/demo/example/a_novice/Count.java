@@ -1,7 +1,7 @@
 package io.daobab.demo.example.a_novice;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.statement.FunctionWhisperer;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class Count extends ServiceBase<Long> implements FunctionWhisperer {
+public class Count extends ServiceBase<Long> implements FunctionWhispererH2 {
 
     @Override
     public Long call() {

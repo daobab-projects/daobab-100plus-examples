@@ -2,7 +2,7 @@ package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.target.database.JdbcType;
-import io.daobab.target.meta.MetaSpecificsTables;
+import io.daobab.target.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class MetaDataAsQueryTarget extends ServiceBase<Void> implements MetaSpecificsTables {
+public class MetaDataAsQueryTarget extends ServiceBase<Void> implements MetaDataTables {
 
 
     @Override
