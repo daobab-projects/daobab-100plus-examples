@@ -25,6 +25,7 @@ public class InMemorySelect extends ServiceBase<List<String>> {
         //execute SQL over this content - query only for titles of movies longer than...
         return allFilms.select(t.colTitle())
                 .whereGreater(t.colLength(), 150)
+                .limitBy(15)
                 .findMany();
     }
 

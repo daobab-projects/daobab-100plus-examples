@@ -1,10 +1,8 @@
 package io.daobab.demo.example.b_beginner;
 
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
-
-import static io.daobab.statement.Function.length;
-import static io.daobab.statement.Function.max;
 
 /**
  * ---------------------------------------------------------
@@ -12,10 +10,10 @@ import static io.daobab.statement.Function.max;
  * ---------------------------------------------------------
  */
 @Component
-public class FunctionMax extends ServiceBase<Double> {
+public class FunctionMax extends ServiceBase<Integer> implements FunctionWhispererH2 {
 
     @Override
-    public Double call() {
+    public Integer call() {
         return db.select(max(length(tabFilm.colDescription())))
                 .groupBy(tabFilm.colLanguageId())
                 .findOne();

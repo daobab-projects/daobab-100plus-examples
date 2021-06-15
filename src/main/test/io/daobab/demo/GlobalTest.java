@@ -9,21 +9,20 @@ import io.daobab.demo.example.e_expert.*;
 import io.daobab.error.DaobabSQLException;
 import io.daobab.error.MandatoryWhere;
 import io.daobab.error.SqlInjectionDetected;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest
-public class GlobalTest implements THelper {
-    private Logger log = LoggerFactory.getLogger("Test");
+class GlobalTest implements THelper {
+    private final Logger log = LoggerFactory.getLogger("Test");
 
     @Override
     public Logger getLog() {
@@ -40,563 +39,567 @@ public class GlobalTest implements THelper {
 
 
     @Test
-    public void testCount(){
+    void testCount(){
         validation(callExample(Count.class));
     }
 
     @Test
-    public void testDistinct(){
+    void testDistinct(){
         validation(callExample(Distinct.class));
     }
 
     @Test
-    public void testEnums(){
+    void testEnums(){
         validation(callExample(Enums.class));
     }
 
     @Test
-    public void testLimit(){
+    void testLimit(){
         validation(callExample(Limit.class));
     }
 
     @Test
-    public void testManyPlatesManyTables(){
+    void testManyPlatesManyTables(){
         validation(callExample(ManyPlatesManyTables.class));
     }
 
     @Test
-    public void testOnePlateManyTables(){
+    void testOnePlateManyTables(){
         validation(callExample(OnePlateManyTables.class));
     }
 
     @Test
-    public void testOrder(){
+    void testOrder(){
         validation(callExample(Order.class));
     }
 
     @Test
-    public void testSelectAll(){
+    void testSelectAll(){
         validation(callExample(SelectAll.class));
     }
 
     @Test
-    public void testSelectBlob(){
+    void testSelectBlob(){
         validation(callExample(SelectBlob.class));
     }
 
     @Test
-    public void testSelectField(){
+    void testSelectField(){
         validation(callExample(SelectField.class));
     }
 
     @Test
-    public void testSelectFieldList(){
+    void testSelectFieldList(){
         validation(callExample(SelectFieldList.class));
     }
 
     @Test
-    public void testSelectManyEntities(){
+    void testSelectManyEntities(){
         validation(callExample(SelectManyEntities.class));
     }
 
     @Test
-    public void testSelectOneEntity(){
+    void testSelectOneEntity(){
         validation(callExample(SelectOnePrimaryKeyEntity.class));
     }
 
     @Test
-    public void testSelectPlate(){
+    void testSelectPlate(){
         validation(callExample(SelectPlate.class));
     }
 
     @Test
-    public void testWhereAnd(){
+    void testWhereAnd(){
         validation(callExample(WhereAnd.class));
     }
 
     @Test
-    public void testWhereNot(){
+    void testWhereNot(){
         validation(callExample(WhereNot.class));
     }
 
     @Test
-    public void testWhereOr(){
+    void testWhereOr(){
         validation(callExample(WhereOr.class));
     }
 
     @Test
-    public void testWhereSingleCondition(){
+    void testWhereSingleCondition(){
         validation(callExample(WhereSingleCondition.class));
     }
 
     @Test
-    public void testBuildInParsers(){
+    void testBuildInParsers(){
         validation(callExample(BuildInParsers.class));
     }
 
     @Test
-    public void testChainedSettingAndInsert(){
+    void testChainedSettingAndInsert(){
         validation(callExample(ChainedSettingAndInsert.class));
     }
 
     @Test
-    public void testDistinctCount(){
+    void testDistinctCount(){
         validation(callExample(DistinctCount.class));
     }
 
     @Test
-    public void testFunctionAvg(){
+    void testFunctionAvg(){
         validation(callExample(FunctionAvg.class));
     }
 
     @Test
-    public void testFunctionLower(){
+    void testFunctionLower(){
         validation(callExample(FunctionLower.class));
     }
 
     @Test
-    public void testFunctionMax(){
+    void testFunctionMax(){
         validation(callExample(FunctionMax.class));
     }
 
     @Test
-    public void testFunctionMin(){
+    void testFunctionMin(){
         validation(callExample(FunctionMin.class));
     }
 
     @Test
-    public void testFunctionSum(){
+    void testFunctionSum(){
         validation(callExample(FunctionSum.class));
     }
 
     @Test
-    public void testPlateAsEntity(){
+    void testPlateAsEntity(){
         validation(callExample(PlateAsEntity.class));
     }
 
     @Test
-    public void testPrimaryKeyDelete(){
+    void testPrimaryKeyDelete(){
         validation(callExample(PrimaryKeyDelete.class));
     }
 
     @Test
-    public void testPrimaryKeyInsert(){
+    void testPrimaryKeyInsert(){
         validation(callExample(PrimaryKeyInsert.class));
     }
 
     @Test
-    public void testPrimaryKeyUpdate(){
+    void testPrimaryKeyUpdate(){
         validation(callExample(PrimaryKeyUpdate.class));
     }
 
     @Test
-    public void testResultConsumer(){
+    void testResultConsumer(){
         validation(callExample(ResultConsumer.class));
     }
 
     @Test
-    public void testResultMapper(){
+    void testResultMapper(){
         validation(callExample(ResultMapper.class));
     }
 
     @Test
-    public void testToJsonEntities(){
+    void testToJsonEntities(){
         validation(callExample(ToJsonEntities.class));
     }
 
     @Test
-    public void testToJsonEntity(){
+    void testToJsonEntity(){
         validation(callExample(ToJsonEntity.class));
     }
 
     @Test
-    public void testToJsonPlate(){
+    void testToJsonPlate(){
         validation(callExample(ToJsonPlate.class));
     }
 
     @Test
-    public void testWhereManyConditions(){
+    void testWhereManyConditions(){
         validation(callExample(WhereManyConditions.class));
     }
 
     @Test
-    public void testBigQuery(){
+    void testBigQuery(){
         validation(callExample(BigQuery.class));
     }
 
     @Test
-    public void testByteBuffer(){
+    void testByteBuffer(){
         validation(callExample(ByteBuffer.class));
     }
 
     @Test
-    public void testCloningEntities(){
+    void testCloningEntities(){
         validation(callExample(CloningEntities.class));
     }
 
     @Test
-    public void testCombinedFunctions(){
+    void testCombinedFunctions(){
         validation(callExample(CombinedFunctions.class));
     }
 
     @Test
-    public void testConcurrencySafeDelete(){
+    void testConcurrencySafeDelete(){
         validation(callExample(ConcurrencySafeDelete.class));
     }
 
     @Test
-    public void testConcurrencySafeUpdate(){
+    void testConcurrencySafeUpdate(){
         validation(callExample(ConcurrencySafeUpdate.class));
     }
 
     @Test
-    public void testCountDistinct(){
+    void testCountDistinct(){
         validation(callExample(CountDistinct.class));
     }
 
     @Test
-    public void testDateFunctions(){
+    void testDateFunctions(){
         validation(callExample(DateFunctions.class));
     }
 
     @Test
-    public void testFlatPlateExample(){
+    void testFlatPlateExample(){
         validation(callExample(FlatPlateExample.class));
     }
 
     @Test
-    public void testGroupBy(){
+    void testGroupBy(){
         validation(callExample(GroupBy.class));
     }
 
     @Test
-    public void testHaving(){
+    void testHaving(){
         validation(callExample(Having.class));
     }
 
     @Test
-    public void testAboveMultiEntity(){
+    void testAboveMultiEntity(){
         validation(callExample(AboveMultiEntity.class));
     }
 
     @Test
-    public void testInMemoryCascadeSelects(){
+    void testInMemoryCascadeSelects(){
         validation(callExample(InMemoryCascadeSelects.class));
     }
 
     @Test
-    public void testInMemoryFilterAndMap(){
+    void testInMemoryFilterAndMap(){
         validation(callExample(EntitiesStream.class));
     }
 
     @Test
-    public void testInMemoryInnerSelect(){
+    void testInMemoryInnerSelect(){
         validation(callExample(InMemoryInnerSelect.class));
     }
 
     @Test
-    public void testInMemorySelect(){
+    void testInMemorySelect(){
         validation(callExample(InMemorySelect.class));
     }
 
     @Test
-    public void testInnerSelect(){
+    void testInnerSelect(){
         validation(callExample(InnerSelect.class));
     }
 
     @Test
-    public void testInsertSelect(){
-        Assert.assertThrows(DaobabSQLException.class, () -> callExample(InsertSelect.class));
+    void testInsertSelect(){
+        assertThrows(DaobabSQLException.class, () -> callExample(InsertSelect.class));
     }
 
     @Test
-    public void testJoinLeft(){
+    void testJoinLeft(){
         validation(callExample(JoinLeft.class));
     }
 
     @Test
-    public void testJoinManyTables(){
+    void testJoinManyTables(){
         validation(callExample(JoinManyTables.class));
     }
 
     @Test
-    public void testJoinPrimaryKeyTable(){
+    void testJoinPrimaryKeyTable(){
         validation(callExample(JoinPrimaryKeyTable.class));
     }
 
     @Test
-    public void testJoinTable(){
+    void testJoinTable(){
         validation(callExample(JoinTable.class));
     }
 
     @Test
-    public void testJoinViaDifferentColumns(){
+    void testJoinViaDifferentColumns(){
         validation(callExample(JoinViaDifferentColumns.class));
     }
 
     @Test
-    public void testJoinWithJoinConditions(){
+    void testJoinWithJoinConditions(){
         validation(callExample(JoinWithJoinConditions.class));
     }
 
     @Test
-    public void testLimitOffset(){
+    void testLimitOffset(){
         validation(callExample(LimitOffset.class));
     }
 
     @Test
-    public void testManyFunctions(){
+    void testManyFunctions(){
         validation(callExample(ManyFunctions.class));
     }
 
     @Test
-    public void testMinus(){
+    void testMinus(){
         validation(callExample(Minus.class));
     }
 
     @Test
-    public void testOrderJoinManyTables(){
+    void testOrderJoinManyTables(){
         validation(callExample(OrderJoinManyTables.class));
     }
 
     @Test
-    public void testPagination(){
+    void testPagination(){
         validation(callExample(Pagination.class));
     }
 
     @Test
-    public void testSelectFromDual(){
+    void testSelectFromDual(){
         validation(callExample(SelectFromDual.class));
     }
 
     @Test
-    public void testSelectNativeManyCells(){
+    void testSelectNativeManyCells(){
         validation(callExample(SelectNativeManyCells.class));
     }
 
     @Test
-    public void testSelectNativeManyEntities(){
+    void testSelectNativeManyEntities(){
         validation(callExample(SelectNativeManyEntities.class));
     }
 
     @Test
-    public void testSelectNativeOneEntity(){
+    void testSelectNativeOneEntity(){
         validation(callExample(SelectNativeOneEntity.class));
     }
 
     @Test
-    public void testSelectNativePlate(){
+    void testSelectNativePlate(){
         validation(callExample(SelectNativePlate.class));
     }
 
     @Test
-    public void testStatistic(){
-        Assert.assertNull(callExample(Statistic.class));
+    void testStatistic(){
+        assertNull(callExample(Statistic.class));
     }
 
     @Test
-    public void testTransactionManual(){
-        Assert.assertNull(callExample(TransactionManual.class));
+    void testTransactionManual(){
+        assertNull(callExample(TransactionManual.class));
     }
 
     @Test
-    public void testTransactionWrapper(){
+    void testTransactionWrapper(){
         validation(callExample(TransactionWrapper.class));
     }
 
     @Test
-    public void testTransactionWrapperAsynchronous(){
+    void testTransactionWrapperAsynchronous(){
         validation(callExample(TransactionWrapperAsynchronous.class));
     }
 
     @Test
-    public void testTransactionWrapperVoid(){
+    void testTransactionWrapperVoid(){
         validation(callExample(TransactionWrapperVoid.class));
     }
 
     @Test
-    public void testUnionAll(){
+    void testUnionAll(){
         validation(callExample(UnionAll.class));
     }
 
     @Test
-    public void testUpdateSelectedOnly(){
+    void testUpdateSelectedOnly(){
         validation(callExample(UpdateSelectedOnly.class));
     }
 
     @Test
-    public void testWhereInAndArrays(){
+    void testWhereInAndArrays(){
         validation(callExample(WhereInAndArrays.class));
     }
 
     @Test
-    public void testWhereManyCombined(){
+    void testWhereManyCombined(){
         validation(callExample(WhereManyCombined.class));
     }
 
     @Test
-    public void testWhereNotNullIsNull(){
+    void testWhereNotNullIsNull(){
         validation(callExample(WhereNotNullIsNull.class));
     }
 
     @Test
-    public void testConditionalWhere(){
+    void testConditionalWhere(){
         validation(callExample(ConditionalWhere.class));
     }
 
     @Test
-    public void testConditionIfNotNull(){
+    void testConditionIfNotNull(){
         validation(callExample(ConditionIfNotNull.class));
     }
 
     @Test
-    public void testE083(){
+    void testE083(){
         validation(callExample(DateTimeConversions.class));
     }
 
     @Test
-    public void testMetaDataColumnDatatype(){
+    void testMetaDataColumnDatatype(){
         validation(callExample(MetaDataColumnDatatype.class));
     }
 
     @Test
-    public void testMetaDataAsQueryTarget(){
+    void testMetaDataAsQueryTarget(){
         validation(callExample(MetaDataAsQueryTarget.class));
     }
 
     @Test
-    public void testMultiEntity(){
+    void testMultiEntity(){
         validation(callExample(MultiEntity.class));
     }
 
     @Test
-    public void testPrimaryKeyFindManyToManyRelated(){
+    void testPrimaryKeyFindManyToManyRelated(){
         validation(callExample(PrimaryKeyFindManyToManyRelated.class));
     }
 
     @Test
-    public void testPrimaryKeyFindManyToManyRelatedColumns(){
+    void testPrimaryKeyFindManyToManyRelatedColumns(){
         validation(callExample(PrimaryKeyFindManyToManyRelatedColumns.class));
     }
 
     @Test
-    public void testPrimaryKeyFindOneToOneRelated(){
+    void testPrimaryKeyFindOneToOneRelated(){
         validation(callExample(PrimaryKeyFindOneToOneRelated.class));
     }
 
     @Test
-    public void testPrimaryKeyFindOneToOneRelatedColumns(){
+    void testPrimaryKeyFindOneToOneRelatedColumns(){
         validation(callExample(PrimaryKeyFindOneToOneRelatedColumns.class));
     }
 
     @Test
-    public void testQueryMultiEntity(){
+    void testQueryMultiEntity(){
         validation(callExample(QueryMultiEntity.class));
     }
 
     @Test
-    public void testRemotePlate(){
+    void testRemotePlate(){
         validation(callExample(RemotePlate.class));
     }
 
     @Test
-    public void testRemoteSecurityForbiddenColumns(){
+    void testRemoteSecurityForbiddenColumns(){
         callExample(RemoteSecurityForbiddenColumns.class);
     }
 
     @Test
-    public void testRemoteSecurityForbiddenEntities(){
+    void testRemoteSecurityForbiddenEntities(){
         validation(callExample(RemoteSecurityForbiddenEntities.class));
     }
 
     @Test
-    public void testRemoteSelectManyCells(){
+    void testRemoteSelectManyCells(){
         validation(callExample(RemoteSelectManyCells.class));
     }
 
     @Test
-    public void testRemoteSelectManyColumns(){
+    void testRemoteSelectManyColumns(){
         validation(callExample(RemoteSelectManyColumns.class));
     }
 
     @Test
-    public void testRemoteSelectManyEntities(){
+    void testRemoteSelectManyEntities(){
         validation(callExample(RemoteSelectManyEntities.class));
     }
 
     @Test
-    public void testRemoteSelectOneEntity(){
+    void testRemoteSelectOneEntity(){
         validation(callExample(RemoteSelectOneEntity.class));
     }
 
     @Test
-    public void testResultPostProcessor(){
+    void testResultPostProcessor(){
         validation(callExample(ResultPostProcessor.class));
     }
 
     @Test
-    public void testTransactionPropagation() {
+    void testTransactionPropagation() {
         validation(callExample(TransactionPropagation.class));
     }
 
     @Test
-    public void testSqlInjectionProtection() {
-        Assert.assertThrows(SqlInjectionDetected.class, () -> callExample(SqlInjectionProtection.class));
+    void testSqlInjectionProtection() {
+        assertThrows(SqlInjectionDetected.class, () -> callExample(SqlInjectionProtection.class));
     }
 
     @Test
-    public void testAbstractQueryAddressRelatedItems() {
+    void testAbstractQueryAddressRelatedItems() {
         callExample(AbstractQueryAddressRelatedItems.class);
     }
 
     @Test
-    public void testAbstractQueryLastRecord() {
+    void testAbstractQueryLastRecord() {
         callExample(AbstractQueryLastRecord.class);
     }
 
     @Test
-    public void testEagerLoading() {
+    void testEagerLoading() {
         callExample(EagerLoading.class);
     }
 
     @Test
-    public void testEmbeddedColumns() {
+    void testEmbeddedColumns() {
         callExample(EmbeddedColumns.class);
     }
 
     @Test
-    public void testAccidentalDeleteProtection() {
-        Assert.assertThrows(MandatoryWhere.class, () -> callExample(AccidentalDeleteProtection.class));
+    void testAccidentalDeleteProtection() {
+        assertThrows(MandatoryWhere.class, () -> callExample(AccidentalDeleteProtection.class));
     }
 
     @Test
-    public void testEEnhancedEntity() {
+    void testEEnhancedEntity() {
         callExample(EnhancedEntity.class);
     }
 
     @Test
-    public void testLazyLoading() {
+    void testLazyLoading() {
         callExample(LazyLoading.class);
     }
 
     @Test
-    public void testLinkingEntitiesByWhere() {
+    void testLinkingEntitiesByWhere() {
         callExample(LinkingEntitiesByWhere.class);
     }
     @Test
-    public void testOptimisticConcurrencyControlForPrimaryKey() {
+    void testOptimisticConcurrencyControlForPrimaryKey() {
         callExample(OptimisticConcurrencyControlForPrimaryKey.class);
     }
-    public void testQueryOptimisation() {
+
+    @Test
+    void testQueryOptimisation() {
         callExample(QueryOptimisation.class);
     }
-    public void testValidateSchemaCompliant() {
-        callExample(ValidateSchemaCompliant.class);
+
+    @Test
+    void testSchemaComparator() {
+        callExample(SchemaComparator.class);
     }
 
 
     @Test
-    public void testQueryModification() {
+    void testQueryModification() {
         callExample(QueryModification.class);
     }
 }

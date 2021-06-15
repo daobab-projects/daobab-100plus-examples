@@ -30,18 +30,18 @@ public interface TestHelper {
 
     default void validation(Plate entity) {
         check(entity);
-        System.out.println(entity.toJSON());
+        getLog().info(entity.toJSON());
     }
 
     default void validation(Plates entity) {
         check(entity);
-        System.out.println(entity.toJSON());
+        getLog().info(entity.toJSON());
     }
 
 
     default void validation(FlatPlates entity) {
         check(entity);
-        System.out.println(entity.toJSON());
+        getLog().info(entity.toJSON());
     }
 
     default <F> void validation(List<F> entity) {
@@ -51,7 +51,7 @@ public interface TestHelper {
 
     default <F> void validation(F entity) {
         check(entity);
-        System.out.println(entity);
+        getLog().info(entity.toString());
     }
 
     default <F> void validation(Void entity) {

@@ -19,6 +19,7 @@ public class JoinPrimaryKeyTable extends ServiceBase<FlatPlates> {
         var a = tabAddress;
         return db.select(c.colFirstName(), c.colLastName(), a.colPhone())
                 .joinPk(a)
+                .limitBy(10)
                 .findManyAsFlat();
     }
 

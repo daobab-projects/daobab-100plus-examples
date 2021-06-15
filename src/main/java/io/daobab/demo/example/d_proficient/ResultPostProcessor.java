@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class ResultPostProcessor extends ServiceBase<List<Payment>> {
 
-    private BigDecimal _200 = new BigDecimal(200);
+    private final BigDecimal _200 = new BigDecimal(200);
 
     @Override
     public List<Payment> call() {

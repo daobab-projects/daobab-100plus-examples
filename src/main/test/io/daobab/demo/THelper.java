@@ -2,10 +2,11 @@ package io.daobab.demo;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.base.TestHelper;
-import org.junit.Assert;
 
 import java.util.List;
 import java.util.function.Function;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public interface THelper extends TestHelper {
 
@@ -22,6 +23,6 @@ public interface THelper extends TestHelper {
     }
     @Override
     default void check(Object obj) {
-        Assert.assertNotNull(obj);
+        assertNotNull(obj);
     }
 }

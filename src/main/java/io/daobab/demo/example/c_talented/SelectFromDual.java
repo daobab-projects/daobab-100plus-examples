@@ -2,9 +2,8 @@ package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Plate;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
-
-import static io.daobab.statement.Function.count;
 
 
 /**
@@ -16,7 +15,7 @@ import static io.daobab.statement.Function.count;
  * in the background.
  */
 @Component
-public class SelectFromDual extends ServiceBase<Plate> {
+public class SelectFromDual extends ServiceBase<Plate> implements FunctionWhispererH2 {
 
 
     @Override

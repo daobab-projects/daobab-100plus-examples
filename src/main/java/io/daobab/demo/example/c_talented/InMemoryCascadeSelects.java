@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 public class InMemoryCascadeSelects extends ServiceBase<List<String>> {
 
-
     @Override
     public List<String> call() {
         var t = tabFilm;

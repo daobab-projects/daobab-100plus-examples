@@ -3,7 +3,7 @@ package io.daobab.demo.example.e_expert;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Entity;
 import io.daobab.model.TableColumn;
-import io.daobab.target.meta.MetaSpecificsTables;
+import io.daobab.target.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -13,12 +13,11 @@ import static java.lang.String.format;
 
 /**
  * ---------------------------------------------------------
- * Protection against accidental delete
+ * Schemas Comparator
  * ---------------------------------------------------------
- * Daobab requires a where clause for each delete and update
  */
 @Component
-public class ValidateSchemaCompliant extends ServiceBase<Void> implements MetaSpecificsTables {
+public class SchemaComparator extends ServiceBase<Void> implements MetaDataTables {
 
 
     @Override
@@ -35,12 +34,12 @@ public class ValidateSchemaCompliant extends ServiceBase<Void> implements MetaSp
 
         var notGeneratedTables=db.getMetaData()
                 .select(tabMetaTable.colTableName())
-                .whereNotIn(tabMetaTable.colTableName(),tablesInSchema)
+                .whereNotInFields(tabMetaTable.colTableName(),tablesInSchema)
                 .findMany();
 
         var notGeneratedColumns=db.getMetaData()
                 .select(tabMetaColumn.colTableColumnName())
-                .whereNotIn(tabMetaColumn.colTableColumnName(), columnsInSchema)
+                .whereNotInFields(tabMetaColumn.colTableColumnName(), columnsInSchema)
                 .orderAscBy(tabMetaColumn.colTableColumnName())
                 .findMany();
 

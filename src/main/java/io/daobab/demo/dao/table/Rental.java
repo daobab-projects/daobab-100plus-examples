@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.*;
-import io.daobab.model.Column;
-import io.daobab.model.TableColumn;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
+import io.daobab.model.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -17,7 +14,7 @@ import java.util.Objects;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
-
+@IdGenerator(type = IdGeneratorType.GENERATOR)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
 public class Rental extends Table implements

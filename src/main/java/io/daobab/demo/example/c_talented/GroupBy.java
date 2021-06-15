@@ -2,9 +2,9 @@ package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.result.FlatPlates;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
-import static io.daobab.statement.Function.count;
 
 /**
  * ---------------------------------------------------------
@@ -12,7 +12,7 @@ import static io.daobab.statement.Function.count;
  * ---------------------------------------------------------
  */
 @Component
-public class GroupBy extends ServiceBase<FlatPlates> {
+public class GroupBy extends ServiceBase<FlatPlates> implements FunctionWhispererH2 {
 
     @Override
     public FlatPlates call() {

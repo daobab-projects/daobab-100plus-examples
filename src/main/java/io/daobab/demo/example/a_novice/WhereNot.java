@@ -20,6 +20,7 @@ public class WhereNot extends ServiceBase<Entities<Customer>> {
         var t = tabCustomer;
         return db.select(t)
                 .where(not().equal(t.colActive(), true))
+                .limitBy(5)
                 .findMany();
     }
 

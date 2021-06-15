@@ -2,11 +2,10 @@ package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.FlatPlate;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import static io.daobab.statement.Function.count;
 
 /**
  * ---------------------------------------------------------
@@ -14,7 +13,7 @@ import static io.daobab.statement.Function.count;
  * ---------------------------------------------------------
  */
 @Component
-public class Having extends ServiceBase<List<FlatPlate>> {
+public class Having extends ServiceBase<List<FlatPlate>> implements FunctionWhispererH2 {
 
     @Override
     public List<FlatPlate> call() {

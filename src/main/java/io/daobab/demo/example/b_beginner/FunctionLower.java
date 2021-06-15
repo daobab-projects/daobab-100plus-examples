@@ -1,11 +1,11 @@
 package io.daobab.demo.example.b_beginner;
 
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static io.daobab.statement.Function.lower;
 
 /**
  * ---------------------------------------------------------
@@ -13,7 +13,7 @@ import static io.daobab.statement.Function.lower;
  * ---------------------------------------------------------
  */
 @Component
-public class FunctionLower extends ServiceBase<List<String>> {
+public class FunctionLower extends ServiceBase<List<String>> implements FunctionWhispererH2 {
 
     @Override
     public List<String> call() {

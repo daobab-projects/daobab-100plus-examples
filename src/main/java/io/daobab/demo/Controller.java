@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,11 +26,11 @@ public class Controller implements SakilaTables {
     private InMemoryAppender inMemoryConsole;
 
     @Autowired
-    private List<ServiceBase> examples;
+    private List<ServiceBase<?>> examples;
 
     private void executeExampleNo(String no) {
         if (no == null) return;
-        for (ServiceBase service : examples) {
+        for (ServiceBase<?> service : examples) {
             if (service.getClass().getSimpleName().equalsIgnoreCase(no)) {
                 service.callService();
                 return;
@@ -48,18 +49,18 @@ public class Controller implements SakilaTables {
 
     private String getServices(String selected) {
         var sb = new StringBuilder();
-        sb.append("<option" + (selected == null ? " selected " : "") + ">Choose Daobab example to execute</option>");
+        sb.append("<option").append(selected == null ? " selected " : "").append(">Choose Daobab example to execute</option>");
         for (var service : examples) {
 
             boolean chosen = service.getClass().getSimpleName().equals(selected);
-            sb.append("<option " + (chosen ? " selected " : "") + "value=\"" + service.getClass().getSimpleName() + "\">").append(service.getClass().getSimpleName()).append("</option>");
+            sb.append("<option ").append(chosen ? " selected " : "").append("value=\"").append(service.getClass().getSimpleName()).append("\">").append(service.getClass().getSimpleName()).append("</option>");
         }
         return sb.toString();
     }
 
     @GetMapping("/test")
     public String test(@RequestParam(value = "name", required = false) String no) {
-        System.out.println("wywoluje "+no);
+        log.info("wywoluje "+no);
         inMemoryConsole.clear();
         if (no != null) executeExampleNo(no);
 
@@ -76,8 +77,7 @@ public class Controller implements SakilaTables {
 
     public String load() {
         try {
-            return new Scanner(new ClassPathResource("page.html").getInputStream(), "UTF-8").useDelimiter("\\A").next();
-//            return content;//DictTemplateKey.TEMP_APP_URL.replaceAll(content,getURL());
+            return new Scanner(new ClassPathResource("page.html").getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A").next();
         } catch (Exception e) {
             e.printStackTrace();
             return "";

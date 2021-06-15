@@ -1,28 +1,25 @@
 package io.daobab.demo.example.b_beginner;
 
-import io.daobab.demo.dao.table.FilmActor;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * ---------------------------------------------------------
- * Min
+ * Sum
  * ---------------------------------------------------------
  */
 @Component
-public class FunctionMin extends ServiceBase<Integer> implements FunctionWhispererH2 {
+public class FunctionSumRows extends ServiceBase<List<BigDecimal>> implements FunctionWhispererH2 {
 
     @Override
-    public Integer call() {
-        return db.select(min(tabFilm.colLength()))
+    public List<BigDecimal> call() {
+        return db.select(sumRows(tabFilm.colRentalRate(),tabFilm.colReplacementCost()).cast(BigDecimal.class))
                 .groupBy(tabFilm.colLanguageId())
-                .findOne();
-    }
-
-    public FilmActor call2() {
-        return db.selectRelated(tabFilm, tabFilmActor).findOne();
+                .findMany();
     }
 
 

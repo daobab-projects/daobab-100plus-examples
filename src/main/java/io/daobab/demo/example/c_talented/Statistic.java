@@ -1,7 +1,7 @@
 package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.target.meta.MetaSpecificsTables;
+import io.daobab.target.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class Statistic extends ServiceBase<Void> implements MetaSpecificsTables {
+public class Statistic extends ServiceBase<Void> implements MetaDataTables {
 
 
     @Override
@@ -42,7 +42,7 @@ public class Statistic extends ServiceBase<Void> implements MetaSpecificsTables 
 
         var rs=db.getStatistics().findMany();
 
-        System.out.println(rs.size());
+        log.info(String.valueOf(rs.size()));
 
         rs.forEach(c->log.info(c.toJSON()));
         return null;

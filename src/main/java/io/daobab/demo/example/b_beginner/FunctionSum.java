@@ -1,11 +1,12 @@
 package io.daobab.demo.example.b_beginner;
 
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.demo.dao.column.LanguageId;
+import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
-
-import static io.daobab.statement.Function.sum;
 
 /**
  * ---------------------------------------------------------
@@ -13,11 +14,11 @@ import static io.daobab.statement.Function.sum;
  * ---------------------------------------------------------
  */
 @Component
-public class FunctionSum extends ServiceBase<List<Double>> {
+public class FunctionSum extends ServiceBase<List<BigDecimal>> implements FunctionWhispererH2 {
 
     @Override
-    public List<Double> call() {
-        return db.select(sum(tabFilm.colLength()))
+    public List<BigDecimal> call() {
+        return db.select(sum(tabFilm.colLength(),BigDecimal.class))
                 .groupBy(tabFilm.colLanguageId())
                 .findMany();
     }
