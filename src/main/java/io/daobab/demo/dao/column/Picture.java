@@ -3,29 +3,25 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+
 
 public interface Picture<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: PICTURE,
-     * db type: VARBINARY
+     * STAFF: VARBINARY
      */
-    default byte[] getPicture() {
-        return getColumnParam("Picture");
-    }
+    default byte[] getPicture(){return getColumnParam("Picture");}
+    @SuppressWarnings("unchecked")
+    default E setPicture(byte[] val){setColumnParam("Picture",val); return (E)this;}
 
-    default E setPicture(byte[] val) {
-        setColumnParam("Picture", val);
-        return (E) this;
-    }
-
-    default Column<E, byte[], Picture> colPicture() {
-        return new Column<E, byte[], Picture>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,byte[],Picture> colPicture(){
+        return new Column<E,byte[],Picture>() {
 
             @Override
             public String getColumnName() {
@@ -38,24 +34,24 @@ public interface Picture<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<byte[]> getFieldClass() {
-                return byte[].class;
+            public Class<byte[]> getFieldClass(){
+                return  byte[].class;
             }
 
             @Override
-            public byte[] getValue(Picture entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Picture");
-                return entity.getPicture();
+            public byte[] getValue(Picture entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Picture");
+                return  entity.getPicture();
             }
 
             @Override
-            public void setValue(Picture entity, byte[] param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Picture");
+            public void setValue(Picture entity, byte[] param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Picture");
                 entity.setPicture(param);
             }
 
@@ -65,15 +61,15 @@ public interface Picture<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

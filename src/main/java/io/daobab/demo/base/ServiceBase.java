@@ -1,12 +1,19 @@
 package io.daobab.demo.base;
 
+import io.daobab.converter.JsonHandler;
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaRemote;
 import io.daobab.demo.dao.SakilaTables;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityMap;
+import io.daobab.target.buffer.single.Entities;
+import io.daobab.target.buffer.single.Plates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Supplier;
 
 public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
@@ -20,10 +27,13 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
     protected SakilaRemote remote;
 
     public V callService() {
-        return call(() -> call());
+        return call(this::call);
     }
 
     public abstract V call();
+
+    public void beforeCall(){
+    }
 
     public V call(Supplier<V> scenario) {
         log.info("<hr>");
@@ -39,10 +49,24 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
         return rv;
     }
 
+    public void afterCall(V data){
+        if (data==null){
+            return;
+        }
+        log.info("************************************ -= result =- ************************************");
+        if (data instanceof JsonHandler){
+            log.info(((JsonHandler)data).toJSON());
+        }else if (data instanceof Collection){
+            ((Collection<?>) data).forEach(o->log.info(o.toString()));
+        }else if (data instanceof Object[]){
+            Arrays.stream(((Object[]) data)).forEach(o->log.info(o.toString()));
+        }else{
+            log.info(data.toString());
+        }
+    }
 
     protected String info() {
         return "";
     }
-
 
 }

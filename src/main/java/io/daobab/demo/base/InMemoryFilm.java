@@ -3,8 +3,8 @@ package io.daobab.demo.base;
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
 import io.daobab.model.Entity;
-import io.daobab.target.QueryTarget;
-import io.daobab.target.multi.AboveMultiEntityTarget;
+import io.daobab.target.database.DataBaseTarget;
+import io.daobab.target.buffer.multi.AboveMultiEntityTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class InMemoryFilm extends AboveMultiEntityTarget implements SakilaTables
     }
 
     @Override
-    protected QueryTarget getSourceTarget() {
+    protected DataBaseTarget getSourceTarget() {
         return sakilaDataBase;
     }
 

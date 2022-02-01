@@ -5,7 +5,7 @@ import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
 import io.daobab.demo.dao.table.FilmActor;
 import io.daobab.model.dummy.DummyColumnTemplate;
-import io.daobab.result.Entities;
+import io.daobab.target.buffer.single.Entities;
 import io.daobab.statement.function.FunctionWhispererH2;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

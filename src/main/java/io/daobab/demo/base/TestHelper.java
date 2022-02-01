@@ -3,9 +3,9 @@ package io.daobab.demo.base;
 import io.daobab.model.EntityMap;
 import io.daobab.model.Plate;
 import io.daobab.model.PrimaryKey;
-import io.daobab.result.Entities;
+import io.daobab.target.buffer.single.Entities;
 import io.daobab.result.FlatPlates;
-import io.daobab.result.Plates;
+import io.daobab.target.buffer.single.Plates;
 import org.slf4j.Logger;
 
 import java.util.List;

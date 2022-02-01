@@ -3,30 +3,25 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
+import io.daobab.model.EntityMap;
+import java.util.Objects;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 public interface ReturnDate<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: RETURN_DATE,
-     * db type: TIMESTAMP
+     * RENTAL: TIMESTAMP
      */
-    default Timestamp getReturnDate() {
-        return getColumnParam("ReturnDate");
-    }
+    default Timestamp getReturnDate(){return getColumnParam("ReturnDate");}
+    @SuppressWarnings("unchecked")
+    default E setReturnDate(Timestamp val){setColumnParam("ReturnDate",val); return (E)this;}
 
-    default E setReturnDate(Timestamp val) {
-        setColumnParam("ReturnDate", val);
-        return (E) this;
-    }
-
-    default Column<E, Timestamp, ReturnDate> colReturnDate() {
-        return new Column<E, Timestamp, ReturnDate>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,Timestamp,ReturnDate> colReturnDate(){
+        return new Column<E,Timestamp,ReturnDate>() {
 
             @Override
             public String getColumnName() {
@@ -39,24 +34,24 @@ public interface ReturnDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<Timestamp> getFieldClass() {
-                return Timestamp.class;
+            public Class<Timestamp> getFieldClass(){
+                return  Timestamp.class;
             }
 
             @Override
-            public Timestamp getValue(ReturnDate entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "ReturnDate");
-                return entity.getReturnDate();
+            public Timestamp getValue(ReturnDate entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"ReturnDate");
+                return  entity.getReturnDate();
             }
 
             @Override
-            public void setValue(ReturnDate entity, Timestamp param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReturnDate");
+            public void setValue(ReturnDate entity, Timestamp param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"ReturnDate");
                 entity.setReturnDate(param);
             }
 
@@ -66,15 +61,15 @@ public interface ReturnDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

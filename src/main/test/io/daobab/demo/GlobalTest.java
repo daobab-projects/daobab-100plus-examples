@@ -1,11 +1,12 @@
 package io.daobab.demo;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.demo.example.a_novice.*;
-import io.daobab.demo.example.b_beginner.*;
-import io.daobab.demo.example.c_talented.*;
-import io.daobab.demo.example.d_proficient.*;
-import io.daobab.demo.example.e_expert.*;
+import io.daobab.demo.example.part_a.*;
+import io.daobab.demo.example.part_b.*;
+import io.daobab.demo.example.part_c.*;
+import io.daobab.demo.example.part_d.*;
+import io.daobab.demo.example.part_e.*;
+import io.daobab.demo.example.function.*;
 import io.daobab.error.DaobabSQLException;
 import io.daobab.error.MandatoryWhere;
 import io.daobab.error.SqlInjectionDetected;
@@ -20,6 +21,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("java:S2699")
 @SpringBootTest
 class GlobalTest implements THelper {
     private final Logger log = LoggerFactory.getLogger("Test");
@@ -28,9 +30,12 @@ class GlobalTest implements THelper {
     public Logger getLog() {
         return log;
     }
+
+    @SuppressWarnings("rawtypes")
     @Autowired
     private List<ServiceBase> examples;
 
+    @SuppressWarnings("rawtypes")
     @Override
     public List<ServiceBase> getExamples() {
         return examples;
@@ -149,6 +154,11 @@ class GlobalTest implements THelper {
     }
 
     @Test
+    void testFunctionSumRows(){
+        validation(callExample(FunctionSumRows.class));
+    }
+
+    @Test
     void testFunctionLower(){
         validation(callExample(FunctionLower.class));
     }
@@ -194,8 +204,8 @@ class GlobalTest implements THelper {
     }
 
     @Test
-    void testResultMapper(){
-        validation(callExample(ResultMapper.class));
+    void testExists(){
+        validation(callExample(Exists.class));
     }
 
     @Test
@@ -224,8 +234,8 @@ class GlobalTest implements THelper {
     }
 
     @Test
-    void testByteBuffer(){
-        validation(callExample(ByteBuffer.class));
+    void testNoHeapBuffer(){
+        validation(callExample(NoHeapBuffer.class));
     }
 
     @Test

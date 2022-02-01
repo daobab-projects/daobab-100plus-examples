@@ -3,30 +3,25 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
+import io.daobab.model.EntityMap;
+import java.util.Objects;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public interface RentalRate<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: RENTAL_RATE,
-     * db type: DECIMAL
+     * FILM: DECIMAL
      */
-    default BigDecimal getRentalRate() {
-        return getColumnParam("RentalRate");
-    }
+    default BigDecimal getRentalRate(){return getColumnParam("RentalRate");}
+    @SuppressWarnings("unchecked")
+    default E setRentalRate(BigDecimal val){setColumnParam("RentalRate",val); return (E)this;}
 
-    default E setRentalRate(BigDecimal val) {
-        setColumnParam("RentalRate", val);
-        return (E) this;
-    }
-
-    default Column<E, BigDecimal, RentalRate> colRentalRate() {
-        return new Column<E, BigDecimal, RentalRate>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,BigDecimal,RentalRate> colRentalRate(){
+        return new Column<E,BigDecimal,RentalRate>() {
 
             @Override
             public String getColumnName() {
@@ -39,24 +34,24 @@ public interface RentalRate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass() {
-                return BigDecimal.class;
+            public Class<BigDecimal> getFieldClass(){
+                return  BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(RentalRate entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalRate");
-                return entity.getRentalRate();
+            public BigDecimal getValue(RentalRate entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalRate");
+                return  entity.getRentalRate();
             }
 
             @Override
-            public void setValue(RentalRate entity, BigDecimal param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalRate");
+            public void setValue(RentalRate entity, BigDecimal param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalRate");
                 entity.setRentalRate(param);
             }
 
@@ -66,15 +61,15 @@ public interface RentalRate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }
