@@ -27,6 +27,7 @@ public class ConcurrencySafeUpdate extends ServiceBase<Void> {
 
         db.select(f)
                 .whereLess(f.colFilmId(), 20)
+                .findMany()
                 .forEach(c -> c.setLastUpdate(toCurrentTimestamp()).update(db, f.colLastUpdate()));
         return null;
     }

@@ -17,6 +17,7 @@ public class ResultConsumer extends ServiceBase<Void> {
         db.select(tabPayment)
                 .whereEqual(tabPayment.colAmount(), toBigDecimal(100))
                 .orderAscBy(tabPayment.colPaymentDate())
+                .findMany()
                 .forEach(this::resultConsumer);
         return null;
     }

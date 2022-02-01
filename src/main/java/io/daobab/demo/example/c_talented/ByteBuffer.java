@@ -19,9 +19,8 @@ public class ByteBuffer extends ServiceBase<Void> implements MetaDataTables {
 
         var bb=db.select(tabFilm).createByteBuffer();
 
-
-        bb.select(tabFilm).whereLess(tabFilm.colFilmId(),4).forEach(c->log.info(c.toJSON()));
-        db.select(tabFilm).whereLess(tabFilm.colFilmId(),4).forEach(c->log.info(c.toJSON()));
+        bb.select(tabFilm).whereLess(tabFilm.colFilmId(),4).findMany().forEach(c->log.info(c.toJSON()));
+        db.select(tabFilm).whereLess(tabFilm.colFilmId(),4).findMany().forEach(c->log.info(c.toJSON()));
 
         return null;
     }

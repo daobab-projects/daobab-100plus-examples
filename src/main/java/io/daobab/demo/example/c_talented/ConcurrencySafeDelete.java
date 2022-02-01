@@ -26,6 +26,7 @@ public class ConcurrencySafeDelete extends ServiceBase<Void> {
 
         db.select(f)
                 .whereGreater(f.colFilmId(), 2000)
+                .findMany()
                 .forEach(d -> d.delete(db));
 
 
