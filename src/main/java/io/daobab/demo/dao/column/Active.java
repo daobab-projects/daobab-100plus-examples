@@ -3,29 +3,26 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+import java.lang.Boolean;
 
 public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: ACTIVE,
-     * db type: BOOLEAN
+     * CUSTOMER: BOOLEAN
+     * STAFF: BOOLEAN
      */
-    default Boolean getActive() {
-        return getColumnParam("Active");
-    }
+    default Boolean getActive(){return getColumnParam("Active");}
+    @SuppressWarnings("unchecked")
+    default E setActive(Boolean val){setColumnParam("Active",val); return (E)this;}
 
-    default E setActive(Boolean val) {
-        setColumnParam("Active", val);
-        return (E) this;
-    }
-
-    default Column<E, Boolean, Active> colActive() {
-        return new Column<E, Boolean, Active>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,Boolean,Active> colActive(){
+        return new Column<E,Boolean,Active>() {
 
             @Override
             public String getColumnName() {
@@ -38,24 +35,24 @@ public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<Boolean> getFieldClass() {
-                return Boolean.class;
+            public Class<Boolean> getFieldClass(){
+                return  Boolean.class;
             }
 
             @Override
-            public Boolean getValue(Active entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Active");
-                return entity.getActive();
+            public Boolean getValue(Active entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Active");
+                return  entity.getActive();
             }
 
             @Override
-            public void setValue(Active entity, Boolean param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Active");
+            public void setValue(Active entity, Boolean param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Active");
                 entity.setActive(param);
             }
 
@@ -65,15 +62,15 @@ public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

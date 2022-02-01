@@ -7,9 +7,9 @@ import io.daobab.demo.dao.procedure.SomeIn;
 import io.daobab.demo.dao.procedure.SomeOut;
 import io.daobab.demo.dao.table.Rental;
 import io.daobab.model.Entity;
-import io.daobab.model.IdGeneratorSupplier;
+import io.daobab.target.database.DataBaseIdGeneratorSupplier;
 import io.daobab.target.database.DataBaseTarget;
-import io.daobab.target.database.SqlQueryResolver;
+import io.daobab.target.database.connection.SqlProducer;
 import io.daobab.target.protection.Access;
 import org.h2.tools.RunScript;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQueryResolver {
+public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlProducer {
 
     boolean recreate_database_on_start = true;
     @Value("${spring.datasource.url}")
@@ -61,12 +61,9 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
     @PostConstruct
     public void init(){
         getAccessProtector().setColumnAccess(tabActor.colLastName(), Access.NO_INSERT, Access.NO_UPDATE);
+        setShowSql(true);
     }
 
-    @Override
-    public boolean isLogQueriesEnabled() {
-        return true;
-    }
 
     @Override
     public List<Entity> initTables() {
@@ -114,7 +111,7 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQ
     }
 
     @Override
-    public <E extends Entity> IdGeneratorSupplier<?> getPrimaryKeyGenerator(E entity) {
+    public <E extends Entity> DataBaseIdGeneratorSupplier<?> getPrimaryKeyGenerator(E entity) {
 
         if (entity.getClass().equals(Rental.class)){
                 return rentalGenerator;

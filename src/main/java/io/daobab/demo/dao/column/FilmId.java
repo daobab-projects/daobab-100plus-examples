@@ -3,29 +3,29 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+import java.lang.Integer;
 
 public interface FilmId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: FILM_ID,
-     * db type: SMALLINT
+     * FILM: SMALLINT
+     * FILM_ACTOR: SMALLINT
+     * FILM_CATEGORY: SMALLINT
+     * FILM_TEXT: SMALLINT
+     * INVENTORY: SMALLINT
      */
-    default Integer getFilmId() {
-        return getColumnParam("FilmId");
-    }
+    default Integer getFilmId(){return getColumnParam("FilmId");}
+    @SuppressWarnings("unchecked")
+    default E setFilmId(Integer val){setColumnParam("FilmId",val); return (E)this;}
 
-    default E setFilmId(Integer val) {
-        setColumnParam("FilmId", val);
-        return (E) this;
-    }
-
-    default Column<E, Integer, FilmId> colFilmId() {
-        return new Column<E, Integer, FilmId>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,Integer,FilmId> colFilmId(){
+        return new Column<E,Integer,FilmId>() {
 
             @Override
             public String getColumnName() {
@@ -38,24 +38,24 @@ public interface FilmId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<Integer> getFieldClass() {
-                return Integer.class;
+            public Class<Integer> getFieldClass(){
+                return  Integer.class;
             }
 
             @Override
-            public Integer getValue(FilmId entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "FilmId");
-                return entity.getFilmId();
+            public Integer getValue(FilmId entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"FilmId");
+                return  entity.getFilmId();
             }
 
             @Override
-            public void setValue(FilmId entity, Integer param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "FilmId");
+            public void setValue(FilmId entity, Integer param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"FilmId");
                 entity.setFilmId(param);
             }
 
@@ -65,15 +65,15 @@ public interface FilmId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

@@ -3,29 +3,25 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+import java.lang.Integer;
 
 public interface OriginalLanguageId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: ORIGINAL_LANGUAGE_ID,
-     * db type: TINYINT
+     * FILM: TINYINT
      */
-    default Integer getOriginalLanguageId() {
-        return getColumnParam("OriginalLanguageId");
-    }
+    default Integer getOriginalLanguageId(){return getColumnParam("OriginalLanguageId");}
+    @SuppressWarnings("unchecked")
+    default E setOriginalLanguageId(Integer val){setColumnParam("OriginalLanguageId",val); return (E)this;}
 
-    default E setOriginalLanguageId(Integer val) {
-        setColumnParam("OriginalLanguageId", val);
-        return (E) this;
-    }
-
-    default Column<E, Integer, OriginalLanguageId> colOriginalLanguageId() {
-        return new Column<E, Integer, OriginalLanguageId>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,Integer,OriginalLanguageId> colOriginalLanguageId(){
+        return new Column<E,Integer,OriginalLanguageId>() {
 
             @Override
             public String getColumnName() {
@@ -38,26 +34,24 @@ public interface OriginalLanguageId<E extends EntityMap> extends EntityRelationM
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<Integer> getFieldClass() {
-                return Integer.class;
+            public Class<Integer> getFieldClass(){
+                return  Integer.class;
             }
 
             @Override
-            public Integer getValue(OriginalLanguageId entity) {
-                if (entity == null)
-                    throw new AttemptToReadFromNullEntityException(getEntityClass(), "OriginalLanguageId");
-                return entity.getOriginalLanguageId();
+            public Integer getValue(OriginalLanguageId entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"OriginalLanguageId");
+                return  entity.getOriginalLanguageId();
             }
 
             @Override
-            public void setValue(OriginalLanguageId entity, Integer param) {
-                if (entity == null)
-                    throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "OriginalLanguageId");
+            public void setValue(OriginalLanguageId entity, Integer param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"OriginalLanguageId");
                 entity.setOriginalLanguageId(param);
             }
 
@@ -67,15 +61,15 @@ public interface OriginalLanguageId<E extends EntityMap> extends EntityRelationM
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

@@ -3,29 +3,27 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+import java.lang.String;
 
 public interface FirstName<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: FIRST_NAME,
-     * db type: VARCHAR
+     * ACTOR: VARCHAR
+     * CUSTOMER: VARCHAR
+     * STAFF: VARCHAR
      */
-    default String getFirstName() {
-        return getColumnParam("FirstName");
-    }
+    default String getFirstName(){return getColumnParam("FirstName");}
+    @SuppressWarnings("unchecked")
+    default E setFirstName(String val){setColumnParam("FirstName",val); return (E)this;}
 
-    default E setFirstName(String val) {
-        setColumnParam("FirstName", val);
-        return (E) this;
-    }
-
-    default Column<E, String, FirstName> colFirstName() {
-        return new Column<E, String, FirstName>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,String,FirstName> colFirstName(){
+        return new Column<E,String,FirstName>() {
 
             @Override
             public String getColumnName() {
@@ -38,24 +36,24 @@ public interface FirstName<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<String> getFieldClass() {
-                return String.class;
+            public Class<String> getFieldClass(){
+                return  String.class;
             }
 
             @Override
-            public String getValue(FirstName entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "FirstName");
-                return entity.getFirstName();
+            public String getValue(FirstName entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"FirstName");
+                return  entity.getFirstName();
             }
 
             @Override
-            public void setValue(FirstName entity, String param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "FirstName");
+            public void setValue(FirstName entity, String param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"FirstName");
                 entity.setFirstName(param);
             }
 
@@ -65,15 +63,15 @@ public interface FirstName<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

@@ -3,29 +3,25 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
-
+import io.daobab.model.EntityMap;
 import java.util.Objects;
+
+import java.lang.String;
 
 public interface District<E extends EntityMap> extends EntityRelationMap<E> {
 
 
     /**
-     * db name: DISTRICT,
-     * db type: VARCHAR
+     * ADDRESS: VARCHAR
      */
-    default String getDistrict() {
-        return getColumnParam("District");
-    }
+    default String getDistrict(){return getColumnParam("District");}
+    @SuppressWarnings("unchecked")
+    default E setDistrict(String val){setColumnParam("District",val); return (E)this;}
 
-    default E setDistrict(String val) {
-        setColumnParam("District", val);
-        return (E) this;
-    }
-
-    default Column<E, String, District> colDistrict() {
-        return new Column<E, String, District>() {
+    @SuppressWarnings("rawtypes")
+    default Column<E,String,District> colDistrict(){
+        return new Column<E,String,District>() {
 
             @Override
             public String getColumnName() {
@@ -38,24 +34,24 @@ public interface District<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public E getInstance() {
+            public E getInstance(){
                 return getEntity();
             }
 
             @Override
-            public Class<String> getFieldClass() {
-                return String.class;
+            public Class<String> getFieldClass(){
+                return  String.class;
             }
 
             @Override
-            public String getValue(District entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "District");
-                return entity.getDistrict();
+            public String getValue(District entity){
+                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"District");
+                return  entity.getDistrict();
             }
 
             @Override
-            public void setValue(District entity, String param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "District");
+            public void setValue(District entity, String param){
+                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"District");
                 entity.setDistrict(param);
             }
 
@@ -65,15 +61,15 @@ public interface District<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public String toString() {
-                return getEntityName() + "." + getFieldName();
+            public String toString(){
+                return getEntityName()+"."+getFieldName();
             }
 
             @Override
             public boolean equals(Object obj) {
-                if (this == obj) return true;
-                if (obj == null) return false;
-                if (getClass() != obj.getClass()) return false;
+                if (this == obj)return true;
+                if (obj == null)return false;
+                if (getClass() != obj.getClass())return false;
                 Column other = (Column) obj;
                 return Objects.equals(hashCode(), other.hashCode());
             }

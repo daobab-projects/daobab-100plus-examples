@@ -7,8 +7,8 @@ import io.daobab.demo.dao.procedure.SomeOut;
 import io.daobab.model.Column;
 import io.daobab.model.TableColumn;
 import io.daobab.statement.function.FunctionWhispererH2;
-import io.daobab.target.meta.MetaDataTables;
-import io.daobab.target.meta.table.MetaEntity;
+import io.daobab.target.database.meta.MetaDataTables;
+import io.daobab.target.database.meta.table.MetaEntity;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +92,7 @@ class TestProcedureCall implements MetaDataTables, FunctionWhispererH2, SakilaTa
                 .where(and()
                         .equal(tabMetaIndex.colColumnName(),tabFilm.colFilmId().getColumnName())
                         .equal(tabMetaIndex.colTableName(),tabFilm.colFilmId().getEntityName()))
-                    .forEach(c->log.info(c.toJSON()));
+                    .findMany().forEach(c->log.info(c.toJSON()));
 
 
 
