@@ -2,7 +2,7 @@ package io.daobab.demo.base;
 
 import io.daobab.model.*;
 import io.daobab.result.FlatPlates;
-import io.daobab.result.Plates;
+import io.daobab.target.buffer.single.Plates;
 
 import java.util.Collection;
 

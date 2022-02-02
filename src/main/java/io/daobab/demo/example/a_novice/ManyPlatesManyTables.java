@@ -3,7 +3,7 @@ package io.daobab.demo.example.a_novice;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Column;
 import io.daobab.model.Plate;
-import io.daobab.result.Plates;
+import io.daobab.target.buffer.single.Plates;
 import org.springframework.stereotype.Component;
 
 /**

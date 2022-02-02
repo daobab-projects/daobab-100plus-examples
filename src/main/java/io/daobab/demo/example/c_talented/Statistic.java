@@ -1,7 +1,7 @@
 package io.daobab.demo.example.c_talented;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.target.meta.MetaDataTables;
+import io.daobab.target.database.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 

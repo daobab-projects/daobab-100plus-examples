@@ -5,7 +5,7 @@ import io.daobab.demo.dao.table.*;
 import io.daobab.model.Column;
 import io.daobab.model.Entity;
 import io.daobab.query.base.Query;
-import io.daobab.query.base.QueryBase;
+import io.daobab.target.database.query.DataBaseQueryBase;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -36,7 +36,7 @@ public class QueryModification extends ServiceBase<Void> {
         return null;
     }
 
-    public <Q extends QueryBase<E,Q>,E extends Entity,F> Q applyLimit(Q query) {
+    public <Q extends DataBaseQueryBase<E,Q>,E extends Entity,F> Q applyLimit(Q query) {
         return query.limitBy(5);
     }
 

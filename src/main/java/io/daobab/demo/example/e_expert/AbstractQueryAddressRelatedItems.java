@@ -3,7 +3,7 @@ package io.daobab.demo.example.e_expert;
 import io.daobab.demo.dao.column.AddressId;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.EntityMap;
-import io.daobab.result.Entities;
+import io.daobab.target.buffer.single.Entities;
 import org.springframework.stereotype.Component;
 
 /**

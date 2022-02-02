@@ -1,8 +1,8 @@
 package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.target.database.JdbcType;
-import io.daobab.target.meta.MetaDataTables;
+import io.daobab.target.database.connection.JdbcType;
+import io.daobab.target.database.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 

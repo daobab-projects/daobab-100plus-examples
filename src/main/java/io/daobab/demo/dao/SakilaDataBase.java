@@ -9,7 +9,7 @@ import io.daobab.demo.dao.table.Rental;
 import io.daobab.model.Entity;
 import io.daobab.model.IdGeneratorSupplier;
 import io.daobab.target.database.DataBaseTarget;
-import io.daobab.target.database.SqlQueryResolver;
+import io.daobab.target.database.connection.SqlProducer;
 import io.daobab.target.protection.Access;
 import org.h2.tools.RunScript;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlQueryResolver {
+public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlProducer {
 
     boolean recreate_database_on_start = true;
     @Value("${spring.datasource.url}")

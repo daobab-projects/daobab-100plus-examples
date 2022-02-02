@@ -1,8 +1,8 @@
 package io.daobab.demo.meta;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.target.meta.MetaDataTables;
-import io.daobab.target.meta.table.MetaIndex;
+import io.daobab.target.database.meta.MetaDataTables;
+import io.daobab.target.database.meta.table.MetaIndex;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

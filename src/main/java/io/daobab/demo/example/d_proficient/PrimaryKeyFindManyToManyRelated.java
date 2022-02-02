@@ -2,7 +2,7 @@ package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.dao.table.Actor;
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.result.Entities;
+import io.daobab.target.buffer.single.Entities;
 import org.springframework.stereotype.Component;
 
 /**

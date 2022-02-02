@@ -1,7 +1,7 @@
 package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.result.Plates;
+import io.daobab.target.buffer.single.Plates;
 import org.springframework.stereotype.Component;
 
 /**

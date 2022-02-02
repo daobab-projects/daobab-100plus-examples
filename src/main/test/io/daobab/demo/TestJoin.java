@@ -2,9 +2,9 @@ package io.daobab.demo;
 
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
-import io.daobab.result.EntityByteBuffer;
+import io.daobab.target.buffer.bytebyffer.EntityByteBuffer;
 import io.daobab.statement.function.FunctionWhispererH2;
-import io.daobab.target.meta.MetaDataTables;
+import io.daobab.target.database.meta.MetaDataTables;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package io.daobab.demo.example.e_expert;
 
 import io.daobab.demo.dao.table.enhanced.CountryCity;
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.result.Entities;
+import io.daobab.target.buffer.single.Entities;
 import org.springframework.stereotype.Component;
 
 /**

@@ -3,7 +3,7 @@ package io.daobab.demo.example.e_expert;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Entity;
 import io.daobab.model.TableColumn;
-import io.daobab.target.meta.MetaDataTables;
+import io.daobab.target.database.meta.MetaDataTables;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

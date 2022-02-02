@@ -2,8 +2,8 @@ package io.daobab.demo.example.d_proficient;
 
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.statement.function.FunctionWhispererH2;
-import io.daobab.target.meta.MetaDataTables;
-import io.daobab.target.multi.MultiEntityTarget;
+import io.daobab.target.database.meta.MetaDataTables;
+import io.daobab.target.buffer.multi.MultiEntityTarget;
 import org.springframework.stereotype.Component;
 
 import static java.lang.String.format;

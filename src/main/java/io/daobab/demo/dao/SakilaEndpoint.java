@@ -1,7 +1,7 @@
 package io.daobab.demo.dao;
 
 import io.daobab.model.ResponseWrapper;
-import io.daobab.target.remote.Endpoint;
+import io.daobab.target.database.remote.Endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

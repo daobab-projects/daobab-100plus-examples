@@ -2,7 +2,7 @@ package io.daobab.demo.dao;
 
 import io.daobab.model.IdGeneratorSupplier;
 import io.daobab.statement.function.FunctionWhispererH2;
-import io.daobab.target.QueryTarget;
+import io.daobab.target.database.QueryTarget;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
