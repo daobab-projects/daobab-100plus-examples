@@ -2,9 +2,9 @@
 
 Over 100 Daobab ORM examples, ready to instant use.
 
-#Gow to run?
+#How to run?
 A few ways:
-1. Go to specific example and run the main method inside the class.
+1. Go to the specific example and run the main method inside the class.
 2. Run a unit test
 3. Run DemoApplication to start the examples via http page http://localhost:9000/
 
