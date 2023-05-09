@@ -8,6 +8,7 @@ import io.daobab.model.Entity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -25,15 +26,15 @@ public class AbstractQueryLastRecord extends ServiceBase<Void> {
 
     @Override
     public Void call() {
-        Film lastRecordFilm = findTheYougestRecord(tabFilm.colLastUpdate());
-        Actor lastRecordActor = findTheYougestRecord(tabActor.colLastUpdate());
-        Rental lastRecordRental = findTheYougestRecord(tabRental.colLastUpdate());
-        Customer lastlyCreatedCustomerRental = findTheYougestRecord(tabCustomer.colCreateDate());
-        Payment lastPayment = findTheYougestRecord(tabPayment.colPaymentDate());
+        Film lastRecordFilm = findTheYoungestRecord(tabFilm.colLastUpdate());
+        Actor lastRecordActor = findTheYoungestRecord(tabActor.colLastUpdate());
+        Rental lastRecordRental = findTheYoungestRecord(tabRental.colLastUpdate());
+        Customer lastlyCreatedCustomerRental = findTheYoungestRecord(tabCustomer.colCreateDate());
+        Payment lastPayment = findTheYoungestRecord(tabPayment.colPaymentDate());
         return null;
     }
 
-    public <E extends Entity, F extends Date> E findTheYougestRecord(Column<E, F, ?> column) {
+    public <E extends Entity, F extends Date> E findTheYoungestRecord(Column<E, LocalDateTime, ?> column) {
         return db.select(column.getInstance())
                 .orderDescBy(column)
                 .findOne();

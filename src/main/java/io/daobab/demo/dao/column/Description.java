@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface Description<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: VARCHAR
-     * FILM_TEXT: VARCHAR
-     */
-    default String getDescription(){return getColumnParam("Description");}
+public interface Description<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getDescription() {
+        return getColumnParam("Description");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setDescription(String val){setColumnParam("Description",val); return (E)this;}
+    default E setDescription(F val) {
+        setColumnParam("Description", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,Description> colDescription(){
-        return new Column<E,String,Description>() {
+    /**
+     * table:FILM,type:VARCHAR,size:1000000000,nullable:true
+     * table:FILM_TEXT,type:VARCHAR,size:1000000000,nullable:true
+     */
+    default Column<E, F, Description> colDescription() {
+        return new Column<E, F, Description>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface Description<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(Description entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Description");
-                return  entity.getDescription();
+            public F getValue(Description entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Description");
+                return (F) entity.getDescription();
             }
 
             @Override
-            public void setValue(Description entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Description");
+            public void setValue(Description entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Description");
                 entity.setDescription(param);
             }
 

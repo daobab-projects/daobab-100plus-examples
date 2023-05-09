@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface ManagerStaffId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * STORE: TINYINT
-     */
-    default Integer getManagerStaffId(){return getColumnParam("ManagerStaffId");}
+public interface ManagerStaffId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getManagerStaffId() {
+        return getColumnParam("ManagerStaffId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setManagerStaffId(Integer val){setColumnParam("ManagerStaffId",val); return (E)this;}
+    default E setManagerStaffId(F val) {
+        setColumnParam("ManagerStaffId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,ManagerStaffId> colManagerStaffId(){
-        return new Column<E,Integer,ManagerStaffId>() {
+    /**
+     * table:STORE,type:TINYINT,size:8,nullable:false
+     */
+    default Column<E, F, ManagerStaffId> colManagerStaffId() {
+        return new Column<E, F, ManagerStaffId>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface ManagerStaffId<E extends EntityMap> extends EntityRelationMap<E
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(ManagerStaffId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"ManagerStaffId");
-                return  entity.getManagerStaffId();
+            public F getValue(ManagerStaffId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "ManagerStaffId");
+                return (F) entity.getManagerStaffId();
             }
 
             @Override
-            public void setValue(ManagerStaffId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"ManagerStaffId");
+            public void setValue(ManagerStaffId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ManagerStaffId");
                 entity.setManagerStaffId(param);
             }
 

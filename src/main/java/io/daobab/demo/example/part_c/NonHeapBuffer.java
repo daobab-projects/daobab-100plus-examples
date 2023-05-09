@@ -9,28 +9,26 @@ import org.springframework.stereotype.Component;
 
 /**
  * ---------------------------------------------------------
- * NoHeapBuffer
+ * NonHeapBuffer
  * ---------------------------------------------------------
  */
 @Component
-public class NoHeapBuffer extends ServiceBase<Void> implements MetaDataTables {
+public class NonHeapBuffer extends ServiceBase<Void> implements MetaDataTables {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, NoHeapBuffer.class.getName());
+        SpringApplication.run(DemoApplication.class, NonHeapBuffer.class.getName());
     }
 
     @Override
     public Void call() {
 
-        var noHeap=db.select(tabFilm).toNoHeap();
+        var noHeap = db.select(tabFilm).toNonHeap();
 
-        noHeap.select(tabFilm).whereLess(tabFilm.colFilmId(),4).findMany().forEach(c->log.info(c.toJSON()));
-        db.select(tabFilm).whereLess(tabFilm.colFilmId(),4).findMany().forEach(c->log.info(c.toJSON()));
+        noHeap.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJSON()));
+        db.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJSON()));
 
         return null;
     }
-
-
 
 
 }

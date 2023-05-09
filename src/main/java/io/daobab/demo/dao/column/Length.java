@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface Length<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: SMALLINT
-     */
-    default Integer getLength(){return getColumnParam("Length");}
+public interface Length<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getLength() {
+        return getColumnParam("Length");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setLength(Integer val){setColumnParam("Length",val); return (E)this;}
+    default E setLength(F val) {
+        setColumnParam("Length", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,Length> colLength(){
-        return new Column<E,Integer,Length>() {
+    /**
+     * table:FILM,type:SMALLINT,size:16,nullable:true
+     */
+    default Column<E, F, Length> colLength() {
+        return new Column<E, F, Length>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface Length<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(Length entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Length");
-                return  entity.getLength();
+            public F getValue(Length entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Length");
+                return (F) entity.getLength();
             }
 
             @Override
-            public void setValue(Length entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Length");
+            public void setValue(Length entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Length");
                 entity.setLength(param);
             }
 

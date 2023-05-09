@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface Title<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: VARCHAR
-     * FILM_TEXT: VARCHAR
-     */
-    default String getTitle(){return getColumnParam("Title");}
+public interface Title<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getTitle() {
+        return getColumnParam("Title");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setTitle(String val){setColumnParam("Title",val); return (E)this;}
+    default E setTitle(F val) {
+        setColumnParam("Title", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,Title> colTitle(){
-        return new Column<E,String,Title>() {
+    /**
+     * table:FILM,type:VARCHAR,size:255,nullable:false
+     * table:FILM_TEXT,type:VARCHAR,size:255,nullable:false
+     */
+    default Column<E, F, Title> colTitle() {
+        return new Column<E, F, Title>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface Title<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(Title entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Title");
-                return  entity.getTitle();
+            public F getValue(Title entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Title");
+                return (F) entity.getTitle();
             }
 
             @Override
-            public void setValue(Title entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Title");
+            public void setValue(Title entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Title");
                 entity.setTitle(param);
             }
 

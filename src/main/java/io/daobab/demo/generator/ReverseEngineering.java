@@ -2,10 +2,9 @@ package io.daobab.demo.generator;
 
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.generator.base.H2Database;
+import io.daobab.generator.template.TemplateLanguage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
-
-import java.sql.Types;
 
 @Component
 public class ReverseEngineering extends H2Database {
@@ -20,6 +19,7 @@ public class ReverseEngineering extends H2Database {
 
 
         //STEP 2: set the package
+        generator.setLanguage(TemplateLanguage.JAVA);
         generator.setPackage("io.daobab.demo.dao");
         //put the real path here:
         generator.setPath("E:\\Daobabx\\");

@@ -5,13 +5,15 @@ import io.daobab.demo.base.ServiceBase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * Concurrency Safe Update
  * ---------------------------------------------------------
  * - How to use concurrency safe update.
- *   In this example each row is modified into separated transaction.
- *   Records are not locked by big transaction.
+ * In this example each row is modified into separated transaction.
+ * Records are not locked by big transaction.
  */
 @Component
 public class ConcurrencySafeUpdate extends ServiceBase<Void> {
@@ -26,14 +28,14 @@ public class ConcurrencySafeUpdate extends ServiceBase<Void> {
 
         //This may create deadlocks
 //     Update.to(db,f).set(SetFields
-//             .setColumn(f.colLastUpdate(),toCurrentTimestamp()))
+//             .setColumn(f.colLastUpdate(),LocalDateTime.now()))
 //             .where(f.colFilmId(),LT,20)
 //             .execute();
 
         db.select(f)
                 .whereLess(f.colFilmId(), 20)
                 .findMany()
-                .forEach(c -> c.setLastUpdate(toCurrentTimestamp()).update(db, f.colLastUpdate()));
+                .forEach(c -> c.setLastUpdate(LocalDateTime.now()).update(db, f.colLastUpdate()));
         return null;
     }
 

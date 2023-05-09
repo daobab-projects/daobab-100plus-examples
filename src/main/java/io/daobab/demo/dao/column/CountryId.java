@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface CountryId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * CITY: SMALLINT
-     * COUNTRY: SMALLINT
-     */
-    default Integer getCountryId(){return getColumnParam("CountryId");}
+public interface CountryId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getCountryId() {
+        return getColumnParam("CountryId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setCountryId(Integer val){setColumnParam("CountryId",val); return (E)this;}
+    default E setCountryId(F val) {
+        setColumnParam("CountryId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,CountryId> colCountryId(){
-        return new Column<E,Integer,CountryId>() {
+    /**
+     * table:CITY,type:SMALLINT,size:16,nullable:false
+     * table:COUNTRY,type:SMALLINT,size:16,nullable:false
+     */
+    default Column<E, F, CountryId> colCountryId() {
+        return new Column<E, F, CountryId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface CountryId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(CountryId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"CountryId");
-                return  entity.getCountryId();
+            public F getValue(CountryId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "CountryId");
+                return (F) entity.getCountryId();
             }
 
             @Override
-            public void setValue(CountryId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"CountryId");
+            public void setValue(CountryId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "CountryId");
                 entity.setCountryId(param);
             }
 

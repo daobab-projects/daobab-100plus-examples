@@ -20,13 +20,14 @@ public class DemoApplication implements ApplicationRunner, ApplicationContextAwa
 
     private ApplicationContext applicationContext;
 
-    private static Logger log= LoggerFactory.getLogger(DemoApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 
 
+    @SuppressWarnings("java:S3864")
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
@@ -44,8 +45,8 @@ public class DemoApplication implements ApplicationRunner, ApplicationContextAwa
                 })
                 .filter(Objects::nonNull)
                 .filter(ServiceBase.class::isAssignableFrom)
-                .peek(c->log.info("*********************************************************************************************"))
-                .peek(c->log.info("executing an example: "+c.getName()))
+                .peek(c -> log.info("*********************************************************************************************"))
+                .peek(c -> log.info("executing an example: {}", c.getName()))
                 .peek(c->log.info("*********************************************************************************************"))
                 .map(applicationContext::getBean)
                 .map(ServiceBase.class::cast)

@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface Password<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * STAFF: VARCHAR
-     */
-    default String getPassword(){return getColumnParam("Password");}
+public interface Password<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getPassword() {
+        return getColumnParam("Password");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPassword(String val){setColumnParam("Password",val); return (E)this;}
+    default E setPassword(F val) {
+        setColumnParam("Password", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,Password> colPassword(){
-        return new Column<E,String,Password>() {
+    /**
+     * table:STAFF,type:VARCHAR,size:40,nullable:true
+     */
+    default Column<E, F, Password> colPassword() {
+        return new Column<E, F, Password>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface Password<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(Password entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Password");
-                return  entity.getPassword();
+            public F getValue(Password entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Password");
+                return (F) entity.getPassword();
             }
 
             @Override
-            public void setValue(Password entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Password");
+            public void setValue(Password entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Password");
                 entity.setPassword(param);
             }
 

@@ -3,16 +3,13 @@ package io.daobab.demo.dao.table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
-import io.daobab.model.Column;
-import io.daobab.model.TableColumn;
-import io.daobab.model.PrimaryKey;
+import io.daobab.demo.dao.column.Description;
 import io.daobab.demo.dao.column.FilmId;
 import io.daobab.demo.dao.column.Title;
-import io.daobab.demo.dao.column.Description;
-
+import io.daobab.model.Column;
+import io.daobab.model.PrimaryKey;
 import io.daobab.model.Table;
-
-import java.lang.Integer;
+import io.daobab.model.TableColumn;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,12 +22,12 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @SuppressWarnings("rawtypes")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class FilmText extends Table implements 
-	FilmId<FilmText>,
-	Title<FilmText>,
-	Description<FilmText>,
+public class FilmText extends Table implements
+        FilmId<FilmText, Integer>,
+        Title<FilmText, String>,
+        Description<FilmText, String>,
 
-	PrimaryKey<FilmText,Integer,FilmId>
+        PrimaryKey<FilmText, Integer, FilmId>
 	{
 
 	@Override
@@ -41,9 +38,9 @@ public class FilmText extends Table implements
 	@Override
     public List<TableColumn> columns() {
         return Arrays.asList(
-			new TableColumn(colFilmId()).primaryKey().size(5),
-			new TableColumn(colTitle()).size(255),
-			new TableColumn(colDescription()).lob()
+                new TableColumn(colFilmId()).primaryKey().size(16),
+                new TableColumn(colTitle()).size(255),
+                new TableColumn(colDescription()).size(1000000000)
         );
 	}
 

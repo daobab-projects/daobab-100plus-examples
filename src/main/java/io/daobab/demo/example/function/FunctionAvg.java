@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
-
 /**
  * ---------------------------------------------------------
  * Avg
@@ -19,6 +18,10 @@ import java.util.List;
 @Component
 public class FunctionAvg extends ServiceBase<List<BigDecimal>> implements FunctionWhispererH2 {
 
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, FunctionAvg.class.getName());
+    }
+
     @Override
     public List<BigDecimal> call() {
         return db.select(avg(tabFilm.colLength()))
@@ -26,7 +29,4 @@ public class FunctionAvg extends ServiceBase<List<BigDecimal>> implements Functi
                 .findMany();
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, FunctionAvg.class.getName());
-    }
 }

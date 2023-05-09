@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface Phone<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * ADDRESS: VARCHAR
-     */
-    default String getPhone(){return getColumnParam("Phone");}
+public interface Phone<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getPhone() {
+        return getColumnParam("Phone");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPhone(String val){setColumnParam("Phone",val); return (E)this;}
+    default E setPhone(F val) {
+        setColumnParam("Phone", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,Phone> colPhone(){
-        return new Column<E,String,Phone>() {
+    /**
+     * table:ADDRESS,type:VARCHAR,size:20,nullable:false
+     */
+    default Column<E, F, Phone> colPhone() {
+        return new Column<E, F, Phone>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface Phone<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(Phone entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Phone");
-                return  entity.getPhone();
+            public F getValue(Phone entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Phone");
+                return (F) entity.getPhone();
             }
 
             @Override
-            public void setValue(Phone entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Phone");
+            public void setValue(Phone entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Phone");
                 entity.setPhone(param);
             }
 

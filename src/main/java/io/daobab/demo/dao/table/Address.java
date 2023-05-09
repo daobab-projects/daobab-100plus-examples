@@ -3,21 +3,13 @@ package io.daobab.demo.dao.table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
+import io.daobab.demo.dao.column.*;
 import io.daobab.model.Column;
-import io.daobab.model.TableColumn;
 import io.daobab.model.PrimaryKey;
-import io.daobab.demo.dao.column.AddressId;
-import io.daobab.demo.dao.column.Address2;
-import io.daobab.demo.dao.column.District;
-import io.daobab.demo.dao.column.CityId;
-import io.daobab.demo.dao.column.PostalCode;
-import io.daobab.demo.dao.column.Phone;
-import io.daobab.demo.dao.column.LastUpdate;
-
 import io.daobab.model.Table;
+import io.daobab.model.TableColumn;
 
-import java.lang.Integer;
-
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -29,17 +21,17 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @SuppressWarnings("rawtypes")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Address extends Table implements 
-	AddressId<Address>,
-	io.daobab.demo.dao.column.Address<Address>,
-	Address2<Address>,
-	District<Address>,
-	CityId<Address>,
-	PostalCode<Address>,
-	Phone<Address>,
-	LastUpdate<Address>,
+public class Address extends Table implements
+        AddressId<Address, Integer>,
+        io.daobab.demo.dao.column.Address<Address, String>,
+        Address2<Address, String>,
+        District<Address, String>,
+        CityId<Address, Integer>,
+        PostalCode<Address, String>,
+        Phone<Address, String>,
+        LastUpdate<Address, LocalDateTime>,
 
-	PrimaryKey<Address,Integer,AddressId>
+        PrimaryKey<Address, Integer, AddressId>
 	{
 
 	@Override
@@ -50,14 +42,14 @@ public class Address extends Table implements
 	@Override
     public List<TableColumn> columns() {
         return Arrays.asList(
-			new TableColumn(colAddressId()).primaryKey().size(5),
-			new TableColumn(colAddress()).size(50),
-			new TableColumn(colAddress2()).size(50),
-			new TableColumn(colDistrict()).size(20),
-			new TableColumn(colCityId()).size(5),
-			new TableColumn(colPostalCode()).size(10),
-			new TableColumn(colPhone()).size(20),
-			new TableColumn(colLastUpdate()).size(26).scale(6)
+                new TableColumn(colAddressId()).primaryKey().size(16),
+                new TableColumn(colAddress()).size(50),
+                new TableColumn(colAddress2()).size(50),
+                new TableColumn(colDistrict()).size(20),
+                new TableColumn(colCityId()).size(16),
+                new TableColumn(colPostalCode()).size(10),
+                new TableColumn(colPhone()).size(20),
+                new TableColumn(colLastUpdate()).size(26).scale(6)
         );
 	}
 

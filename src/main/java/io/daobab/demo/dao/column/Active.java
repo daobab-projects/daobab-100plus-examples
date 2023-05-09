@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Boolean;
-
-public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * CUSTOMER: BOOLEAN
-     * STAFF: BOOLEAN
-     */
-    default Boolean getActive(){return getColumnParam("Active");}
+public interface Active<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getActive() {
+        return getColumnParam("Active");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setActive(Boolean val){setColumnParam("Active",val); return (E)this;}
+    default E setActive(F val) {
+        setColumnParam("Active", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Boolean,Active> colActive(){
-        return new Column<E,Boolean,Active>() {
+    /**
+     * table:CUSTOMER,type:BOOLEAN,size:1,nullable:false
+     * table:STAFF,type:BOOLEAN,size:1,nullable:false
+     */
+    default Column<E, F, Active> colActive() {
+        return new Column<E, F, Active>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface Active<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Boolean> getFieldClass(){
-                return  Boolean.class;
+            public Class getFieldClass() {
+                return Boolean.class;
             }
 
             @Override
-            public Boolean getValue(Active entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Active");
-                return  entity.getActive();
+            public F getValue(Active entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Active");
+                return (F) entity.getActive();
             }
 
             @Override
-            public void setValue(Active entity, Boolean param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Active");
+            public void setValue(Active entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Active");
                 entity.setActive(param);
             }
 

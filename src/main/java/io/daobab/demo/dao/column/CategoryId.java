@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface CategoryId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * CATEGORY: TINYINT
-     * FILM_CATEGORY: TINYINT
-     */
-    default Integer getCategoryId(){return getColumnParam("CategoryId");}
+public interface CategoryId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getCategoryId() {
+        return getColumnParam("CategoryId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setCategoryId(Integer val){setColumnParam("CategoryId",val); return (E)this;}
+    default E setCategoryId(F val) {
+        setColumnParam("CategoryId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,CategoryId> colCategoryId(){
-        return new Column<E,Integer,CategoryId>() {
+    /**
+     * table:CATEGORY,type:TINYINT,size:8,nullable:false
+     * table:FILM_CATEGORY,type:TINYINT,size:8,nullable:false
+     */
+    default Column<E, F, CategoryId> colCategoryId() {
+        return new Column<E, F, CategoryId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface CategoryId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(CategoryId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"CategoryId");
-                return  entity.getCategoryId();
+            public F getValue(CategoryId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "CategoryId");
+                return (F) entity.getCategoryId();
             }
 
             @Override
-            public void setValue(CategoryId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"CategoryId");
+            public void setValue(CategoryId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "CategoryId");
                 entity.setCategoryId(param);
             }
 

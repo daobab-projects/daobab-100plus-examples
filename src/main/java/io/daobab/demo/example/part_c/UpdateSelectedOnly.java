@@ -6,6 +6,8 @@ import io.daobab.query.base.QueryWhisperer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * PK - Update selected only
@@ -28,14 +30,14 @@ public class UpdateSelectedOnly extends ServiceBase<Void> implements QueryWhispe
 
     public void way01() {
         var category = db.findOneByPk(tabCategory, 1);
-        category.setLastUpdate(toCurrentTimestamp());
+        category.setLastUpdate(LocalDateTime.now());
         //update single column only
         category.update(db, tabCategory.colLastUpdate());
     }
 
 
     public void way02() {
-        db.update(tabCategory.colLastUpdate(), toCurrentTimestamp())
+        db.update(tabCategory.colLastUpdate(), LocalDateTime.now())
                 .whereEqual(tabCategory.colCategoryId(), 1)
                 .execute();
     }
