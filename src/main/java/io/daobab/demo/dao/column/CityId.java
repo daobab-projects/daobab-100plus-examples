@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface CityId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * ADDRESS: SMALLINT
-     * CITY: SMALLINT
-     */
-    default Integer getCityId(){return getColumnParam("CityId");}
+public interface CityId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getCityId() {
+        return getColumnParam("CityId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setCityId(Integer val){setColumnParam("CityId",val); return (E)this;}
+    default E setCityId(F val) {
+        setColumnParam("CityId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,CityId> colCityId(){
-        return new Column<E,Integer,CityId>() {
+    /**
+     * table:ADDRESS,type:SMALLINT,size:16,nullable:false
+     * table:CITY,type:SMALLINT,size:16,nullable:false
+     */
+    default Column<E, F, CityId> colCityId() {
+        return new Column<E, F, CityId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface CityId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(CityId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"CityId");
-                return  entity.getCityId();
+            public F getValue(CityId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "CityId");
+                return (F) entity.getCityId();
             }
 
             @Override
-            public void setValue(CityId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"CityId");
+            public void setValue(CityId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "CityId");
                 entity.setCityId(param);
             }
 

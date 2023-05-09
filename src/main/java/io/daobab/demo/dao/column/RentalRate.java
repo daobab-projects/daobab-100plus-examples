@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
-import java.util.Objects;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-public interface RentalRate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface RentalRate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: DECIMAL
-     */
-    default BigDecimal getRentalRate(){return getColumnParam("RentalRate");}
+    default F getRentalRate() {
+        return getColumnParam("RentalRate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setRentalRate(BigDecimal val){setColumnParam("RentalRate",val); return (E)this;}
+    default E setRentalRate(F val) {
+        setColumnParam("RentalRate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,BigDecimal,RentalRate> colRentalRate(){
-        return new Column<E,BigDecimal,RentalRate>() {
+    /**
+     * table:FILM,type:DECIMAL,size:4,nullable:false
+     */
+    default Column<E, F, RentalRate> colRentalRate() {
+        return new Column<E, F, RentalRate>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface RentalRate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass(){
-                return  BigDecimal.class;
+            public Class getFieldClass() {
+                return BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(RentalRate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalRate");
-                return  entity.getRentalRate();
+            public F getValue(RentalRate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalRate");
+                return (F) entity.getRentalRate();
             }
 
             @Override
-            public void setValue(RentalRate entity, BigDecimal param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalRate");
+            public void setValue(RentalRate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalRate");
                 entity.setRentalRate(param);
             }
 

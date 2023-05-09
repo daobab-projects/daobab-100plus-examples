@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface Address<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * ADDRESS: VARCHAR
-     */
-    default String getAddress(){return getColumnParam("Address");}
+public interface Address<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getAddress() {
+        return getColumnParam("Address");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setAddress(String val){setColumnParam("Address",val); return (E)this;}
+    default E setAddress(F val) {
+        setColumnParam("Address", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,Address> colAddress(){
-        return new Column<E,String,Address>() {
+    /**
+     * table:ADDRESS,type:VARCHAR,size:50,nullable:false
+     */
+    default Column<E, F, Address> colAddress() {
+        return new Column<E, F, Address>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface Address<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(Address entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Address");
-                return  entity.getAddress();
+            public F getValue(Address entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Address");
+                return (F) entity.getAddress();
             }
 
             @Override
-            public void setValue(Address entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Address");
+            public void setValue(Address entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Address");
                 entity.setAddress(param);
             }
 

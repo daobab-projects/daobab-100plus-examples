@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CountryCity extends City implements
-        io.daobab.demo.dao.column.Country<City>,
+        io.daobab.demo.dao.column.Country<City, Integer>,
         EnhancedEntity {
 
     private static final Country tabCountry = new Country();

@@ -1,8 +1,8 @@
 package io.daobab.demo;
 
-import io.daobab.demo.dao.SakilaTables;
 import io.daobab.demo.base.InMemoryAppender;
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.demo.dao.SakilaTables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,6 @@ public class Controller implements SakilaTables {
         var sb = new StringBuilder();
         sb.append("<option").append(selected == null ? " selected " : "").append(">Choose Daobab example to execute</option>");
         for (var service : examples) {
-
             boolean chosen = service.getClass().getSimpleName().equals(selected);
             sb.append("<option ").append(chosen ? " selected " : "").append("value=\"").append(service.getClass().getSimpleName()).append("\">").append(service.getClass().getSimpleName()).append("</option>");
         }
@@ -60,7 +59,6 @@ public class Controller implements SakilaTables {
 
     @GetMapping("/test")
     public String test(@RequestParam(value = "name", required = false) String no) {
-        log.info("wywoluje "+no);
         inMemoryConsole.clear();
         if (no != null) executeExampleNo(no);
 

@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import java.sql.Timestamp;
-
-public interface RentalDate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface RentalDate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * RENTAL: TIMESTAMP
-     */
-    default Timestamp getRentalDate(){return getColumnParam("RentalDate");}
+    default F getRentalDate() {
+        return getColumnParam("RentalDate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setRentalDate(Timestamp val){setColumnParam("RentalDate",val); return (E)this;}
+    default E setRentalDate(F val) {
+        setColumnParam("RentalDate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Timestamp,RentalDate> colRentalDate(){
-        return new Column<E,Timestamp,RentalDate>() {
+    /**
+     * table:RENTAL,type:TIMESTAMP,size:26,nullable:false
+     */
+    default Column<E, F, RentalDate> colRentalDate() {
+        return new Column<E, F, RentalDate>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface RentalDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getFieldClass(){
-                return  Timestamp.class;
+            public Class getFieldClass() {
+                return LocalDateTime.class;
             }
 
             @Override
-            public Timestamp getValue(RentalDate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalDate");
-                return  entity.getRentalDate();
+            public F getValue(RentalDate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalDate");
+                return (F) entity.getRentalDate();
             }
 
             @Override
-            public void setValue(RentalDate entity, Timestamp param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalDate");
+            public void setValue(RentalDate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalDate");
                 entity.setRentalDate(param);
             }
 

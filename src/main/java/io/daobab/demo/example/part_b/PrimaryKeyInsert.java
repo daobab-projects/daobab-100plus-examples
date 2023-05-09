@@ -6,6 +6,8 @@ import io.daobab.demo.dao.table.Category;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * - How to insert entity by PK method.
@@ -21,7 +23,7 @@ public class PrimaryKeyInsert extends ServiceBase<Category> {
     @Override
     public Category call() {
         return new Category()
-                .setLastUpdate(toCurrentTimestamp())
+                .setLastUpdate(LocalDateTime.now())
                 .setName("test")
                 .insert(db);
     }
@@ -29,7 +31,7 @@ public class PrimaryKeyInsert extends ServiceBase<Category> {
 
     public Category way02() {
         var category = new Category()
-                .setLastUpdate(toCurrentTimestamp())
+                .setLastUpdate(LocalDateTime.now())
                 .setName("test");
 
         return db.insert(category).execute();

@@ -3,13 +3,15 @@ package io.daobab.demo.dao.table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
-import io.daobab.model.*;
 import io.daobab.demo.dao.column.CategoryId;
-import io.daobab.demo.dao.column.Name;
 import io.daobab.demo.dao.column.LastUpdate;
+import io.daobab.demo.dao.column.Name;
+import io.daobab.model.Column;
+import io.daobab.model.PrimaryKey;
+import io.daobab.model.Table;
+import io.daobab.model.TableColumn;
 
-import java.lang.Integer;
-
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -21,12 +23,12 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @SuppressWarnings("rawtypes")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Category extends Table implements 
-	CategoryId<Category>,
-	Name<Category>,
-	LastUpdate<Category>,
+public class Category extends Table implements
+        CategoryId<Category, Integer>,
+        Name<Category, String>,
+        LastUpdate<Category, LocalDateTime>,
 
-	PrimaryKey<Category,Integer,CategoryId>
+        PrimaryKey<Category, Integer, CategoryId>
 	{
 
 	@Override
@@ -37,9 +39,9 @@ public class Category extends Table implements
 	@Override
     public List<TableColumn> columns() {
         return Arrays.asList(
-			new TableColumn(colCategoryId()).primaryKey().size(3),
-			new TableColumn(colName()).size(25),
-			new TableColumn(colLastUpdate()).size(26).scale(6)
+                new TableColumn(colCategoryId()).primaryKey().size(8),
+                new TableColumn(colName()).size(25),
+                new TableColumn(colLastUpdate()).size(26).scale(6)
         );
 	}
 
@@ -68,13 +70,4 @@ public class Category extends Table implements
 	}
 
 
-    @Override
-    public IdGeneratorType getIdGeneratorType() {
-        return IdGeneratorType.SEQUENCE;
     }
-
-    @Override
-    public String getSequenceName() {
-        return "CATEGORY_SEQ";
-    }
-}

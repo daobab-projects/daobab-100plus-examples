@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>io.daobab</groupId>
 	<artifactId>daobab-100plus-examples</artifactId>
-	<version>1.5</version>
+	<version>1.6</version>
 	<name>daobab-100plus-examples</name>
 	<description>Daobab - over 100 examples</description>
 
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>io.daobab</groupId>
 			<artifactId>daobab-core</artifactId>
-			<version>1.5</version>
+			<version>1.6</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

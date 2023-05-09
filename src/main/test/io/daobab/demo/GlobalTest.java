@@ -234,8 +234,8 @@ class GlobalTest implements THelper {
     }
 
     @Test
-    void testNoHeapBuffer(){
-        validation(callExample(NoHeapBuffer.class));
+    void testNonHeapBuffer(){
+        validation(callExample(NonHeapBuffer.class));
     }
 
     @Test

@@ -3,28 +3,35 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface StoreId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * CUSTOMER: TINYINT
-     * INVENTORY: TINYINT
-     * STAFF: TINYINT
-     * STORE: TINYINT
-     */
-    default Integer getStoreId(){return getColumnParam("StoreId");}
+public interface StoreId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getStoreId() {
+        return getColumnParam("StoreId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setStoreId(Integer val){setColumnParam("StoreId",val); return (E)this;}
+    default E setStoreId(F val) {
+        setColumnParam("StoreId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,StoreId> colStoreId(){
-        return new Column<E,Integer,StoreId>() {
+    /**
+     * table:CUSTOMER,type:TINYINT,size:8,nullable:false
+     * table:INVENTORY,type:TINYINT,size:8,nullable:false
+     * table:STAFF,type:TINYINT,size:8,nullable:false
+     * table:STORE,type:TINYINT,size:8,nullable:false
+     */
+    default Column<E, F, StoreId> colStoreId() {
+        return new Column<E, F, StoreId>() {
 
             @Override
             public String getColumnName() {
@@ -42,19 +49,19 @@ public interface StoreId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(StoreId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"StoreId");
-                return  entity.getStoreId();
+            public F getValue(StoreId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "StoreId");
+                return (F) entity.getStoreId();
             }
 
             @Override
-            public void setValue(StoreId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"StoreId");
+            public void setValue(StoreId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "StoreId");
                 entity.setStoreId(param);
             }
 

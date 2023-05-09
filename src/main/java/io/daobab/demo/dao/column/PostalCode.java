@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface PostalCode<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * ADDRESS: VARCHAR
-     */
-    default String getPostalCode(){return getColumnParam("PostalCode");}
+public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getPostalCode() {
+        return getColumnParam("PostalCode");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPostalCode(String val){setColumnParam("PostalCode",val); return (E)this;}
+    default E setPostalCode(F val) {
+        setColumnParam("PostalCode", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,PostalCode> colPostalCode(){
-        return new Column<E,String,PostalCode>() {
+    /**
+     * table:ADDRESS,type:VARCHAR,size:10,nullable:true
+     */
+    default Column<E, F, PostalCode> colPostalCode() {
+        return new Column<E, F, PostalCode>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface PostalCode<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(PostalCode entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"PostalCode");
-                return  entity.getPostalCode();
+            public F getValue(PostalCode entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "PostalCode");
+                return (F) entity.getPostalCode();
             }
 
             @Override
-            public void setValue(PostalCode entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"PostalCode");
+            public void setValue(PostalCode entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PostalCode");
                 entity.setPostalCode(param);
             }
 

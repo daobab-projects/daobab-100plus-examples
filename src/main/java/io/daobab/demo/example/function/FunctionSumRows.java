@@ -17,15 +17,16 @@ import java.util.List;
 @Component
 public class FunctionSumRows extends ServiceBase<List<BigDecimal>> implements FunctionWhispererH2 {
 
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, FunctionSumRows.class.getName());
+    }
+
     @Override
     public List<BigDecimal> call() {
-        return db.select(sumRows(tabFilm.colRentalRate(),tabFilm.colReplacementCost()).cast(BigDecimal.class))
+        return db.select(sumRows(tabFilm.colRentalRate(), tabFilm.colReplacementCost()).cast(BigDecimal.class))
                 .groupBy(tabFilm.colLanguageId())
                 .findMany();
     }
 
-    //to run directly
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, FunctionSumRows.class.getName());
-    }
+
 }

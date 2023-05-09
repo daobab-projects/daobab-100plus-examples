@@ -2,7 +2,7 @@ package io.daobab.demo;
 
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
-import io.daobab.target.buffer.noheap.NoHeapBuffer;
+import io.daobab.target.buffer.nonheap.NonHeapBuffer;
 import io.daobab.statement.function.FunctionWhispererH2;
 import io.daobab.target.database.meta.MetaDataTables;
 import org.junit.jupiter.api.Test;

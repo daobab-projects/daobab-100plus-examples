@@ -33,7 +33,7 @@ public class AbstractQueryAddressRelatedItems extends ServiceBase<Void> {
         return null;
     }
 
-    public <V extends EntityMap, E extends EntityMap & AddressId<E>> Entities<E> findAddressRelated(E entity, AddressId<V> addressId) {
+    public <V extends EntityMap, E extends EntityMap & AddressId<E, Integer>> Entities<E> findAddressRelated(E entity, AddressId<V, Integer> addressId) {
         return db.select(entity)
                 .whereEqual(entity.colAddressId(), addressId.getAddressId())
                 .findMany();

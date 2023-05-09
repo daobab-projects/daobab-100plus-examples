@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import java.sql.Timestamp;
-
-public interface ReturnDate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface ReturnDate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * RENTAL: TIMESTAMP
-     */
-    default Timestamp getReturnDate(){return getColumnParam("ReturnDate");}
+    default F getReturnDate() {
+        return getColumnParam("ReturnDate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setReturnDate(Timestamp val){setColumnParam("ReturnDate",val); return (E)this;}
+    default E setReturnDate(F val) {
+        setColumnParam("ReturnDate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Timestamp,ReturnDate> colReturnDate(){
-        return new Column<E,Timestamp,ReturnDate>() {
+    /**
+     * table:RENTAL,type:TIMESTAMP,size:26,nullable:true
+     */
+    default Column<E, F, ReturnDate> colReturnDate() {
+        return new Column<E, F, ReturnDate>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface ReturnDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getFieldClass(){
-                return  Timestamp.class;
+            public Class getFieldClass() {
+                return LocalDateTime.class;
             }
 
             @Override
-            public Timestamp getValue(ReturnDate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"ReturnDate");
-                return  entity.getReturnDate();
+            public F getValue(ReturnDate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "ReturnDate");
+                return (F) entity.getReturnDate();
             }
 
             @Override
-            public void setValue(ReturnDate entity, Timestamp param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"ReturnDate");
+            public void setValue(ReturnDate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReturnDate");
                 entity.setReturnDate(param);
             }
 

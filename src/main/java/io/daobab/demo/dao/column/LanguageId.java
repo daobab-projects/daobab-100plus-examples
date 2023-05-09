@@ -3,26 +3,33 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface LanguageId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: TINYINT
-     * LANGUAGE: TINYINT
-     */
-    default Integer getLanguageId(){return getColumnParam("LanguageId");}
+public interface LanguageId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getLanguageId() {
+        return getColumnParam("LanguageId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setLanguageId(Integer val){setColumnParam("LanguageId",val); return (E)this;}
+    default E setLanguageId(F val) {
+        setColumnParam("LanguageId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,LanguageId> colLanguageId(){
-        return new Column<E,Integer,LanguageId>() {
+    /**
+     * table:FILM,type:TINYINT,size:8,nullable:false
+     * table:LANGUAGE,type:TINYINT,size:8,nullable:false
+     */
+    default Column<E, F, LanguageId> colLanguageId() {
+        return new Column<E, F, LanguageId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +47,19 @@ public interface LanguageId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(LanguageId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"LanguageId");
-                return  entity.getLanguageId();
+            public F getValue(LanguageId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "LanguageId");
+                return (F) entity.getLanguageId();
             }
 
             @Override
-            public void setValue(LanguageId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"LanguageId");
+            public void setValue(LanguageId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "LanguageId");
                 entity.setLanguageId(param);
             }
 

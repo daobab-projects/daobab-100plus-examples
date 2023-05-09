@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
-import java.util.Objects;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-public interface Amount<E extends EntityMap> extends EntityRelationMap<E> {
+public interface Amount<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * PAYMENT: DECIMAL
-     */
-    default BigDecimal getAmount(){return getColumnParam("Amount");}
+    default F getAmount() {
+        return getColumnParam("Amount");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setAmount(BigDecimal val){setColumnParam("Amount",val); return (E)this;}
+    default E setAmount(F val) {
+        setColumnParam("Amount", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,BigDecimal,Amount> colAmount(){
-        return new Column<E,BigDecimal,Amount>() {
+    /**
+     * table:PAYMENT,type:DECIMAL,size:5,nullable:false
+     */
+    default Column<E, F, Amount> colAmount() {
+        return new Column<E, F, Amount>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface Amount<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass(){
-                return  BigDecimal.class;
+            public Class getFieldClass() {
+                return BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(Amount entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Amount");
-                return  entity.getAmount();
+            public F getValue(Amount entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Amount");
+                return (F) entity.getAmount();
             }
 
             @Override
-            public void setValue(Amount entity, BigDecimal param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Amount");
+            public void setValue(Amount entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Amount");
                 entity.setAmount(param);
             }
 

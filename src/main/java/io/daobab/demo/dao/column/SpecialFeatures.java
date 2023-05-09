@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface SpecialFeatures<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: VARCHAR
-     */
-    default String getSpecialFeatures(){return getColumnParam("SpecialFeatures");}
+public interface SpecialFeatures<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getSpecialFeatures() {
+        return getColumnParam("SpecialFeatures");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setSpecialFeatures(String val){setColumnParam("SpecialFeatures",val); return (E)this;}
+    default E setSpecialFeatures(F val) {
+        setColumnParam("SpecialFeatures", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,SpecialFeatures> colSpecialFeatures(){
-        return new Column<E,String,SpecialFeatures>() {
+    /**
+     * table:FILM,type:VARCHAR,size:54,nullable:true
+     */
+    default Column<E, F, SpecialFeatures> colSpecialFeatures() {
+        return new Column<E, F, SpecialFeatures>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,20 @@ public interface SpecialFeatures<E extends EntityMap> extends EntityRelationMap<
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(SpecialFeatures entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"SpecialFeatures");
-                return  entity.getSpecialFeatures();
+            public F getValue(SpecialFeatures entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "SpecialFeatures");
+                return (F) entity.getSpecialFeatures();
             }
 
             @Override
-            public void setValue(SpecialFeatures entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"SpecialFeatures");
+            public void setValue(SpecialFeatures entity, F param) {
+                if (entity == null)
+                    throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "SpecialFeatures");
                 entity.setSpecialFeatures(param);
             }
 

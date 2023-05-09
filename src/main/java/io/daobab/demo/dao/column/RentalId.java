@@ -3,26 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
-import java.util.Objects;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-public interface RentalId<E extends EntityMap> extends EntityRelationMap<E> {
+public interface RentalId<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * PAYMENT: INTEGER
-     * RENTAL: INTEGER
-     */
-    default BigDecimal getRentalId(){return getColumnParam("RentalId");}
+    default F getRentalId() {
+        return getColumnParam("RentalId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setRentalId(BigDecimal val){setColumnParam("RentalId",val); return (E)this;}
+    default E setRentalId(F val) {
+        setColumnParam("RentalId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,BigDecimal,RentalId> colRentalId(){
-        return new Column<E,BigDecimal,RentalId>() {
+    /**
+     * table:PAYMENT,type:INTEGER,size:32,nullable:true
+     * table:RENTAL,type:INTEGER,size:32,nullable:false
+     */
+    default Column<E, F, RentalId> colRentalId() {
+        return new Column<E, F, RentalId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +46,19 @@ public interface RentalId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass(){
-                return  BigDecimal.class;
+            public Class getFieldClass() {
+                return BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(RentalId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalId");
-                return  entity.getRentalId();
+            public F getValue(RentalId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalId");
+                return (F) entity.getRentalId();
             }
 
             @Override
-            public void setValue(RentalId entity, BigDecimal param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalId");
+            public void setValue(RentalId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalId");
                 entity.setRentalId(param);
             }
 

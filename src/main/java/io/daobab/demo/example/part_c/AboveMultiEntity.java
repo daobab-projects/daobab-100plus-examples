@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * ---------------------------------------------------------
- * - How to use AboveMultiEntityTarget
+ * - How to use AboveMultiEntity Target
  * ---------------------------------------------------------
  */
 @Component
@@ -27,15 +27,13 @@ public class AboveMultiEntity extends ServiceBase<List<Film>> {
 
     @Override
     public List<Film> call() {
-        var f = tabFilm;
-
-        return inMemoryFilm.select(f)
+        return inMemoryFilm.select(tabFilm)
                 .whereAnd(a -> a
-                        .less(f.colFilmId(), 100)
-                        .equal(f.colSpecialFeatures(), "Deleted Scenes")
-                        .greater(f.colReplacementCost(), toBigDecimal(20))
+                        .less(tabFilm.colFilmId(), 100)
+                        .equal(tabFilm.colSpecialFeatures(), "Deleted Scenes")
+                        .greater(tabFilm.colReplacementCost(), toBigDecimal(20))
                 )
-                .orderDescBy(f.colDescription())
+                .orderDescBy(tabFilm.colDescription())
                 .findMany();
 
     }

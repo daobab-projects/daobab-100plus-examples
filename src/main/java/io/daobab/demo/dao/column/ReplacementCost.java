@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
-import java.util.Objects;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-public interface ReplacementCost<E extends EntityMap> extends EntityRelationMap<E> {
+public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: DECIMAL
-     */
-    default BigDecimal getReplacementCost(){return getColumnParam("ReplacementCost");}
+    default F getReplacementCost() {
+        return getColumnParam("ReplacementCost");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setReplacementCost(BigDecimal val){setColumnParam("ReplacementCost",val); return (E)this;}
+    default E setReplacementCost(F val) {
+        setColumnParam("ReplacementCost", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,BigDecimal,ReplacementCost> colReplacementCost(){
-        return new Column<E,BigDecimal,ReplacementCost>() {
+    /**
+     * table:FILM,type:DECIMAL,size:5,nullable:false
+     */
+    default Column<E, F, ReplacementCost> colReplacementCost() {
+        return new Column<E, F, ReplacementCost>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,20 @@ public interface ReplacementCost<E extends EntityMap> extends EntityRelationMap<
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass(){
-                return  BigDecimal.class;
+            public Class getFieldClass() {
+                return BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(ReplacementCost entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"ReplacementCost");
-                return  entity.getReplacementCost();
+            public F getValue(ReplacementCost entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "ReplacementCost");
+                return (F) entity.getReplacementCost();
             }
 
             @Override
-            public void setValue(ReplacementCost entity, BigDecimal param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"ReplacementCost");
+            public void setValue(ReplacementCost entity, F param) {
+                if (entity == null)
+                    throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReplacementCost");
                 entity.setReplacementCost(param);
             }
 

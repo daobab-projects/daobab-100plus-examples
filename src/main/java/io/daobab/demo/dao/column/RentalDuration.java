@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface RentalDuration<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: TINYINT
-     */
-    default Integer getRentalDuration(){return getColumnParam("RentalDuration");}
+public interface RentalDuration<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getRentalDuration() {
+        return getColumnParam("RentalDuration");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setRentalDuration(Integer val){setColumnParam("RentalDuration",val); return (E)this;}
+    default E setRentalDuration(F val) {
+        setColumnParam("RentalDuration", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,RentalDuration> colRentalDuration(){
-        return new Column<E,Integer,RentalDuration>() {
+    /**
+     * table:FILM,type:TINYINT,size:8,nullable:false
+     */
+    default Column<E, F, RentalDuration> colRentalDuration() {
+        return new Column<E, F, RentalDuration>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface RentalDuration<E extends EntityMap> extends EntityRelationMap<E
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(RentalDuration entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"RentalDuration");
-                return  entity.getRentalDuration();
+            public F getValue(RentalDuration entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalDuration");
+                return (F) entity.getRentalDuration();
             }
 
             @Override
-            public void setValue(RentalDuration entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"RentalDuration");
+            public void setValue(RentalDuration entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalDuration");
                 entity.setRentalDuration(param);
             }
 

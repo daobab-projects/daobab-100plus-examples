@@ -7,6 +7,8 @@ import io.daobab.transaction.Propagation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * Transaction Propagation
@@ -29,12 +31,12 @@ public class TransactionPropagation extends ServiceBase<Void> {
         try {
             //Insert entity
             var category = new Category()
-                    .setLastUpdate(toCurrentTimestamp())
+                    .setLastUpdate(LocalDateTime.now())
                     .setName("test")
                     .insert(transaction, Propagation.REQUIRED_NEW);
 
             //Update entity
-            db.update(tabCategory.colLastUpdate(), toCurrentTimestamp())
+            db.update(tabCategory.colLastUpdate(), LocalDateTime.now())
                     .whereEqual(tabCategory.colCategoryId(), 1)
                     .execute(Propagation.SUPPORTS);
 

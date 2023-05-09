@@ -3,18 +3,16 @@ package io.daobab.demo.dao.table;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
-import io.daobab.model.Column;
-import io.daobab.model.TableColumn;
-import io.daobab.model.PrimaryKey;
 import io.daobab.demo.dao.column.ActorId;
 import io.daobab.demo.dao.column.FirstName;
 import io.daobab.demo.dao.column.LastName;
 import io.daobab.demo.dao.column.LastUpdate;
-
+import io.daobab.model.Column;
+import io.daobab.model.PrimaryKey;
 import io.daobab.model.Table;
+import io.daobab.model.TableColumn;
 
-import java.lang.Integer;
-
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -26,13 +24,13 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @SuppressWarnings("rawtypes")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Actor extends Table implements 
-	ActorId<Actor>,
-	FirstName<Actor>,
-	LastName<Actor>,
-	LastUpdate<Actor>,
+public class Actor extends Table implements
+        ActorId<Actor, Integer>,
+        FirstName<Actor, String>,
+        LastName<Actor, String>,
+        LastUpdate<Actor, LocalDateTime>,
 
-	PrimaryKey<Actor,Integer,ActorId>
+        PrimaryKey<Actor, Integer, ActorId>
 	{
 
 	@Override
@@ -43,10 +41,10 @@ public class Actor extends Table implements
 	@Override
     public List<TableColumn> columns() {
         return Arrays.asList(
-			new TableColumn(colActorId()).primaryKey().size(5),
-			new TableColumn(colFirstName()).size(45),
-			new TableColumn(colLastName()).size(45),
-			new TableColumn(colLastUpdate()).size(26).scale(6)
+                new TableColumn(colActorId()).primaryKey().size(16),
+                new TableColumn(colFirstName()).size(45),
+                new TableColumn(colLastName()).size(45),
+                new TableColumn(colLastUpdate()).size(26).scale(6)
         );
 	}
 
@@ -73,8 +71,5 @@ public class Actor extends Table implements
 		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
 		return Objects.equals(getId(), other.getId());
 	}
-
-
-
 
 }

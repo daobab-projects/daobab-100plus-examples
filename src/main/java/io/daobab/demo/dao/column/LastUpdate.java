@@ -3,39 +3,45 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import java.sql.Timestamp;
-
-public interface LastUpdate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface LastUpdate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * ACTOR: TIMESTAMP
-     * ADDRESS: TIMESTAMP
-     * CATEGORY: TIMESTAMP
-     * CITY: TIMESTAMP
-     * COUNTRY: TIMESTAMP
-     * CUSTOMER: TIMESTAMP
-     * FILM: TIMESTAMP
-     * FILM_ACTOR: TIMESTAMP
-     * FILM_CATEGORY: TIMESTAMP
-     * INVENTORY: TIMESTAMP
-     * LANGUAGE: TIMESTAMP
-     * PAYMENT: TIMESTAMP
-     * RENTAL: TIMESTAMP
-     * STAFF: TIMESTAMP
-     * STORE: TIMESTAMP
-     */
-    default Timestamp getLastUpdate(){return getColumnParam("LastUpdate");}
+    default F getLastUpdate() {
+        return getColumnParam("LastUpdate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setLastUpdate(Timestamp val){setColumnParam("LastUpdate",val); return (E)this;}
+    default E setLastUpdate(F val) {
+        setColumnParam("LastUpdate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Timestamp,LastUpdate> colLastUpdate(){
-        return new Column<E,Timestamp,LastUpdate>() {
+    /**
+     * table:ACTOR,type:TIMESTAMP,size:26,nullable:false
+     * table:ADDRESS,type:TIMESTAMP,size:26,nullable:false
+     * table:CATEGORY,type:TIMESTAMP,size:26,nullable:false
+     * table:CITY,type:TIMESTAMP,size:26,nullable:false
+     * table:COUNTRY,type:TIMESTAMP,size:26,nullable:false
+     * table:CUSTOMER,type:TIMESTAMP,size:26,nullable:false
+     * table:FILM,type:TIMESTAMP,size:26,nullable:false
+     * table:FILM_ACTOR,type:TIMESTAMP,size:26,nullable:false
+     * table:FILM_CATEGORY,type:TIMESTAMP,size:26,nullable:false
+     * table:INVENTORY,type:TIMESTAMP,size:26,nullable:false
+     * table:LANGUAGE,type:TIMESTAMP,size:26,nullable:false
+     * table:PAYMENT,type:TIMESTAMP,size:26,nullable:false
+     * table:RENTAL,type:TIMESTAMP,size:26,nullable:false
+     * table:STAFF,type:TIMESTAMP,size:26,nullable:false
+     * table:STORE,type:TIMESTAMP,size:26,nullable:false
+     */
+    default Column<E, F, LastUpdate> colLastUpdate() {
+        return new Column<E, F, LastUpdate>() {
 
             @Override
             public String getColumnName() {
@@ -53,19 +59,19 @@ public interface LastUpdate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getFieldClass(){
-                return  Timestamp.class;
+            public Class getFieldClass() {
+                return LocalDateTime.class;
             }
 
             @Override
-            public Timestamp getValue(LastUpdate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"LastUpdate");
-                return  entity.getLastUpdate();
+            public F getValue(LastUpdate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "LastUpdate");
+                return (F) entity.getLastUpdate();
             }
 
             @Override
-            public void setValue(LastUpdate entity, Timestamp param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"LastUpdate");
+            public void setValue(LastUpdate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "LastUpdate");
                 entity.setLastUpdate(param);
             }
 

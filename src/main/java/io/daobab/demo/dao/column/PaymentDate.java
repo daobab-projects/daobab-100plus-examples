@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import java.sql.Timestamp;
-
-public interface PaymentDate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface PaymentDate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * PAYMENT: TIMESTAMP
-     */
-    default Timestamp getPaymentDate(){return getColumnParam("PaymentDate");}
+    default F getPaymentDate() {
+        return getColumnParam("PaymentDate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPaymentDate(Timestamp val){setColumnParam("PaymentDate",val); return (E)this;}
+    default E setPaymentDate(F val) {
+        setColumnParam("PaymentDate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Timestamp,PaymentDate> colPaymentDate(){
-        return new Column<E,Timestamp,PaymentDate>() {
+    /**
+     * table:PAYMENT,type:TIMESTAMP,size:26,nullable:false
+     */
+    default Column<E, F, PaymentDate> colPaymentDate() {
+        return new Column<E, F, PaymentDate>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface PaymentDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getFieldClass(){
-                return  Timestamp.class;
+            public Class getFieldClass() {
+                return LocalDateTime.class;
             }
 
             @Override
-            public Timestamp getValue(PaymentDate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"PaymentDate");
-                return  entity.getPaymentDate();
+            public F getValue(PaymentDate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "PaymentDate");
+                return (F) entity.getPaymentDate();
             }
 
             @Override
-            public void setValue(PaymentDate entity, Timestamp param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"PaymentDate");
+            public void setValue(PaymentDate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PaymentDate");
                 entity.setPaymentDate(param);
             }
 

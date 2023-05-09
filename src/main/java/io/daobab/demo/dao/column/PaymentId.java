@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface PaymentId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * PAYMENT: SMALLINT
-     */
-    default Integer getPaymentId(){return getColumnParam("PaymentId");}
+public interface PaymentId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getPaymentId() {
+        return getColumnParam("PaymentId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPaymentId(Integer val){setColumnParam("PaymentId",val); return (E)this;}
+    default E setPaymentId(F val) {
+        setColumnParam("PaymentId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,PaymentId> colPaymentId(){
-        return new Column<E,Integer,PaymentId>() {
+    /**
+     * table:PAYMENT,type:SMALLINT,size:16,nullable:false
+     */
+    default Column<E, F, PaymentId> colPaymentId() {
+        return new Column<E, F, PaymentId>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface PaymentId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(PaymentId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"PaymentId");
-                return  entity.getPaymentId();
+            public F getValue(PaymentId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "PaymentId");
+                return (F) entity.getPaymentId();
             }
 
             @Override
-            public void setValue(PaymentId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"PaymentId");
+            public void setValue(PaymentId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PaymentId");
                 entity.setPaymentId(param);
             }
 

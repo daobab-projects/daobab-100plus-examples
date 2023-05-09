@@ -6,6 +6,7 @@ import io.daobab.demo.dao.table.Film;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class BuildInParsers extends ServiceBase<List<Film>> {
                         .equal(f.colSpecialFeatures(), "Deleted Scenes")
                         .greater(f.colReplacementCost(), toBigDecimal(amount))
                         .greater(f.colLength(), toInteger("5"))
-                        .less(f.colLastUpdate(), toTimestamp("2009-12-10", "yyyy-MM-dd"))
+                        .less(f.colLastUpdate(), LocalDate.parse("2009-12-10").atStartOfDay())
                 )
                 .orderDescBy(f.colDescription())
                 .findMany();

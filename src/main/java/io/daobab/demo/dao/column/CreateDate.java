@@ -3,25 +3,31 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-import java.sql.Timestamp;
-
-public interface CreateDate<E extends EntityMap> extends EntityRelationMap<E> {
+public interface CreateDate<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * CUSTOMER: TIMESTAMP
-     */
-    default Timestamp getCreateDate(){return getColumnParam("CreateDate");}
+    default F getCreateDate() {
+        return getColumnParam("CreateDate");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setCreateDate(Timestamp val){setColumnParam("CreateDate",val); return (E)this;}
+    default E setCreateDate(F val) {
+        setColumnParam("CreateDate", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Timestamp,CreateDate> colCreateDate(){
-        return new Column<E,Timestamp,CreateDate>() {
+    /**
+     * table:CUSTOMER,type:TIMESTAMP,size:26,nullable:false
+     */
+    default Column<E, F, CreateDate> colCreateDate() {
+        return new Column<E, F, CreateDate>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +45,19 @@ public interface CreateDate<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Timestamp> getFieldClass(){
-                return  Timestamp.class;
+            public Class getFieldClass() {
+                return LocalDateTime.class;
             }
 
             @Override
-            public Timestamp getValue(CreateDate entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"CreateDate");
-                return  entity.getCreateDate();
+            public F getValue(CreateDate entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "CreateDate");
+                return (F) entity.getCreateDate();
             }
 
             @Override
-            public void setValue(CreateDate entity, Timestamp param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"CreateDate");
+            public void setValue(CreateDate entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "CreateDate");
                 entity.setCreateDate(param);
             }
 

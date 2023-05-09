@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface OriginalLanguageId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: TINYINT
-     */
-    default Integer getOriginalLanguageId(){return getColumnParam("OriginalLanguageId");}
+public interface OriginalLanguageId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getOriginalLanguageId() {
+        return getColumnParam("OriginalLanguageId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setOriginalLanguageId(Integer val){setColumnParam("OriginalLanguageId",val); return (E)this;}
+    default E setOriginalLanguageId(F val) {
+        setColumnParam("OriginalLanguageId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,OriginalLanguageId> colOriginalLanguageId(){
-        return new Column<E,Integer,OriginalLanguageId>() {
+    /**
+     * table:FILM,type:TINYINT,size:8,nullable:true
+     */
+    default Column<E, F, OriginalLanguageId> colOriginalLanguageId() {
+        return new Column<E, F, OriginalLanguageId>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,21 @@ public interface OriginalLanguageId<E extends EntityMap> extends EntityRelationM
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(OriginalLanguageId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"OriginalLanguageId");
-                return  entity.getOriginalLanguageId();
+            public F getValue(OriginalLanguageId entity) {
+                if (entity == null)
+                    throw new AttemptToReadFromNullEntityException(getEntityClass(), "OriginalLanguageId");
+                return (F) entity.getOriginalLanguageId();
             }
 
             @Override
-            public void setValue(OriginalLanguageId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"OriginalLanguageId");
+            public void setValue(OriginalLanguageId entity, F param) {
+                if (entity == null)
+                    throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "OriginalLanguageId");
                 entity.setOriginalLanguageId(param);
             }
 

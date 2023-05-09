@@ -7,6 +7,8 @@ import io.daobab.transaction.Propagation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * Transaction wrapper
@@ -26,8 +28,8 @@ public class TransactionWrapperVoid extends ServiceBase<Void> {
 
 
 
-        var cat=new Category()
-                .setLastUpdate(toCurrentTimestamp())
+        var cat= new Category()
+                .setLastUpdate(LocalDateTime.now())
                 .setName("test");
 
         var anotherCat=db.select(tabCategory).whereEqual(tabCategory.colID(),1).findOne().clone();
@@ -48,12 +50,12 @@ public class TransactionWrapperVoid extends ServiceBase<Void> {
         db.wrapTransaction(transaction -> {
                     //Insert entity
                     var category = new Category()
-                            .setLastUpdate(toCurrentTimestamp())
+                            .setLastUpdate(LocalDateTime.now())
                             .setName("test")
                             .insert(transaction);
 
                     //Update entity
-                    category.setLastUpdate(toCurrentTimestamp())
+            category.setLastUpdate(LocalDateTime.now())
                             .update(transaction, tabCategory.colLastUpdate());
 
                     //Delete entity

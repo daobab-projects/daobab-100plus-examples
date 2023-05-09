@@ -23,10 +23,16 @@ public class Limit extends ServiceBase<List<Customer>> {
     @Override
     public List<Customer> call() {
         var c = tabCustomer;
-        return db.select(c)
-                .whereGreater(c.colID(), 10)
+        var rv = db.select(c)
+                .whereGreater(c.colID(), 1)
                 .limitBy(5)
                 .findMany();
+
+//        rv.forEach(cus->{
+//            Entities<Store> ent=cus.getStore();
+//            System.out.println("customer "+cus.getCustomerId()+" storeSize "+(ent==null?"null":ent.size()));
+//        });
+        return rv;
     }
 
 

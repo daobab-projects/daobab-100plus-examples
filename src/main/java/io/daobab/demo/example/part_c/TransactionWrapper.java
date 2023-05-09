@@ -6,6 +6,8 @@ import io.daobab.demo.dao.table.Category;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * Transaction wrapper
@@ -27,12 +29,12 @@ public class TransactionWrapper extends ServiceBase<Void> {
         var deletedRecords=db.wrapTransaction(transaction -> {
                     //Insert entity
                     var category = new Category()
-                            .setLastUpdate(toCurrentTimestamp())
+                            .setLastUpdate(LocalDateTime.now())
                             .setName("test")
                             .insert(transaction);
 
                     //Update entity
-                    category.setLastUpdate(toCurrentTimestamp())
+            category.setLastUpdate(LocalDateTime.now())
                             .update(transaction, tabCategory.colLastUpdate());
 
                     //Delete entity

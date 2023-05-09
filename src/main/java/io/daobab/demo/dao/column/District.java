@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.String;
-
-public interface District<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * ADDRESS: VARCHAR
-     */
-    default String getDistrict(){return getColumnParam("District");}
+public interface District<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getDistrict() {
+        return getColumnParam("District");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setDistrict(String val){setColumnParam("District",val); return (E)this;}
+    default E setDistrict(F val) {
+        setColumnParam("District", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,String,District> colDistrict(){
-        return new Column<E,String,District>() {
+    /**
+     * table:ADDRESS,type:VARCHAR,size:20,nullable:false
+     */
+    default Column<E, F, District> colDistrict() {
+        return new Column<E, F, District>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface District<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<String> getFieldClass(){
-                return  String.class;
+            public Class getFieldClass() {
+                return String.class;
             }
 
             @Override
-            public String getValue(District entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"District");
-                return  entity.getDistrict();
+            public F getValue(District entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "District");
+                return (F) entity.getDistrict();
             }
 
             @Override
-            public void setValue(District entity, String param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"District");
+            public void setValue(District entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "District");
                 entity.setDistrict(param);
             }
 

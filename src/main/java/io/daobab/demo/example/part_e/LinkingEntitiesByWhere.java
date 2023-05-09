@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  * Linking Entities by Where
  * ---------------------------------------------------------
- * - How to use Where for linking Entities (instead og joins)
+ * - How to use Where for linking Entities (instead of joins)
  */
 @Component
 public class LinkingEntitiesByWhere extends ServiceBase<FlatPlate> {

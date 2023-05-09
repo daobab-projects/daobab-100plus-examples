@@ -3,7 +3,7 @@ package io.daobab.demo.dao;
 import io.daobab.model.Entity;
 import io.daobab.model.ResponseWrapper;
 import io.daobab.query.base.Query;
-import io.daobab.target.database.remote.RemoteClient;
+import io.daobab.target.buffer.remote.RemoteClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

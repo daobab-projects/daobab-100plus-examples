@@ -7,6 +7,8 @@ import io.daobab.target.buffer.single.Entities;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 /**
  * ---------------------------------------------------------
  * - How to use WhereAND clause
@@ -36,7 +38,7 @@ public class WhereAnd extends ServiceBase<Entities<Customer>> {
                         .notNull(t.colAddressId())
                         .notEqual(t.colEmail(), "forbidden@email.com")
                         .greater(t.colCustomerId(), 0)
-                        .between(t.colCreateDate(), toTimestamp("2005-01-01", "yyyy-MM-dd"), toTimestamp("2007-01-01", "yyyy-MM-dd"))
+                        .between(t.colCreateDate(), LocalDate.parse("2005-01-01").atStartOfDay(), LocalDate.parse("2007-01-01").atStartOfDay())
                 )
                 .findMany();
     }
@@ -52,7 +54,7 @@ public class WhereAnd extends ServiceBase<Entities<Customer>> {
                         .notNull(t.colAddressId())
                         .notEqual(t.colEmail(), "forbidden@email.com")
                         .greater(t.colCustomerId(), 0)
-                        .between(t.colCreateDate(), toTimestamp("2005-01-01", "yyyy-MM-dd"), toTimestamp("2007-01-01", "yyyy-MM-dd"))
+                        .between(t.colCreateDate(), LocalDate.parse("2005-01-01").atStartOfDay(), LocalDate.parse("2007-01-01").atStartOfDay())
                 )
                 .findMany();
     }

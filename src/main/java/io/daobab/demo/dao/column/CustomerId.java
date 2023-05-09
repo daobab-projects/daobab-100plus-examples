@@ -3,27 +3,34 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface CustomerId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * CUSTOMER: SMALLINT
-     * PAYMENT: SMALLINT
-     * RENTAL: SMALLINT
-     */
-    default Integer getCustomerId(){return getColumnParam("CustomerId");}
+public interface CustomerId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getCustomerId() {
+        return getColumnParam("CustomerId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setCustomerId(Integer val){setColumnParam("CustomerId",val); return (E)this;}
+    default E setCustomerId(F val) {
+        setColumnParam("CustomerId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,CustomerId> colCustomerId(){
-        return new Column<E,Integer,CustomerId>() {
+    /**
+     * table:CUSTOMER,type:SMALLINT,size:16,nullable:false
+     * table:PAYMENT,type:SMALLINT,size:16,nullable:false
+     * table:RENTAL,type:SMALLINT,size:16,nullable:false
+     */
+    default Column<E, F, CustomerId> colCustomerId() {
+        return new Column<E, F, CustomerId>() {
 
             @Override
             public String getColumnName() {
@@ -41,19 +48,19 @@ public interface CustomerId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(CustomerId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"CustomerId");
-                return  entity.getCustomerId();
+            public F getValue(CustomerId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "CustomerId");
+                return (F) entity.getCustomerId();
             }
 
             @Override
-            public void setValue(CustomerId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"CustomerId");
+            public void setValue(CustomerId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "CustomerId");
                 entity.setCustomerId(param);
             }
 

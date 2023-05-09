@@ -6,6 +6,9 @@ import io.daobab.demo.dao.table.Film;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * Chained Setters and Insert
@@ -22,9 +25,9 @@ public class ChainedSettingAndInsert extends ServiceBase<Film> {
     public Film call() {
         var film = new Film()
                 .setFilmId(3999)
-                .setLastUpdate(toCurrentTimestamp())
+                .setLastUpdate(LocalDateTime.now())
                 .setDescription("Description")
-                .setReleaseYear(toCurrentDateSQL())
+                .setReleaseYear(LocalDate.now())
                 .setReplacementCost(toBD(10.10))
                 .setRentalDuration(10)
                 .setRentalRate(toBD(1))

@@ -3,26 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
-import java.util.Objects;
+import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-public interface InventoryId<E extends EntityMap> extends EntityRelationMap<E> {
+public interface InventoryId<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * INVENTORY: INTEGER
-     * RENTAL: INTEGER
-     */
-    default BigDecimal getInventoryId(){return getColumnParam("InventoryId");}
+    default F getInventoryId() {
+        return getColumnParam("InventoryId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setInventoryId(BigDecimal val){setColumnParam("InventoryId",val); return (E)this;}
+    default E setInventoryId(F val) {
+        setColumnParam("InventoryId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,BigDecimal,InventoryId> colInventoryId(){
-        return new Column<E,BigDecimal,InventoryId>() {
+    /**
+     * table:INVENTORY,type:INTEGER,size:32,nullable:false
+     * table:RENTAL,type:INTEGER,size:32,nullable:false
+     */
+    default Column<E, F, InventoryId> colInventoryId() {
+        return new Column<E, F, InventoryId>() {
 
             @Override
             public String getColumnName() {
@@ -40,19 +46,19 @@ public interface InventoryId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<BigDecimal> getFieldClass(){
-                return  BigDecimal.class;
+            public Class getFieldClass() {
+                return BigDecimal.class;
             }
 
             @Override
-            public BigDecimal getValue(InventoryId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"InventoryId");
-                return  entity.getInventoryId();
+            public F getValue(InventoryId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "InventoryId");
+                return (F) entity.getInventoryId();
             }
 
             @Override
-            public void setValue(InventoryId entity, BigDecimal param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"InventoryId");
+            public void setValue(InventoryId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "InventoryId");
                 entity.setInventoryId(param);
             }
 

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-class TestNoHeap implements SakilaTables {
+class TestNonHeap implements SakilaTables {
 
 
     private final Logger log = LoggerFactory.getLogger("Test");

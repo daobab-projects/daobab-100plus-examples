@@ -6,6 +6,8 @@ import io.daobab.demo.dao.table.Category;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 /**
  * ---------------------------------------------------------
  * - How to update entity by PK method.
@@ -25,14 +27,14 @@ public class PrimaryKeyUpdate extends ServiceBase<Category> {
 
     public Category way01() {
         return db.findOneByPk(tabCategory, 1)
-                .setLastUpdate(toCurrentTimestamp())
+                .setLastUpdate(LocalDateTime.now())
                 .update(db);
     }
 
 
     public Category way02() {
         var category = new Category()
-                .setLastUpdate(toCurrentTimestamp());
+                .setLastUpdate(LocalDateTime.now());
 
         db.update(category).execute();
 

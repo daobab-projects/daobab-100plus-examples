@@ -3,29 +3,36 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
-import java.lang.Integer;
-
-public interface FilmId<E extends EntityMap> extends EntityRelationMap<E> {
 
 
-    /**
-     * FILM: SMALLINT
-     * FILM_ACTOR: SMALLINT
-     * FILM_CATEGORY: SMALLINT
-     * FILM_TEXT: SMALLINT
-     * INVENTORY: SMALLINT
-     */
-    default Integer getFilmId(){return getColumnParam("FilmId");}
+public interface FilmId<E extends EntityMap, F> extends EntityRelationMap<E> {
+
+
+    default F getFilmId() {
+        return getColumnParam("FilmId");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setFilmId(Integer val){setColumnParam("FilmId",val); return (E)this;}
+    default E setFilmId(F val) {
+        setColumnParam("FilmId", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,Integer,FilmId> colFilmId(){
-        return new Column<E,Integer,FilmId>() {
+    /**
+     * table:FILM,type:SMALLINT,size:16,nullable:false
+     * table:FILM_ACTOR,type:SMALLINT,size:16,nullable:false
+     * table:FILM_CATEGORY,type:SMALLINT,size:16,nullable:false
+     * table:FILM_TEXT,type:SMALLINT,size:16,nullable:false
+     * table:INVENTORY,type:SMALLINT,size:16,nullable:false
+     */
+    default Column<E, F, FilmId> colFilmId() {
+        return new Column<E, F, FilmId>() {
 
             @Override
             public String getColumnName() {
@@ -43,19 +50,19 @@ public interface FilmId<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<Integer> getFieldClass(){
-                return  Integer.class;
+            public Class getFieldClass() {
+                return Integer.class;
             }
 
             @Override
-            public Integer getValue(FilmId entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"FilmId");
-                return  entity.getFilmId();
+            public F getValue(FilmId entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "FilmId");
+                return (F) entity.getFilmId();
             }
 
             @Override
-            public void setValue(FilmId entity, Integer param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"FilmId");
+            public void setValue(FilmId entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "FilmId");
                 entity.setFilmId(param);
             }
 

@@ -3,25 +3,32 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
-import io.daobab.model.EntityRelationMap;
 import io.daobab.model.EntityMap;
+import io.daobab.model.EntityRelationMap;
+
 import java.util.Objects;
 
 
 
-public interface Picture<E extends EntityMap> extends EntityRelationMap<E> {
+public interface Picture<E extends EntityMap, F> extends EntityRelationMap<E> {
 
 
-    /**
-     * STAFF: VARBINARY
-     */
-    default byte[] getPicture(){return getColumnParam("Picture");}
+    default F getPicture() {
+        return getColumnParam("Picture");
+    }
+
     @SuppressWarnings("unchecked")
-    default E setPicture(byte[] val){setColumnParam("Picture",val); return (E)this;}
+    default E setPicture(F val) {
+        setColumnParam("Picture", val);
+        return (E) this;
+    }
 
     @SuppressWarnings("rawtypes")
-    default Column<E,byte[],Picture> colPicture(){
-        return new Column<E,byte[],Picture>() {
+    /**
+     * table:STAFF,type:VARBINARY,size:1000000000,nullable:true
+     */
+    default Column<E, F, Picture> colPicture() {
+        return new Column<E, F, Picture>() {
 
             @Override
             public String getColumnName() {
@@ -39,19 +46,19 @@ public interface Picture<E extends EntityMap> extends EntityRelationMap<E> {
             }
 
             @Override
-            public Class<byte[]> getFieldClass(){
-                return  byte[].class;
+            public Class getFieldClass() {
+                return byte[].class;
             }
 
             @Override
-            public byte[] getValue(Picture entity){
-                if (entity==null) throw new AttemptToReadFromNullEntityException(getEntityClass(),"Picture");
-                return  entity.getPicture();
+            public F getValue(Picture entity) {
+                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Picture");
+                return (F) entity.getPicture();
             }
 
             @Override
-            public void setValue(Picture entity, byte[] param){
-                if (entity==null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(),"Picture");
+            public void setValue(Picture entity, F param) {
+                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Picture");
                 entity.setPicture(param);
             }
 
