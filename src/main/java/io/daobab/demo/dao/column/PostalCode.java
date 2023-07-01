@@ -1,86 +1,25 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
-import java.util.Objects;
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 
 
+@SuppressWarnings("unused")
+public interface PostalCode<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E> {
+	default String getPostalCode(){
+		return readParam("PostalCode");
+	}
 
+	default E setPostalCode(String val){
+		return storeParam("PostalCode",val);
+	}
 
-    default F getPostalCode() {
-        return getColumnParam("PostalCode");
-    }
-
-    @SuppressWarnings("unchecked")
-    default E setPostalCode(F val) {
-        setColumnParam("PostalCode", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:ADDRESS,type:VARCHAR,size:10,nullable:true
+     * table:ADDRESS, type:VARCHAR, size:10, nullable:true
      */
-    default Column<E, F, PostalCode> colPostalCode() {
-        return new Column<E, F, PostalCode>() {
-
-            @Override
-            public String getColumnName() {
-                return "POSTAL_CODE";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "PostalCode";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return String.class;
-            }
-
-            @Override
-            public F getValue(PostalCode entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "PostalCode");
-                return (F) entity.getPostalCode();
-            }
-
-            @Override
-            public void setValue(PostalCode entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PostalCode");
-                entity.setPostalCode(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, String,PostalCode> colPostalCode(){
+		return DaobabCache.getColumn("PostalCode", "POSTAL_CODE", (Table<?>) this, String.class);
+	}
 }

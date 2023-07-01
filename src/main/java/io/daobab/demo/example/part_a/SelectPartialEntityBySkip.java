@@ -23,7 +23,7 @@ public class SelectPartialEntityBySkip extends ServiceBase<Entities<Staff>> {
     @Override
     public Entities<Staff> call() {
         return db.select(tabStaff)
-                .skip(tabStaff.colPicture(),tabStaff.colPassword())
+                .skip(tabStaff.colPicture(), tabStaff.colPassword())
                 .findMany();
     }
 

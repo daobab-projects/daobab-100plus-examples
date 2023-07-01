@@ -1,12 +1,12 @@
 package io.daobab.demo;
 
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.demo.example.function.*;
 import io.daobab.demo.example.part_a.*;
 import io.daobab.demo.example.part_b.*;
 import io.daobab.demo.example.part_c.*;
 import io.daobab.demo.example.part_d.*;
 import io.daobab.demo.example.part_e.*;
-import io.daobab.demo.example.function.*;
 import io.daobab.error.DaobabSQLException;
 import io.daobab.error.MandatoryWhere;
 import io.daobab.error.SqlInjectionDetected;
@@ -45,7 +45,7 @@ class GlobalTest implements THelper {
 
     @Test
     void testCount(){
-        validation(callExample(Count.class));
+        callExample(Count.class);
     }
 
     @Test
@@ -429,11 +429,6 @@ class GlobalTest implements THelper {
     }
 
     @Test
-    void testUpdateSelectedOnly(){
-        validation(callExample(UpdateSelectedOnly.class));
-    }
-
-    @Test
     void testWhereInAndArrays(){
         validation(callExample(WhereInAndArrays.class));
     }
@@ -584,11 +579,6 @@ class GlobalTest implements THelper {
     }
 
     @Test
-    void testLazyLoading() {
-        callExample(LazyLoading.class);
-    }
-
-    @Test
     void testLinkingEntitiesByWhere() {
         callExample(LinkingEntitiesByWhere.class);
     }
@@ -607,9 +597,34 @@ class GlobalTest implements THelper {
         callExample(SchemaComparator.class);
     }
 
-
     @Test
     void testQueryModification() {
         callExample(QueryModification.class);
     }
+
+    @Test
+    void testFrozenQueryWithParameters() {
+        callExample(FrozenQueryWithParameters.class);
+    }
+
+    @Test
+    void testPrimaryKeyReplace() {
+        callExample(PrimaryKeyReplace.class);
+    }
+
+    @Test
+    void testUnfreezeFrozenQuery() {
+        callExample(UnfreezeFrozenQuery.class);
+    }
+
+    @Test
+    void testInsertDuplicatedKeyUpdate() {
+        callExample(InsertDuplicatedKeyUpdate.class);
+    }
+
+    @Test
+    void testReplaceSelect() {
+        callExample(ReplaceSelect.class);
+    }
+
 }

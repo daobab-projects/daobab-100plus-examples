@@ -35,7 +35,7 @@ public class TransactionWrapperAsynchronous extends ServiceBase<Void> {
                             .insert(transaction);
 
                     //Update entity
-            category.setLastUpdate(LocalDateTime.now())
+                    category.setLastUpdate(LocalDateTime.now())
                             .update(transaction, tabCategory.colLastUpdate());
 
                     //Delete entity

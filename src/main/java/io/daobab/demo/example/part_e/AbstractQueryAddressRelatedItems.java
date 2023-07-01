@@ -3,7 +3,7 @@ package io.daobab.demo.example.part_e;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.column.AddressId;
-import io.daobab.model.EntityMap;
+import io.daobab.model.Entity;
 import io.daobab.target.buffer.single.Entities;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class AbstractQueryAddressRelatedItems extends ServiceBase<Void> {
         return null;
     }
 
-    public <V extends EntityMap, E extends EntityMap & AddressId<E, Integer>> Entities<E> findAddressRelated(E entity, AddressId<V, Integer> addressId) {
+    public <V extends Entity, E extends Entity & AddressId<E>> Entities<E> findAddressRelated(E entity, AddressId<V> addressId) {
         return db.select(entity)
                 .whereEqual(entity.colAddressId(), addressId.getAddressId())
                 .findMany();

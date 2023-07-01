@@ -1,87 +1,26 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
-import java.util.Objects;
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 
 
+@SuppressWarnings("unused")
+public interface Name<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-public interface Name<E extends EntityMap, F> extends EntityRelationMap<E> {
+	default String getName(){
+		return readParam("Name");
+	}
 
+	default E setName(String val){
+		return storeParam("Name",val);
+	}
 
-    default F getName() {
-        return getColumnParam("Name");
-    }
-
-    @SuppressWarnings("unchecked")
-    default E setName(F val) {
-        setColumnParam("Name", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:CATEGORY,type:VARCHAR,size:25,nullable:false
-     * table:LANGUAGE,type:VARCHAR,size:20,nullable:false
+     * table:CATEGORY, type:VARCHAR, size:25, nullable:false
+     * table:LANGUAGE, type:VARCHAR, size:20, nullable:false
      */
-    default Column<E, F, Name> colName() {
-        return new Column<E, F, Name>() {
-
-            @Override
-            public String getColumnName() {
-                return "NAME";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "Name";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return String.class;
-            }
-
-            @Override
-            public F getValue(Name entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Name");
-                return (F) entity.getName();
-            }
-
-            @Override
-            public void setValue(Name entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Name");
-                entity.setName(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, String,Name> colName(){
+		return DaobabCache.getColumn("Name", "NAME", (Table<?>) this, String.class);
+	}
 }

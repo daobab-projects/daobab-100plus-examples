@@ -14,7 +14,7 @@ import static java.lang.String.format;
  * - How to get specific columns only. This example reads column from single row of particular table
  * ---------------------------------------------------------
  * - in this example, Plate may be easily replaced by related Entity.
- *
+ * <p>
  * - Plate may be used for many table results, but always represents one row of data.
  */
 @Component
@@ -34,7 +34,7 @@ public class SelectPlate extends ServiceBase<Plate> {
         var t = tabCustomer;
 
         var rv = db.select(t.colFirstName(), t.colLastName())
-                .whereEqual(t.colID(),10)
+                .whereEqual(t.colID(), 10)
                 .findOne();
 
         logResult(rv, t.colFirstName(), t.colLastName());
@@ -44,7 +44,7 @@ public class SelectPlate extends ServiceBase<Plate> {
 
     private void logResult(Plate plate, Column<?, ?, ?>... col) {
         for (var c : col) {
-            log.info(format("entity:%s ,column:%s ,value:%s",c.getEntityName(), c.getColumnName(), plate.getValue(c)));
+            log.info(format("entity:%s ,column:%s ,value:%s", c.entityClass().getSimpleName(), c.getColumnName(), plate.getValue(c)));
         }
     }
 

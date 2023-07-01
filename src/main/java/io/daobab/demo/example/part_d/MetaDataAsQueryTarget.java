@@ -22,14 +22,14 @@ public class MetaDataAsQueryTarget extends ServiceBase<Void> implements MetaData
 
     @Override
     public Void call() {
-        var t=tabMetaColumn;
-        var rs= db.getMetaData()
-                .select(t.colTableColumnName(),t.colColumnSize())
+        var t = tabMetaColumn;
+        var rs = db.getMetaData()
+                .select(t.colTableColumnName(), t.colColumnSize())
                 .whereEqual(t.colDatatype(), JdbcType.VARCHAR)
                 .orderAscBy(t.colTableColumnName())
                 .findMany();
 
-        rs.forEach(c->log.info(c.toJSON()));
+        rs.forEach(c -> log.info(c.toJson()));
         return null;
     }
 

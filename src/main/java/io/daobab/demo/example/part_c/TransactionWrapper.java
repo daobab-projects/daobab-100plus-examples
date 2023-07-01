@@ -26,7 +26,7 @@ public class TransactionWrapper extends ServiceBase<Void> {
     public Void call() {
 
         //Wrap all operation into single transaction
-        var deletedRecords=db.wrapTransaction(transaction -> {
+        var deletedRecords = db.wrapTransaction(transaction -> {
                     //Insert entity
                     var category = new Category()
                             .setLastUpdate(LocalDateTime.now())
@@ -34,7 +34,7 @@ public class TransactionWrapper extends ServiceBase<Void> {
                             .insert(transaction);
 
                     //Update entity
-            category.setLastUpdate(LocalDateTime.now())
+                    category.setLastUpdate(LocalDateTime.now())
                             .update(transaction, tabCategory.colLastUpdate());
 
                     //Delete entity
@@ -42,7 +42,7 @@ public class TransactionWrapper extends ServiceBase<Void> {
                 }
         );
 
-        log.info("deleted records:"+deletedRecords);
+        log.info("deleted records:" + deletedRecords);
 
         return null;
     }

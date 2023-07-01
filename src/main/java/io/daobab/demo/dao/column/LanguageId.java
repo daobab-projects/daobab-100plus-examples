@@ -1,87 +1,26 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
-import java.util.Objects;
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 
 
+@SuppressWarnings("unused")
+public interface LanguageId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-public interface LanguageId<E extends EntityMap, F> extends EntityRelationMap<E> {
+	default Integer getLanguageId(){
+		return readParam("LanguageId");
+	}
 
+	default E setLanguageId(Integer val){
+		return storeParam("LanguageId",val);
+	}
 
-    default F getLanguageId() {
-        return getColumnParam("LanguageId");
-    }
-
-    @SuppressWarnings("unchecked")
-    default E setLanguageId(F val) {
-        setColumnParam("LanguageId", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:FILM,type:TINYINT,size:8,nullable:false
-     * table:LANGUAGE,type:TINYINT,size:8,nullable:false
+     * table:FILM, type:TINYINT, size:8, nullable:false
+     * table:LANGUAGE, type:TINYINT, size:8, nullable:false
      */
-    default Column<E, F, LanguageId> colLanguageId() {
-        return new Column<E, F, LanguageId>() {
-
-            @Override
-            public String getColumnName() {
-                return "LANGUAGE_ID";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "LanguageId";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return Integer.class;
-            }
-
-            @Override
-            public F getValue(LanguageId entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "LanguageId");
-                return (F) entity.getLanguageId();
-            }
-
-            @Override
-            public void setValue(LanguageId entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "LanguageId");
-                entity.setLanguageId(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, Integer,LanguageId> colLanguageId(){
+		return DaobabCache.getColumn("LanguageId", "LANGUAGE_ID", (Table<?>) this, Integer.class);
+	}
 }

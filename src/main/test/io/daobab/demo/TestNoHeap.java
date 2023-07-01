@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-class TestNonHeap implements SakilaTables {
+class TestNoHeap implements SakilaTables {
 
 
     private final Logger log = LoggerFactory.getLogger("Test");
@@ -23,7 +23,7 @@ class TestNonHeap implements SakilaTables {
     void test01(){
 
         var noHeap=db.select(tabRental)
-                .findMany().toNoHeap();
+                .findMany().toNonHeap();
 
         long start=System.currentTimeMillis();
         var res = noHeap.select(tabRental.colID(), tabRental.colLastUpdate())
@@ -42,7 +42,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-        res.forEach(p->log.info(p.toJSON()));
+        res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
         }
@@ -62,7 +62,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-       // res.forEach(p->log.info(p.toJSON()));
+       // res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
 
@@ -88,7 +88,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-         res.forEach(p->log.info(p.toJSON()));
+         res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
 

@@ -36,6 +36,14 @@ public class JoinLeft extends ServiceBase<List<FlatPlate>> {
     public List<FlatPlate> way01() {
         var c = tabCustomer;
         var a = tabAddress;
+
+        var str = db.select(c.colFirstName(), c.colLastName(), a.colPhone())
+                .join(LEFT_JOIN, a, c.colAddressId())
+                .freezeQuery()
+                .findMany().toJson();
+
+        log.info(str);
+
         return db.select(c.colFirstName(), c.colLastName(), a.colPhone())
                 .join(LEFT_JOIN, a, c.colAddressId())
                 .flat()

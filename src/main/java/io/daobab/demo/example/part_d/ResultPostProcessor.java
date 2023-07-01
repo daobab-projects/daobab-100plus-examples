@@ -3,6 +3,7 @@ package io.daobab.demo.example.part_d;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Payment;
+import io.daobab.parser.ParserGeneral;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
  * - How to use PostProcessor
  */
 @Component
-public class ResultPostProcessor extends ServiceBase<List<Payment>> {
+public class ResultPostProcessor extends ServiceBase<List<Payment>> implements ParserGeneral {
 
     private final BigDecimal _200 = new BigDecimal(200);
 
@@ -32,12 +33,12 @@ public class ResultPostProcessor extends ServiceBase<List<Payment>> {
                 .orderAscBy(tabPayment.colPaymentDate())
                 .findMany()
                 .stream()
-                .peek(this::myPostProcess)
+                .map(this::myPostProcess)
                 .collect(Collectors.toList());
     }
 
-    private void myPostProcess(Payment payment) {
-        payment.put("amount_GT_200", payment.getAmount().compareTo(_200) > 0);
+    private Payment myPostProcess(Payment payment) {
+        return payment.put("amount_GT_200", payment.getAmount().compareTo(_200) > 0);
     }
 
 }

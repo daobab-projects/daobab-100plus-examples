@@ -18,16 +18,8 @@ public class DistinctCount extends ServiceBase<Long> implements FunctionWhispere
         SpringApplication.run(DemoApplication.class, DistinctCount.class.getName());
     }
 
-    @Override
     public Long call() {
-        return db.select(tabCustomer.colFirstName())
-                .distinct()
-                .countAny();
-    }
-
-    public Long way02() {
         return db.select(count(distinct(tabCustomer.colFirstName()))).findOne();
     }
-
 
 }

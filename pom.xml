@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>io.daobab</groupId>
 	<artifactId>daobab-100plus-examples</artifactId>
-	<version>1.6</version>
+	<version>1.8</version>
 	<name>daobab-100plus-examples</name>
 	<description>Daobab - over 100 examples</description>
 
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>io.daobab</groupId>
 			<artifactId>daobab-core</artifactId>
-			<version>1.6</version>
+			<version>1.8</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -63,6 +63,16 @@
 			<version>8.0.22</version>
 		</dependency>
 
+		<dependency>
+				<groupId>io.daobab</groupId>
+				<artifactId>untitled-annotation-processor</artifactId>
+				<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+
+
+
+
 	</dependencies>
 
 	<build>
@@ -78,12 +88,21 @@
 				</configuration>
 			</plugin>
 
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<release>${java.version}</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>io.daobab</groupId>
+							<artifactId>untitled-annotation-processor</artifactId>
+							<version>1.0-SNAPSHOT</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 		</plugins>

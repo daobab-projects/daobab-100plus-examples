@@ -18,6 +18,7 @@ public class PlateAsEntity extends ServiceBase<Customer> {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, PlateAsEntity.class.getName());
     }
+
     @Override
     public Customer call() {
         var customer = tabCustomer;

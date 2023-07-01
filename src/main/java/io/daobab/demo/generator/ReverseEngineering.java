@@ -27,7 +27,8 @@ public class ReverseEngineering extends H2Database {
 //        generator.setGeneralConversionFor(Types.VARCHAR,StringBuilder.class);
 //        generator.setEnforcedTypeFor("ADDRESS","ADDRESS",ReverseEngineering.class);
 
-//        generator.generateOnlyForCatalogues("sakila");
+        generator.generateOnlyForCatalogues("daobab");
+        generator.generateOnlyForSchemas("public");
 
 
         //STEP 3: execute reverse engineering

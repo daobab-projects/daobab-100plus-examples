@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  * Entity to JSON
  * ---------------------------------------------------------
- * - How to use internal toJSON() method into Entity
+ * - How to use internal toJson() method into Entity
  */
 @Component
 public class ToJsonEntity extends ServiceBase<Void> {
@@ -21,7 +21,7 @@ public class ToJsonEntity extends ServiceBase<Void> {
     @Override
     public Void call() {
         var film = db.findOneByPk(tabFilm, 1);
-        log.info(film.toJSON());
+        log.info(film.toJson());
         return null;
     }
 

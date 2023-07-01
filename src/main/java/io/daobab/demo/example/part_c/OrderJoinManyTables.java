@@ -36,7 +36,7 @@ public class OrderJoinManyTables extends ServiceBase<List<FlatPlate>> {
         var city = tabCity;
         var country = tabCountry;
         return db.select(
-                c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
+                        c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
                 .join(a, c.colAddressId(), and().equal(c.colActive(), true))
                 .join(city, a.colCityId(), and().like(city.colCity(), "%a%"))
                 .join(country, city.colCountryId(), and().in(country.colCountry(), "United States", "Russian Federation"))
@@ -50,7 +50,7 @@ public class OrderJoinManyTables extends ServiceBase<List<FlatPlate>> {
         var city = tabCity;
         var country = tabCountry;
         return db.select(
-                c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
+                        c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
                 .join(a, c.colAddressId())
                 .join(city, a.colCityId())
                 .join(country, city.colCountryId())

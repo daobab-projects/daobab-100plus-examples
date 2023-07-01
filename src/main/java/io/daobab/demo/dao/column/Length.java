@@ -1,86 +1,25 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
-import java.util.Objects;
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 
 
+@SuppressWarnings("unused")
+public interface Length<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-public interface Length<E extends EntityMap, F> extends EntityRelationMap<E> {
+	default Integer getLength(){
+		return readParam("Length");
+	}
 
+	default E setLength(Integer val){
+		return storeParam("Length",val);
+	}
 
-    default F getLength() {
-        return getColumnParam("Length");
-    }
-
-    @SuppressWarnings("unchecked")
-    default E setLength(F val) {
-        setColumnParam("Length", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:FILM,type:SMALLINT,size:16,nullable:true
+     * table:FILM, type:SMALLINT, size:16, nullable:true
      */
-    default Column<E, F, Length> colLength() {
-        return new Column<E, F, Length>() {
-
-            @Override
-            public String getColumnName() {
-                return "LENGTH";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "Length";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return Integer.class;
-            }
-
-            @Override
-            public F getValue(Length entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Length");
-                return (F) entity.getLength();
-            }
-
-            @Override
-            public void setValue(Length entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Length");
-                entity.setLength(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, Integer,Length> colLength(){
+		return DaobabCache.getColumn("Length", "LENGTH", (Table<?>) this, Integer.class);
+	}
 }

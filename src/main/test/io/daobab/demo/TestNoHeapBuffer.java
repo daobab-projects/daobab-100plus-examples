@@ -2,9 +2,9 @@ package io.daobab.demo;
 
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
-import io.daobab.model.Plate;
-import io.daobab.target.database.query.DataBaseQueryField;
-import io.daobab.target.buffer.noheap.NoHeapEntities;
+
+import io.daobab.demo.dao.table.Actor;
+import io.daobab.demo.example.part_c.NonHeapBuffer;
 import io.daobab.statement.function.FunctionWhispererH2;
 import io.daobab.target.database.connection.JdbcType;
 import io.daobab.target.database.meta.table.MetaColumn;
@@ -29,7 +29,7 @@ class TestNoHeapBuffer implements SakilaTables, FunctionWhispererH2 {
     @Test
     void test01(){
 
-        var buffer=new NoHeapEntities<>(db.select(tabActor).findMany());
+        var buffer=db.select(tabActor).findMany().toNonHeap();
 
         var res2=buffer.select(tabActor.colFirstName(),tabActor.colLastName())
                 .where(or()

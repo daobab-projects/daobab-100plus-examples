@@ -1,56 +1,47 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.clone.EntityDuplicator;
+import io.daobab.creation.DaobabCache;
 import io.daobab.demo.dao.column.CountryId;
 import io.daobab.demo.dao.column.LastUpdate;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+@SuppressWarnings({"rawtypes", "unused"})
+@TableInformation(name = "COUNTRY")
+public class Country extends Table<Country> implements
+	CountryId<Country>,
+	io.daobab.demo.dao.column.Country<Country>,
+	LastUpdate<Country>,
 
-
-@SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Country extends Table implements
-        CountryId<Country, Integer>,
-        io.daobab.demo.dao.column.Country<Country, String>,
-        LastUpdate<Country, LocalDateTime>,
-
-        PrimaryKey<Country, Integer, CountryId>
+	PrimaryKey<Country,Integer,CountryId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "COUNTRY";
+	public Country() {
+		super();
+	}
+
+        public Country(Map<String, Object> parameters) {
+		super(parameters);
 	}
 
 	@Override
-    public List<TableColumn> columns() {
-        return Arrays.asList(
-                new TableColumn(colCountryId()).primaryKey().size(16),
-                new TableColumn(colCountry()).size(50),
-                new TableColumn(colLastUpdate()).size(26).scale(6)
-        );
+	public List<TableColumn> columns() {
+		return DaobabCache.getTableColumns(this,
+			() -> Arrays.asList(
+			new TableColumn(colCountryId()).primaryKey().size(16),
+			new TableColumn(colCountry()).size(50),
+			new TableColumn(colLastUpdate()).size(26).scale(6)
+
+		));
 	}
 
+	
 	@Override
-	public Country clone() {
-		return EntityDuplicator.cloneEntity(this);
-	}
-
-	@Override
-	public Column<Country,Integer,CountryId> colID() {
+	public Column< Country, Integer, CountryId> colID() {
 		return colCountryId();
 	}
 
@@ -61,14 +52,12 @@ public class Country extends Table implements
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)return true;
-		if (obj == null)return false;
-		if (getClass() != obj.getClass())return false;
-		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		PrimaryKey<?, ?, ?> other = (PrimaryKey<?, ?, ?>) obj;
 		return Objects.equals(getId(), other.getId());
 	}
-
-
 
 
 }

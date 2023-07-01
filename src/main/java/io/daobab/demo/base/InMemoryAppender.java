@@ -3,7 +3,7 @@ package io.daobab.demo.base;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import io.daobab.demo.dao.SakilaDataBase;
-import io.daobab.parser.ParserGeneral;
+import io.daobab.parser.ParserDate;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Date;
@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 @Configuration
-public class InMemoryAppender extends AppenderBase<ILoggingEvent> implements ParserGeneral {
+public class InMemoryAppender extends AppenderBase<ILoggingEvent> {
 
     //:(
     private static final ConcurrentMap<Long, ILoggingEvent> eventMap = new ConcurrentHashMap<>();
@@ -55,7 +55,7 @@ public class InMemoryAppender extends AppenderBase<ILoggingEvent> implements Par
                 sb.append(msg);
                 continue;
             }
-            sb.append(toSting(new Date(record.getTimeStamp()), "HH:mm:SSS - ")).append(query ? "<b><big><code>" + record.getMessage() + "</b></big></code>" : record.getMessage()).append("<br>");
+            sb.append(ParserDate.toString(new Date(record.getTimeStamp()), "HH:mm:SSS - ")).append(query ? "<b><big><code>" + record.getMessage() + "</b></big></code>" : record.getMessage()).append("<br>");
         }
 
         return sb.toString();
