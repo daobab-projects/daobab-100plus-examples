@@ -2,7 +2,7 @@ package io.daobab.demo.dao.table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.clone.EntityDuplicator;
+import io.daobab.creation.EntityCreator;
 import io.daobab.demo.dao.column.CategoryId;
 import io.daobab.demo.dao.column.FilmId;
 import io.daobab.demo.dao.column.LastUpdate;

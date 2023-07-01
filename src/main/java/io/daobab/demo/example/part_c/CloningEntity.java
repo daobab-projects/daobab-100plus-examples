@@ -1,11 +1,10 @@
 package io.daobab.demo.example.part_c;
 
-import io.daobab.clone.EntityDuplicator;
+import io.daobab.creation.EntityCreator;
 import io.daobab.converter.duplicator.duplication.EntityDuplication;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Entity;
-import io.daobab.model.EntityMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +25,7 @@ public class CloningEntity extends ServiceBase<Void> {
         var film1 = db.select(tabFilm)
                 .whereEqual(tabFilm.colID(), 10)
                 .findOne();
-        var film2 = EntityDuplicator.cloneEntity(film1);
+        var film2 = EntityCreator.cloneEntity(film1);
 
         //make a difference:
         film2.setDescription("this is my change");

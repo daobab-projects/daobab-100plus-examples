@@ -1,6 +1,6 @@
 package io.daobab.demo.base;
 
-import io.daobab.model.EntityMap;
+import io.daobab.model.Entity;
 import io.daobab.model.Plate;
 import io.daobab.model.PrimaryKey;
 import io.daobab.target.buffer.single.Entities;
@@ -16,13 +16,13 @@ public interface TestHelper {
     Logger getLog();
 
 
-    default <E extends EntityMap & PrimaryKey> void validation(E entity) {
+    default <E extends Entity & PrimaryKey> void validation(E entity) {
         check(entity);
-        getLog().info("Result: entity " + entity.getEntityClass().getName());
+        getLog().info("Result: entity " + entity.entityClass().getName());
         getLog().info(entity.toJson());
     }
 
-    default <E extends EntityMap & PrimaryKey> void validation(Entities<E> entity) {
+    default <E extends Entity & PrimaryKey> void validation(Entities<E> entity) {
         check(entity);
         getLog().info(entity.toJson());
     }

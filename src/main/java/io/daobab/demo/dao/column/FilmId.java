@@ -1,10 +1,12 @@
 package io.daobab.demo.dao.column;
 
+import io.daobab.creation.ColumnCache;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
 import io.daobab.model.Entity;
 import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 import java.util.Objects;
 
@@ -14,15 +16,13 @@ public interface FilmId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getFilmId() {
-        return getColumnParam("FilmId");
+        return readParam("FilmId");
     }
 
-    @SuppressWarnings("unchecked")
     default E setFilmId(F val) {
-        return setColumnParam("FilmId", val);
+        return storeParam("FilmId", val);
     }
 
-    @SuppressWarnings("rawtypes")
     /**
      * table:FILM,type:SMALLINT,size:16,nullable:false
      * table:FILM_ACTOR,type:SMALLINT,size:16,nullable:false
@@ -30,60 +30,9 @@ public interface FilmId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:FILM_TEXT,type:SMALLINT,size:16,nullable:false
      * table:INVENTORY,type:SMALLINT,size:16,nullable:false
      */
+    @SuppressWarnings("unchecked")
     default Column<E, F, FilmId> colFilmId() {
-        return new Column<E, F, FilmId>() {
-
-            @Override
-            public String getColumnName() {
-                return "FILM_ID";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "FilmId";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return Integer.class;
-            }
-
-            @Override
-            public F getValue(FilmId entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "FilmId");
-                return (F) entity.getFilmId();
-            }
-
-            @Override
-            public FilmId setValue(FilmId entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "FilmId");
-                return (FilmId) entity.setFilmId(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityClass().getName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
+        return ColumnCache.INSTANCE.getColumn("FilmId","FILMID",(Table<?>)this,Integer.class);
     }
 
 }

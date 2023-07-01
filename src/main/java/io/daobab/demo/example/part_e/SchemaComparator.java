@@ -28,7 +28,7 @@ public class SchemaComparator extends ServiceBase<Void> implements MetaDataTable
     @Override
     public Void call() {
         var tablesInSchema=db.getTables().stream()
-                .map(Entity::getEntityClass)
+                .map(Entity::entityClass)
                 .map(Class::getName)
                 .collect(Collectors.toList());
 

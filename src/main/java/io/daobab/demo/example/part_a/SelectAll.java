@@ -34,21 +34,6 @@ public class SelectAll extends ServiceBase<Entities<Actor>> {
 
     FrozenDataBaseQueryEntity<Actor> prepared;
 
-    @PostConstruct
-    public void init() {
-        prepared = db.select(tabActor)
-                .where(and()
-//                        .equal(tabActor.colID(), param(1))
-//                        .notLike(tabActor.colLastName(), param(2))
-                        .in(tabActor.colID(), param(1))
-                        .in(tabActor.colLastName(),  param(2))
-                )
-//                .limitBy(param(3))
-                .freezeQuery()
-//                .cacheResultsForPeriod(Period.ofYears(5))
-        ;
-
-    }
 
     //Classic usage - no 'where' clause
     @Override

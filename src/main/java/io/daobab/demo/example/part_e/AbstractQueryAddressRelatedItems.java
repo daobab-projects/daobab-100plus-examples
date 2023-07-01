@@ -4,7 +4,6 @@ import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.column.AddressId;
 import io.daobab.model.Entity;
-import io.daobab.model.EntityMap;
 import io.daobab.target.buffer.single.Entities;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;

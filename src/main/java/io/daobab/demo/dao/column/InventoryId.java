@@ -1,86 +1,29 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.Entity;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
+import io.daobab.creation.ColumnCache;
+import io.daobab.model.*;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public interface InventoryId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getInventoryId() {
-        return getColumnParam("InventoryId");
+        return readParam("InventoryId");
     }
 
-    @SuppressWarnings("unchecked")
     default E setInventoryId(F val) {
-        return setColumnParam("InventoryId", val);
+        return storeParam("InventoryId", val);
     }
 
-    @SuppressWarnings("rawtypes")
     /**
      * table:INVENTORY,type:INTEGER,size:32,nullable:false
      * table:RENTAL,type:INTEGER,size:32,nullable:false
      */
+    @SuppressWarnings("unchecked")
     default Column<E, F, InventoryId> colInventoryId() {
-        return new Column<E, F, InventoryId>() {
-
-            @Override
-            public String getColumnName() {
-                return "INVENTORY_ID";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "InventoryId";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return BigDecimal.class;
-            }
-
-            @Override
-            public F getValue(InventoryId entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "InventoryId");
-                return (F) entity.getInventoryId();
-            }
-
-            @Override
-            public InventoryId setValue(InventoryId entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "InventoryId");
-                return (InventoryId) entity.setInventoryId(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityClass().getName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
+        return ColumnCache.INSTANCE.getColumn("InventoryId","INVENTORY_ID",(Table<?>)this,BigDecimal.class);
     }
+
 
 }
