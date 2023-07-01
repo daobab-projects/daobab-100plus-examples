@@ -1,11 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
-
-import java.util.Objects;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 
 
@@ -23,7 +22,7 @@ public interface Picture<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:STAFF,type:VARBINARY,size:1000000000,nullable:true
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, Picture> colPicture() {
         return ColumnCache.INSTANCE.getColumn("Picture","PICTURE",(Table<?>)this,byte[].class);
     }

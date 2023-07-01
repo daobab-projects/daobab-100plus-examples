@@ -1,12 +1,12 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 public interface ReplacementCost<E extends Entity, F> extends EntityRelationMap<E> {
 
@@ -22,7 +22,7 @@ public interface ReplacementCost<E extends Entity, F> extends EntityRelationMap<
     /**
      * table:FILM,type:DECIMAL,size:5,nullable:false
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, ReplacementCost> colReplacementCost() {
         return ColumnCache.INSTANCE.getColumn("ReplacementCost","REPLACEMENT_COST",(Table<?>)this,BigDecimal.class);
     }

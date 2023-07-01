@@ -1,7 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.model.*;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 import java.math.BigDecimal;
 
@@ -20,7 +23,7 @@ public interface InventoryId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:INVENTORY,type:INTEGER,size:32,nullable:false
      * table:RENTAL,type:INTEGER,size:32,nullable:false
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, InventoryId> colInventoryId() {
         return ColumnCache.INSTANCE.getColumn("InventoryId","INVENTORY_ID",(Table<?>)this,BigDecimal.class);
     }

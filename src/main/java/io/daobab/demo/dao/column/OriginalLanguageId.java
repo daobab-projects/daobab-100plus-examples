@@ -1,11 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
-
-import java.util.Objects;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 
 
@@ -23,7 +22,7 @@ public interface OriginalLanguageId<E extends Entity, F> extends EntityRelationM
     /**
      * table:FILM,type:TINYINT,size:8,nullable:true
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, OriginalLanguageId> colOriginalLanguageId() {
         return ColumnCache.INSTANCE.getColumn("OriginalLanguageId","ORIGINAL_LANGUAGE_ID",(Table<?>)this,Integer.class);
     }

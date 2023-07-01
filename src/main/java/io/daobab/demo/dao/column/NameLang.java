@@ -2,11 +2,10 @@ package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
 import io.daobab.demo.dao.Lang;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
-
-import java.util.Objects;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 public interface NameLang<E extends Entity> extends EntityRelationMap<E> {
 
@@ -23,7 +22,7 @@ public interface NameLang<E extends Entity> extends EntityRelationMap<E> {
         return storeParam("Name", val);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, Lang, NameLang> colName() {
         return ColumnCache.INSTANCE.getColumn("Name","NAME",(Table<?>)this,Lang.class);
     }

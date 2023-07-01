@@ -1,11 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
-
-import java.util.Objects;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 
 
@@ -23,7 +22,7 @@ public interface Password<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:STAFF,type:VARCHAR,size:40,nullable:true
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, Password> colPassword() {
         return ColumnCache.INSTANCE.getColumn("Password","PASSWORD",(Table<?>)this,String.class);
     }

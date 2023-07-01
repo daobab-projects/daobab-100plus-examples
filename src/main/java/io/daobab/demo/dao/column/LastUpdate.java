@@ -1,12 +1,12 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public interface LastUpdate<E extends Entity, F> extends EntityRelationMap<E> {
 
@@ -36,7 +36,7 @@ public interface LastUpdate<E extends Entity, F> extends EntityRelationMap<E> {
      * table:STAFF,type:TIMESTAMP,size:26,nullable:false
      * table:STORE,type:TIMESTAMP,size:26,nullable:false
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, LastUpdate> colLastUpdate() {
         return ColumnCache.INSTANCE.getColumn("LastUpdate","LAST_UPDATE",(Table<?>)this,LocalDateTime.class);
     }

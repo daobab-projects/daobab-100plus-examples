@@ -1,11 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
-
-import java.util.Objects;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 
 
@@ -24,7 +23,7 @@ public interface Title<E extends Entity, F> extends EntityRelationMap<E> {
      * table:FILM,type:VARCHAR,size:255,nullable:false
      * table:FILM_TEXT,type:VARCHAR,size:255,nullable:false
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, Title> colTitle() {
         return ColumnCache.INSTANCE.getColumn("Title","TITLE",(Table<?>)this,String.class);
     }

@@ -1,12 +1,12 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.*;
+import io.daobab.model.Column;
+import io.daobab.model.Entity;
+import io.daobab.model.EntityRelationMap;
+import io.daobab.model.Table;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public interface CreateDate<E extends Entity, F> extends EntityRelationMap<E> {
 
@@ -22,7 +22,7 @@ public interface CreateDate<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:CUSTOMER,type:TIMESTAMP,size:26,nullable:false
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked","rawtypes"})
     default Column<E, F, CreateDate> colCreateDate() {
         return ColumnCache.INSTANCE.getColumn("CreateDate", "CREATE_DATE", (Table<?>) this, LocalDateTime.class);
     }
