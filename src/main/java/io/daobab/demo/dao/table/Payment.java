@@ -1,64 +1,54 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.clone.EntityDuplicator;
+import io.daobab.creation.DaobabCache;
 import io.daobab.demo.dao.column.*;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+@SuppressWarnings({"rawtypes", "unused"})
+@TableInformation(name = "PAYMENT")
+public class Payment extends Table<Payment> implements
+	PaymentId<Payment>,
+	CustomerId<Payment>,
+	StaffId<Payment>,
+	RentalId<Payment>,
+	Amount<Payment>,
+	PaymentDate<Payment>,
+	LastUpdate<Payment>,
 
-
-@SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Payment extends Table implements
-        PaymentId<Payment, Integer>,
-        CustomerId<Payment, Integer>,
-        StaffId<Payment, Integer>,
-        RentalId<Payment, BigDecimal>,
-        Amount<Payment, BigDecimal>,
-        PaymentDate<Payment, LocalDateTime>,
-        LastUpdate<Payment, LocalDateTime>,
-
-        PrimaryKey<Payment, Integer, PaymentId>
+	PrimaryKey<Payment,Integer,PaymentId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "PAYMENT";
+	public Payment() {
+		super();
+	}
+
+		public Payment(Map<String, Object> parameters) {
+		super(parameters);
 	}
 
 	@Override
-    public List<TableColumn> columns() {
-        return Arrays.asList(
-                new TableColumn(colPaymentId()).primaryKey().size(16),
-                new TableColumn(colCustomerId()).size(16),
-                new TableColumn(colStaffId()).size(8),
-                new TableColumn(colRentalId()).size(32),
-                new TableColumn(colAmount()).size(5).scale(2),
-                new TableColumn(colPaymentDate()).size(26).scale(6),
-                new TableColumn(colLastUpdate()).size(26).scale(6)
-        );
+	public List<TableColumn> columns() {
+		return DaobabCache.getTableColumns(this,
+			() -> Arrays.asList(
+			new TableColumn(colPaymentId()).primaryKey().size(16),
+			new TableColumn(colCustomerId()).size(16),
+			new TableColumn(colStaffId()).size(8),
+			new TableColumn(colRentalId()).size(32),
+			new TableColumn(colAmount()).size(5).scale(2),
+			new TableColumn(colPaymentDate()).size(26).scale(6),
+			new TableColumn(colLastUpdate()).size(26).scale(6)
+
+		));
 	}
 
+	
 	@Override
-	public Payment clone() {
-		return EntityDuplicator.cloneEntity(this);
-	}
-
-	@Override
-	public Column<Payment,Integer,PaymentId> colID() {
+	public Column< Payment, Integer, PaymentId> colID() {
 		return colPaymentId();
 	}
 
@@ -69,14 +59,12 @@ public class Payment extends Table implements
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)return true;
-		if (obj == null)return false;
-		if (getClass() != obj.getClass())return false;
-		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		PrimaryKey<?, ?, ?> other = (PrimaryKey<?, ?, ?>) obj;
 		return Objects.equals(getId(), other.getId());
 	}
-
-
 
 
 }

@@ -28,7 +28,7 @@ class TestJoin implements SakilaTables, MetaDataTables {
                 .whereEqual(tabMetaColumn.colColumnName(),"LAST_NAME")
                 .findMany();
 
-        res.forEach(p->log.info(p.toJSON()));
+        res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(res);
 

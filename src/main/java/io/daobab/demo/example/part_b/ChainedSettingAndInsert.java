@@ -3,6 +3,7 @@ package io.daobab.demo.example.part_b;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Film;
+import io.daobab.parser.ParserGeneral;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
  * ---------------------------------------------------------
  */
 @Component
-public class ChainedSettingAndInsert extends ServiceBase<Film> {
+public class ChainedSettingAndInsert extends ServiceBase<Film> implements ParserGeneral {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, ChainedSettingAndInsert.class.getName());

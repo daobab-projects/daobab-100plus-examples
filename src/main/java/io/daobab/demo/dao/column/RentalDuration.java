@@ -1,86 +1,25 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
-import java.util.Objects;
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 
 
+@SuppressWarnings("unused")
+public interface RentalDuration<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-public interface RentalDuration<E extends EntityMap, F> extends EntityRelationMap<E> {
+	default Integer getRentalDuration(){
+		return readParam("RentalDuration");
+	}
 
+	default E setRentalDuration(Integer val){
+		return storeParam("RentalDuration",val);
+	}
 
-    default F getRentalDuration() {
-        return getColumnParam("RentalDuration");
-    }
-
-    @SuppressWarnings("unchecked")
-    default E setRentalDuration(F val) {
-        setColumnParam("RentalDuration", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:FILM,type:TINYINT,size:8,nullable:false
+     * table:FILM, type:TINYINT, size:8, nullable:false
      */
-    default Column<E, F, RentalDuration> colRentalDuration() {
-        return new Column<E, F, RentalDuration>() {
-
-            @Override
-            public String getColumnName() {
-                return "RENTAL_DURATION";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "RentalDuration";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return Integer.class;
-            }
-
-            @Override
-            public F getValue(RentalDuration entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "RentalDuration");
-                return (F) entity.getRentalDuration();
-            }
-
-            @Override
-            public void setValue(RentalDuration entity, F param) {
-                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalDuration");
-                entity.setRentalDuration(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, Integer,RentalDuration> colRentalDuration(){
+		return DaobabCache.getColumn("RentalDuration", "RENTAL_DURATION", (Table<?>) this, Integer.class);
+	}
 }

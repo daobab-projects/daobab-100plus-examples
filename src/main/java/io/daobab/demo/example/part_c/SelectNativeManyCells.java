@@ -24,7 +24,7 @@ public class SelectNativeManyCells extends ServiceBase<List<Lang>> {
     public List<Lang> call() {
         var t = tabLanguage;
         return db.nativeSelect("select name from language order by 1 asc",
-                t.colName())
+                        t.colName())
                 .findMany();
     }
 

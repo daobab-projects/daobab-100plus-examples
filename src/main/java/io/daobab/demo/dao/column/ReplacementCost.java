@@ -1,86 +1,25 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.error.AttemptToReadFromNullEntityException;
-import io.daobab.error.AttemptToWriteIntoNullEntityException;
-import io.daobab.model.Column;
-import io.daobab.model.EntityMap;
-import io.daobab.model.EntityRelationMap;
-
+import io.daobab.creation.DaobabCache;
+import io.daobab.model.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 
-public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationMap<E> {
+@SuppressWarnings("unused")
+public interface ReplacementCost<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
+	default BigDecimal getReplacementCost(){
+		return readParam("ReplacementCost");
+	}
 
-    default F getReplacementCost() {
-        return getColumnParam("ReplacementCost");
-    }
+	default E setReplacementCost(BigDecimal val){
+		return storeParam("ReplacementCost",val);
+	}
 
-    @SuppressWarnings("unchecked")
-    default E setReplacementCost(F val) {
-        setColumnParam("ReplacementCost", val);
-        return (E) this;
-    }
-
-    @SuppressWarnings("rawtypes")
     /**
-     * table:FILM,type:DECIMAL,size:5,nullable:false
+     * table:FILM, type:DECIMAL, size:5, nullable:false
      */
-    default Column<E, F, ReplacementCost> colReplacementCost() {
-        return new Column<E, F, ReplacementCost>() {
-
-            @Override
-            public String getColumnName() {
-                return "REPLACEMENT_COST";
-            }
-
-            @Override
-            public String getFieldName() {
-                return "ReplacementCost";
-            }
-
-            @Override
-            public E getInstance(){
-                return getEntity();
-            }
-
-            @Override
-            public Class getFieldClass() {
-                return BigDecimal.class;
-            }
-
-            @Override
-            public F getValue(ReplacementCost entity) {
-                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "ReplacementCost");
-                return (F) entity.getReplacementCost();
-            }
-
-            @Override
-            public void setValue(ReplacementCost entity, F param) {
-                if (entity == null)
-                    throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReplacementCost");
-                entity.setReplacementCost(param);
-            }
-
-            @Override
-            public int hashCode() {
-                return toString().hashCode();
-            }
-
-            @Override
-            public String toString(){
-                return getEntityName()+"."+getFieldName();
-            }
-
-            @Override
-            public boolean equals(Object obj) {
-                if (this == obj)return true;
-                if (obj == null)return false;
-                if (getClass() != obj.getClass())return false;
-                Column other = (Column) obj;
-                return Objects.equals(hashCode(), other.hashCode());
-            }
-        };
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, BigDecimal,ReplacementCost> colReplacementCost(){
+		return DaobabCache.getColumn("ReplacementCost", "REPLACEMENT_COST", (Table<?>) this, BigDecimal.class);
+	}
 }

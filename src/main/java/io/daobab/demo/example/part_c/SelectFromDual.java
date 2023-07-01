@@ -2,6 +2,7 @@ package io.daobab.demo.example.part_c;
 
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.model.Dual;
 import io.daobab.model.Plate;
 import io.daobab.statement.function.FunctionWhispererH2;
 import org.springframework.boot.SpringApplication;
@@ -27,8 +28,9 @@ public class SelectFromDual extends ServiceBase<Plate> implements FunctionWhispe
     @Override
     public Plate call() {
         return db.select(
-                db.select(count(tabFilm)).as("cntFilm"),
-                db.select(count(tabCustomer)).as("cntCustomer"))
+                        db.select(count(tabFilm)).as("cntFilm"),
+                        db.select(count(tabCustomer)).as("cntCustomer"))
+                .from(new Dual())
                 .findOne();
 // uncomment to read
 //              .forEach(p->log.info(p.getValue("cntFilm")+" -- "+p.getValue("cntCustomer")));

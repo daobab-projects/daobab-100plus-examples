@@ -6,7 +6,7 @@ import io.daobab.demo.dao.table.Film;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public class DateTimeConversions extends ServiceBase<List<Film>> {
         var t = tabFilm;
         return db.select(t)
                 .whereLess(t.colID(), 5)
-                .map(e -> e.setLastUpdate(e.getLastUpdate().atZone(ZoneId.of("US/Alaska ")).toLocalDateTime()))
+                .map(e -> e.setLastUpdate(e.getLastUpdate().atZone(ZoneOffset.ofHours(3)).toLocalDateTime()))
                 .findMany();
 
 

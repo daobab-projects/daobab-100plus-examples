@@ -21,10 +21,10 @@ public class MetaDataColumnDatatype extends ServiceBase<Void> implements MetaDat
 
     @Override
     public Void call() {
-        var rs= db.getMetaData()
+        var rs = db.getMetaData()
                 .getColumnDataType(tabFilm.colTitle());
 
-        log.info(rs==null?"null":rs.toString());
+        log.info(rs == null ? "null" : rs.toString());
         return null;
     }
 

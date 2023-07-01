@@ -2,11 +2,15 @@ package io.daobab.demo.example.part_c;
 
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.parser.ParserDate;
+import io.daobab.parser.ParserGeneral;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Locale;
+
+import static java.lang.String.format;
 
 /**
  * ---------------------------------------------------------
@@ -14,7 +18,7 @@ import java.util.Locale;
  * ---------------------------------------------------------
  */
 @Component
-public class BigQuery extends ServiceBase<List<String>> {
+public class BigQuery extends ServiceBase<List<String>> implements ParserGeneral {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, BigQuery.class.getName());
@@ -34,8 +38,8 @@ public class BigQuery extends ServiceBase<List<String>> {
 
 
         return db.select(
-                c.colFirstName(), c.colLastName(), f.colTitle(), city.colCity(), p.colPaymentDate(), p.colAmount(),
-                country.colCountry(), s.colFirstName(), s.colLastName())
+                        c.colFirstName(), c.colLastName(), f.colTitle(), city.colCity(), p.colPaymentDate(), p.colAmount(),
+                        country.colCountry(), s.colFirstName(), s.colLastName())
                 .join(r, c.colCustomerId())
                 .join(i, r.colInventoryId())
                 .join(p, c.colCustomerId(), r.colStaffId())
@@ -47,30 +51,17 @@ public class BigQuery extends ServiceBase<List<String>> {
                 .orderDescBy(p.colPaymentDate())
                 .limitBy(10)
                 .whereEqual(c.colID(), 1)
-                .map(x -> {
-                    var sb = new StringBuffer()
-                            .append("Customer:")
-                            .append(x.getValue(c.colFirstName()))
-                            .append(",")
-                            .append(x.getValue(c.colLastName()))
-                            .append(" living in ")
-                            .append(x.getValue(city.colCity()))
-                            .append(",")
-                            .append(x.getValue(country.colCountry()))
-                            .append(" rent on ")
-                            .append(toSting(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH))
-                            .append(" a movie: ")
-                            .append(x.getValue(f.colTitle()))
-                            .append(" has paid for it: ")
-                            .append(x.getValue(p.colAmount()))
-                            .append(" and was served by ")
-                            .append(x.getValue(s.colFirstName()))
-                            .append(" ")
-                            .append(x.getValue(s.colLastName())
-
-                            );
-                    return sb.toString();
-                })
+                .map(x -> format("Customer: %s,%s living in %s,%s rent on %s a movie: %s has paid for it: %s and was served by %s %s",
+                        x.getValue(c.colFirstName()) ,
+                        x.getValue(c.colLastName()) ,
+                        x.getValue(city.colCity()) ,
+                        x.getValue(country.colCountry()) ,
+                        ParserDate.toString(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH),
+                        x.getValue(f.colTitle()) ,
+                        x.getValue(p.colAmount()) ,
+                        x.getValue(s.colFirstName()) ,
+                        x.getValue(s.colLastName())
+                        ))
                 .findMany();
 
 

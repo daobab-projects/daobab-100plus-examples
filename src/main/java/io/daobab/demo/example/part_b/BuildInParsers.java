@@ -3,6 +3,7 @@ package io.daobab.demo.example.part_b;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Film;
+import io.daobab.parser.ParserGeneral;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * ---------------------------------------------------------
  */
 @Component
-public class BuildInParsers extends ServiceBase<List<Film>> {
+public class BuildInParsers extends ServiceBase<List<Film>> implements ParserGeneral {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, BuildInParsers.class.getName());

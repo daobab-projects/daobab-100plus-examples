@@ -24,8 +24,8 @@ public class NonHeapBuffer extends ServiceBase<Void> implements MetaDataTables {
 
         var noHeap = db.select(tabFilm).toNonHeap();
 
-        noHeap.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJSON()));
-        db.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJSON()));
+        noHeap.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJson()));
+        db.select(tabFilm).whereLess(tabFilm.colFilmId(), 4).findMany().forEach(c -> log.info(c.toJson()));
 
         return null;
     }

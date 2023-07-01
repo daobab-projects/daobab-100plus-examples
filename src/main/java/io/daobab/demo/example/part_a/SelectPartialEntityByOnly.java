@@ -23,7 +23,7 @@ public class SelectPartialEntityByOnly extends ServiceBase<Entities<Staff>> {
     @Override
     public Entities<Staff> call() {
         return db.select(tabStaff)
-                .only(tabStaff.colPicture(),tabStaff.colPassword())
+                .only(tabStaff.colPicture(), tabStaff.colPassword())
                 .findMany();
     }
 

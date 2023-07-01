@@ -1,60 +1,51 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.clone.EntityDuplicator;
+import io.daobab.creation.DaobabCache;
 import io.daobab.demo.dao.column.ActorId;
 import io.daobab.demo.dao.column.FirstName;
 import io.daobab.demo.dao.column.LastName;
 import io.daobab.demo.dao.column.LastUpdate;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
+@SuppressWarnings({"rawtypes", "unused"})
+@TableInformation(name = "ACTOR")
+public class Actor extends Table<Actor> implements
+	ActorId<Actor>,
+	FirstName<Actor>,
+	LastName<Actor>,
+	LastUpdate<Actor>,
 
-
-@SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Actor extends Table implements
-        ActorId<Actor, Integer>,
-        FirstName<Actor, String>,
-        LastName<Actor, String>,
-        LastUpdate<Actor, LocalDateTime>,
-
-        PrimaryKey<Actor, Integer, ActorId>
+	PrimaryKey<Actor,Integer,ActorId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "ACTOR";
+	public Actor() {
+		super();
+	}
+
+        public Actor(Map<String, Object> parameters) {
+		super(parameters);
 	}
 
 	@Override
-    public List<TableColumn> columns() {
-        return Arrays.asList(
-                new TableColumn(colActorId()).primaryKey().size(16),
-                new TableColumn(colFirstName()).size(45),
-                new TableColumn(colLastName()).size(45),
-                new TableColumn(colLastUpdate()).size(26).scale(6)
-        );
+	public List<TableColumn> columns() {
+		return DaobabCache.getTableColumns(this,
+			() -> Arrays.asList(
+			new TableColumn(colActorId()).primaryKey().size(16),
+			new TableColumn(colFirstName()).size(45),
+			new TableColumn(colLastName()).size(45),
+			new TableColumn(colLastUpdate()).size(26).scale(6)
+
+		));
 	}
 
+	
 	@Override
-	public Actor clone() {
-		return EntityDuplicator.cloneEntity(this);
-	}
-
-	@Override
-	public Column<Actor,Integer,ActorId> colID() {
+	public Column< Actor, Integer, ActorId> colID() {
 		return colActorId();
 	}
 
@@ -65,11 +56,12 @@ public class Actor extends Table implements
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)return true;
-		if (obj == null)return false;
-		if (getClass() != obj.getClass())return false;
-		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		PrimaryKey<?, ?, ?> other = (PrimaryKey<?, ?, ?>) obj;
 		return Objects.equals(getId(), other.getId());
 	}
+
 
 }

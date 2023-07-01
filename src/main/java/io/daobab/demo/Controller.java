@@ -1,5 +1,6 @@
 package io.daobab.demo;
 
+
 import io.daobab.demo.base.InMemoryAppender;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.SakilaTables;

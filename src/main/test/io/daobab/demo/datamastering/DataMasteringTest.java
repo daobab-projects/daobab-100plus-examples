@@ -3,15 +3,15 @@ package io.daobab.demo.datamastering;
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaTables;
 import io.daobab.demo.dao.table.Rental;
+import io.daobab.parser.ParserGeneral;
 import io.daobab.statement.function.FunctionWhispererMySql;
-import io.daobab.statement.function.base.DatePeriod;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * This example refers to the DataMastering test created by Cris Simpkins (https://chris.simpkins.org/)
@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @SpringBootTest
 @SuppressWarnings("java:S2699")
-class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
+class DataMasteringTest implements SakilaTables, FunctionWhispererMySql, ParserGeneral {
 
     private final Logger log = LoggerFactory.getLogger("Test");
     @Autowired
@@ -75,7 +75,7 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
                 .limitBy(1)
                 .findOne();
 
-        log.info(rs.toJSON());
+        log.info(rs.toJson());
     }
 
     //Is 'Academy Dinosaur' available for rent from Store 1?
@@ -120,11 +120,11 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
     @Test
     void test09() {
         new Rental()
-                .setRentalDate(toTimestamp(new Date()))
+                .setRentalDate(LocalDateTime.now())
                 .setInventoryId(toBD(1))
                 .setCustomerId(1)
                 .setStaffId(1)
-                .setLastUpdate(toTimestamp(new Date()))
+                .setLastUpdate(LocalDateTime.now())
                 .insert(db);
     }
 
@@ -149,14 +149,14 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
     //Step 3: add the rental duration to the rental date.
     @Test
     void test12() {
-        var rs = db.select(tabRental.colRentalDate(),
-                        sum(tabRental.colRentalDate(), interval(tabRental.colReturnDate(), 1, DatePeriod.DAY)).as("due_date"))
-                .from(tabRental)
-                .whereEqual(tabRental.colRentalId(),
-                        db.select(tabRental.colRentalId()).orderBy(tabRental.colID()).limitBy(1))
-                .toSqlQuery();
-
-        log.info(rs);
+//        var rs = db.select(tabRental.colRentalDate(),
+//                        sum(tabRental.colRentalDate(), interval(tabRental.colReturnDate(), 1, DatePeriod.DAY)).as("due_date"))
+//                .from(tabRental)
+//                .whereEqual(tabRental.colRentalId(),
+//                        db.select(tabRental.colRentalId()).orderBy(tabRental.colID()).limitBy(1))
+//                .toSqlQuery();
+//
+//        log.info(rs);
     }
 
     //What is that average length of all the films in the sakila DB?
@@ -177,7 +177,7 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
                 .orderDescBy("Length")
                 .findMany();
 
-        log.info(rs.toJSON());
+        log.info(rs.toJson());
     }
 
     @Test

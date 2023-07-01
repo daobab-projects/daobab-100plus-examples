@@ -20,21 +20,7 @@ public class Count extends ServiceBase<Long> implements FunctionWhispererH2 {
 
     @Override
     public Long call() {
-        var c = tabCustomer;
-        return db.select(c).whereGreater(c.colID(), 10).countAny();
+        return db.select(count(tabCustomer)).whereGreater(tabCustomer.colID(), 10).findOne();
     }
 
-    public long count() {
-        var c = tabCustomer;
-        return db.select(c)
-                .whereGreater(c.colID(), 10)
-                .countAny();
-    }
-
-    public long count3() {
-        var c = tabCustomer;
-        return db.select(count(c.colActive()))
-                .whereGreater(c.colID(), 10)
-                .findOne();
-    }
 }

@@ -33,7 +33,7 @@ public class JoinManyTables extends ServiceBase<FlatPlates> {
         var city = tabCity;
         var country = tabCountry;
         return db.select(
-                c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
+                        c.colFirstName(), c.colLastName(), a.colPhone(), city.colCity(), country.colCountry())
                 .join(a, c.colAddressId())
                 .join(city, a.colCityId())
                 .join(country, city.colCountryId())

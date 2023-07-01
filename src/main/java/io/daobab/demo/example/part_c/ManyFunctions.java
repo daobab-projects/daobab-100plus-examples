@@ -24,12 +24,12 @@ public class ManyFunctions extends ServiceBase<FlatPlate> implements FunctionWhi
     public FlatPlate call() {
         var f = tabFilm;
         return db.select(
-                sum(f.colLength()),
-                avg(f.colLength()),
-                min(f.colLength()),
-                max(f.colLength()),
-                count(f.colLength())
-        )
+                        sum(f.colLength()),
+                        avg(f.colLength()),
+                        min(f.colLength()),
+                        max(f.colLength()),
+                        count(f.colLength())
+                )
                 .flat()
                 .findOne();
     }

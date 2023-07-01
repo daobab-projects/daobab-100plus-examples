@@ -3,6 +3,7 @@ package io.daobab.demo.example.part_b;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Payment;
+import io.daobab.parser.ParserGeneral;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  */
 @Component
-public class ResultConsumer extends ServiceBase<Void> {
+public class ResultConsumer extends ServiceBase<Void> implements ParserGeneral {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, ResultConsumer.class.getName());
