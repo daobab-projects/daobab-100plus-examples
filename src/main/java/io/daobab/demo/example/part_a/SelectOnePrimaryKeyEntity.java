@@ -17,7 +17,7 @@ import static io.daobab.demo.base.Tag.SELECT;
  * - How to get an entity having PK value
  * - How to get an entity having FK related entity object
  * - How to get an entity through related entity method
- *
+ * <p>
  * Daobab attach universal ID column to every Primary Key entity,
  * whatever Entity contains such column or not.
  */

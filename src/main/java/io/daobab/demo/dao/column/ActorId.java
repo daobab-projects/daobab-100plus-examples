@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface ActorId<E extends Entity, F> extends EntityRelationMap<E> {
 
     default F getActorId() {
@@ -18,12 +17,9 @@ public interface ActorId<E extends Entity, F> extends EntityRelationMap<E> {
         return storeParam("ActorId", val);
     }
 
-
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, ActorId> colActorId() {
-        return ColumnCache.INSTANCE.getColumn("ActorId","ACTOR_ID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("ActorId", "ACTOR_ID", (Table<?>) this, Integer.class);
     }
-
-
 
 }

@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface FilmId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -26,9 +25,9 @@ public interface FilmId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:FILM_TEXT,type:SMALLINT,size:16,nullable:false
      * table:INVENTORY,type:SMALLINT,size:16,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, FilmId> colFilmId() {
-        return ColumnCache.INSTANCE.getColumn("FilmId","FILMID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("FilmId", "FILMID", (Table<?>) this, Integer.class);
     }
 
 }

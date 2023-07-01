@@ -1,6 +1,9 @@
 package io.daobab.demo.base;
 
-import io.daobab.model.*;
+import io.daobab.model.Entity;
+import io.daobab.model.FlatPlate;
+import io.daobab.model.Plate;
+import io.daobab.model.TableColumn;
 import io.daobab.result.FlatPlates;
 import io.daobab.target.buffer.single.Plates;
 
@@ -38,9 +41,9 @@ public interface ToTableConverter {
         } else if (obj instanceof Collection) {
             Collection collection = (Collection) obj;
 
-            if (collection.isEmpty() == false && collection.iterator().next() instanceof FlatPlate) {
+            if (!collection.isEmpty() && collection.iterator().next() instanceof FlatPlate) {
                 return flatsToTable((Collection<FlatPlate>) collection);
-            } else if (collection.isEmpty() == false && collection.iterator().next() instanceof Entity) {
+            } else if (!collection.isEmpty() && collection.iterator().next() instanceof Entity) {
                 return entitiesToTable((Collection<Entity>) collection);
             } else {
                 return cellsToTable(collection);
@@ -53,13 +56,12 @@ public interface ToTableConverter {
     }
 
     private String entityToTable(Entity obj) {
-        var table = new StringBuffer();
-        table.append(OPEN_TABLE)
-                .append(getHeader(obj))
-                .append(getRow(obj))
-                .append(CLOSE_TABLE);
+        String table = OPEN_TABLE +
+                getHeader(obj) +
+                getRow(obj) +
+                CLOSE_TABLE;
 
-        return table.toString();
+        return table;
     }
 
 

@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Country<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface Country<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:COUNTRY,type:VARCHAR,size:50,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Country> colCountry() {
-        return ColumnCache.INSTANCE.getColumn("Country","COUNTRY",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Country", "COUNTRY", (Table<?>) this, String.class);
     }
 
 

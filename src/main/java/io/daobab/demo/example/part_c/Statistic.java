@@ -30,14 +30,13 @@ public class Statistic extends ServiceBase<Void> implements MetaDataTables {
         db.getStatisticCollector().ignoreExecutionTimeBelow(5000);
 
 
-
 //        db.getStatisticCollector().ignoreExecutionTimeBelow(1000000);
         db.select(tabFilm)
-                .whereLess(tabFilm.colFilmId(),10)
+                .whereLess(tabFilm.colFilmId(), 10)
                 .findMany();
 
         db.select(tabFilm)
-                .whereLess(tabFilm.colFilmId(),10)
+                .whereLess(tabFilm.colFilmId(), 10)
                 .findMany();
 
         try {
@@ -46,11 +45,11 @@ public class Statistic extends ServiceBase<Void> implements MetaDataTables {
             e.printStackTrace();
         }
 
-        var rs=db.getStatistics().findMany();
+        var rs = db.getStatistics().findMany();
 
         log.info(String.valueOf(rs.size()));
 
-        rs.forEach(c->log.info(c.toJson()));
+        rs.forEach(c -> log.info(c.toJson()));
         return null;
     }
 

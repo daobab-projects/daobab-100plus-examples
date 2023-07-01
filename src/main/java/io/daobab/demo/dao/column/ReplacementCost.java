@@ -22,11 +22,10 @@ public interface ReplacementCost<E extends Entity, F> extends EntityRelationMap<
     /**
      * table:FILM,type:DECIMAL,size:5,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, ReplacementCost> colReplacementCost() {
-        return ColumnCache.INSTANCE.getColumn("ReplacementCost","REPLACEMENT_COST",(Table<?>)this,BigDecimal.class);
+        return ColumnCache.INSTANCE.getColumn("ReplacementCost", "REPLACEMENT_COST", (Table<?>) this, BigDecimal.class);
     }
-
 
 
 }

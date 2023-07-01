@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Title<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface Title<E extends Entity, F> extends EntityRelationMap<E> {
      * table:FILM,type:VARCHAR,size:255,nullable:false
      * table:FILM_TEXT,type:VARCHAR,size:255,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Title> colTitle() {
-        return ColumnCache.INSTANCE.getColumn("Title","TITLE",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Title", "TITLE", (Table<?>) this, String.class);
     }
 
 }

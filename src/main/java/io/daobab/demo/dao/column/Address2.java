@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Address2<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -15,7 +14,7 @@ public interface Address2<E extends Entity, F> extends EntityRelationMap<E> {
         return readParam("Address2");
     }
 
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default E setAddress2(F val) {
         return storeParam("Address2", val);
     }
@@ -23,9 +22,9 @@ public interface Address2<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:ADDRESS,type:VARCHAR,size:50,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Address2> colAddress2() {
-        return ColumnCache.INSTANCE.getColumn("Address2","ADDRESS2",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Address2", "ADDRESS2", (Table<?>) this, String.class);
     }
 
 }

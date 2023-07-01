@@ -30,11 +30,11 @@ public class SelectByCompositeKey extends ServiceBase<FilmActor> {
     @Override
     public FilmActor call() {
 
-        var anotherEntity=new AnotherEntityHavingTheSameCompositeKeyColumns()
+        var anotherEntity = new AnotherEntityHavingTheSameCompositeKeyColumns()
                 .setActorId(1).setFilmId(1).setDescription("A description");
 
         return db.select(tabFilmActor)
-                .whereEqual(tabFilmActor.colCompositeId(),anotherEntity)
+                .whereEqual(tabFilmActor.colCompositeId(), anotherEntity)
                 .findOne();
     }
 
@@ -42,8 +42,7 @@ public class SelectByCompositeKey extends ServiceBase<FilmActor> {
             extends Table<AnotherEntityHavingTheSameCompositeKeyColumns> implements FilmActorKey<AnotherEntityHavingTheSameCompositeKeyColumns>,
             ActorId<AnotherEntityHavingTheSameCompositeKeyColumns, Integer>,
             FilmId<AnotherEntityHavingTheSameCompositeKeyColumns, Integer>,
-            Description<AnotherEntityHavingTheSameCompositeKeyColumns, String>
-    {
+            Description<AnotherEntityHavingTheSameCompositeKeyColumns, String> {
 
 
         @Override

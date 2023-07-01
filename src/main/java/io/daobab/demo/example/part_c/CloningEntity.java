@@ -1,7 +1,6 @@
 package io.daobab.demo.example.part_c;
 
 import io.daobab.creation.EntityCreator;
-import io.daobab.converter.duplicator.duplication.EntityDuplication;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.model.Entity;

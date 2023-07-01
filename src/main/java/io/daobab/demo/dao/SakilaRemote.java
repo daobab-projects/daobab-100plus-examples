@@ -15,7 +15,7 @@ public class SakilaRemote extends RemoteClient {
     private String port;
 
     @Override
-    protected ResponseWrapper callEndpoint(Query<? extends Entity,?, ?> query, boolean singleResult) {
+    protected ResponseWrapper callEndpoint(Query<? extends Entity, ?, ?> query, boolean singleResult) {
 
         final String url = "http://www.daobab.io/remote/export/db";
 

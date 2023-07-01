@@ -23,7 +23,7 @@ public interface CountryId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:CITY,type:SMALLINT,size:16,nullable:false
      * table:COUNTRY,type:SMALLINT,size:16,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, CountryId> colCountryId() {
         return ColumnCache.INSTANCE.getColumn("CountryId", "COUNTRY_ID", (Table<?>) this, Integer.class);
     }

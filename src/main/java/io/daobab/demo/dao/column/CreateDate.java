@@ -22,7 +22,7 @@ public interface CreateDate<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:CUSTOMER,type:TIMESTAMP,size:26,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, CreateDate> colCreateDate() {
         return ColumnCache.INSTANCE.getColumn("CreateDate", "CREATE_DATE", (Table<?>) this, LocalDateTime.class);
     }

@@ -91,7 +91,7 @@ class TestProcedureCall implements MetaDataTables, FunctionWhispererH2, SakilaTa
         db.getMetaData().select(tabMetaIndex)
                 .where(and()
                         .equal(tabMetaIndex.colColumnName(),tabFilm.colFilmId().getColumnName())
-                        .equal(tabMetaIndex.colTableName(),tabFilm.colFilmId().getEntityName()))
+                        .equal(tabMetaIndex.colTableName(),db.getEntityName(tabFilm.entityClass())))
                     .findMany().forEach(c->log.info(c.toJson()));
 
 

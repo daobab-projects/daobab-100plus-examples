@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Picture<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface Picture<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:STAFF,type:VARBINARY,size:1000000000,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Picture> colPicture() {
-        return ColumnCache.INSTANCE.getColumn("Picture","PICTURE",(Table<?>)this,byte[].class);
+        return ColumnCache.INSTANCE.getColumn("Picture", "PICTURE", (Table<?>) this, byte[].class);
     }
 
 //

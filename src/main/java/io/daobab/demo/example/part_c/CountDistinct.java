@@ -27,5 +27,4 @@ public class CountDistinct extends ServiceBase<Long> implements FunctionWhispere
     }
 
 
-
 }

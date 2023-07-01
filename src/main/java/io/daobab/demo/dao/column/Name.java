@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Name<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -15,7 +14,7 @@ public interface Name<E extends Entity, F> extends EntityRelationMap<E> {
         return readParam("Name");
     }
 
-     default E setName(F val) {
+    default E setName(F val) {
         return storeParam("Name", val);
     }
 
@@ -25,9 +24,8 @@ public interface Name<E extends Entity, F> extends EntityRelationMap<E> {
      * table:LANGUAGE,type:VARCHAR,size:20,nullable:false
      */
     default Column<E, F, Name> colName() {
-        return ColumnCache.INSTANCE.getColumn("Name","NAME",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Name", "NAME", (Table<?>) this, String.class);
     }
-
 
 
 }

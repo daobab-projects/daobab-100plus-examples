@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface OriginalLanguageId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface OriginalLanguageId<E extends Entity, F> extends EntityRelationM
     /**
      * table:FILM,type:TINYINT,size:8,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, OriginalLanguageId> colOriginalLanguageId() {
-        return ColumnCache.INSTANCE.getColumn("OriginalLanguageId","ORIGINAL_LANGUAGE_ID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("OriginalLanguageId", "ORIGINAL_LANGUAGE_ID", (Table<?>) this, Integer.class);
     }
 //
 //    @SuppressWarnings("rawtypes")

@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Length<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface Length<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:FILM,type:SMALLINT,size:16,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Length> colLength() {
-        return ColumnCache.INSTANCE.getColumn("Length","LENGTH",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("Length", "LENGTH", (Table<?>) this, Integer.class);
     }
 
 }

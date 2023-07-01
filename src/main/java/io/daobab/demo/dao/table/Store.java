@@ -15,7 +15,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value="STORE")
+@TableName(value = "STORE")
 public class Store extends Table<Store> implements
         StoreId<Store, Integer>,
         ManagerStaffId<Store, Integer>,

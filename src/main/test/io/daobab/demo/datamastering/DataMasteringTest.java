@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -120,11 +121,11 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
     @Test
     void test09() {
         new Rental()
-                .setRentalDate(toTimestamp(new Date()))
+                .setRentalDate(LocalDateTime.now())
                 .setInventoryId(toBD(1))
                 .setCustomerId(1)
                 .setStaffId(1)
-                .setLastUpdate(toTimestamp(new Date()))
+                .setLastUpdate(LocalDateTime.now())
                 .insert(db);
     }
 

@@ -13,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.time.Year;
+
 @SpringBootTest
 class YourQueryTest implements SakilaTables, TestHelper, DummyColumnTemplate, FunctionWhispererH2 {
 
@@ -27,7 +30,7 @@ class YourQueryTest implements SakilaTables, TestHelper, DummyColumnTemplate, Fu
 
         Entities<FilmActor> result2 = db.select(tabFilmActor)
                 .join(tabFilm, tabFilmActor.colFilmId(),
-                        and().equal(tabFilm.colReleaseYear(), toDateSQL("2020", "YYYY")))
+                        and().equal(tabFilm.colReleaseYear(), LocalDate.of(2020,1,1)))
                 .findMany();
     }
 

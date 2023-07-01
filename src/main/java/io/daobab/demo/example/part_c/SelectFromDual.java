@@ -27,8 +27,8 @@ public class SelectFromDual extends ServiceBase<Plate> implements FunctionWhispe
     @Override
     public Plate call() {
         return db.select(
-                db.select(count(tabFilm)).as("cntFilm"),
-                db.select(count(tabCustomer)).as("cntCustomer"))
+                        db.select(count(tabFilm)).as("cntFilm"),
+                        db.select(count(tabCustomer)).as("cntCustomer"))
                 .findOne();
 // uncomment to read
 //              .forEach(p->log.info(p.getValue("cntFilm")+" -- "+p.getValue("cntCustomer")));

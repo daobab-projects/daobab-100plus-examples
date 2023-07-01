@@ -59,7 +59,7 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlP
     }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         getAccessProtector().setColumnAccess(tabActor.colLastName(), Access.NO_INSERT, Access.NO_UPDATE);
         setShowSql(true);
     }
@@ -93,10 +93,10 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlP
         try {
             var con = ds.getConnection();
 
-            RunScript.execute(con,new BufferedReader(
+            RunScript.execute(con, new BufferedReader(
                     new InputStreamReader(new ClassPathResource("schema.sql").getInputStream())));
 
-            RunScript.execute(con,new BufferedReader(
+            RunScript.execute(con, new BufferedReader(
                     new InputStreamReader(new ClassPathResource("data.sql").getInputStream())));
 
         } catch (Exception e) {
@@ -106,15 +106,15 @@ public class SakilaDataBase extends DataBaseTarget implements SakilaTables, SqlP
 
     }
 
-    public SomeOut test(SomeIn in){
-        return callProcedure("test",in,new SomeOut());
+    public SomeOut test(SomeIn in) {
+        return callProcedure("test", in, new SomeOut());
     }
 
     @Override
     public <E extends Entity> DataBaseIdGeneratorSupplier<?> getPrimaryKeyGenerator(E entity) {
 
-        if (entity.getClass().equals(Rental.class)){
-                return rentalGenerator;
+        if (entity.getClass().equals(Rental.class)) {
+            return rentalGenerator;
         }
         return null;
     }

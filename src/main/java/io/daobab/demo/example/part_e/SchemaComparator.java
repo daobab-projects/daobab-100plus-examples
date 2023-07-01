@@ -27,32 +27,32 @@ public class SchemaComparator extends ServiceBase<Void> implements MetaDataTable
 
     @Override
     public Void call() {
-        var tablesInSchema=db.getTables().stream()
+        var tablesInSchema = db.getTables().stream()
                 .map(Entity::entityClass)
                 .map(Class::getName)
                 .collect(Collectors.toList());
 
-        var columnsInSchema=db.getTables().stream()
-                .flatMap(t->t.columns().stream())
+        var columnsInSchema = db.getTables().stream()
+                .flatMap(t -> t.columns().stream())
                 .map(TableColumn::getColumn)
-                .map(c->c.getEntityClass().getName()+"."+c.getColumnName())
+                .map(c -> c.getEntityClass().getName() + "." + c.getColumnName())
                 .collect(Collectors.toList());
 
-        var notGeneratedTables=db.getMetaData()
+        var notGeneratedTables = db.getMetaData()
                 .select(tabMetaTable.colTableName())
-                .whereNotInFields(tabMetaTable.colTableName(),tablesInSchema)
+                .whereNotInFields(tabMetaTable.colTableName(), tablesInSchema)
                 .findMany();
 
-        var notGeneratedColumns=db.getMetaData()
+        var notGeneratedColumns = db.getMetaData()
                 .select(tabMetaColumn.colTableColumnName())
                 .whereNotInFields(tabMetaColumn.colTableColumnName(), columnsInSchema)
                 .orderAscBy(tabMetaColumn.colTableColumnName())
                 .findMany();
 
-        log.info(format("there is %s tables which are not generated.",notGeneratedTables.size()));
-        log.info(format("there is %s columns which are not generated.",notGeneratedColumns.size()));
+        log.info(format("there is %s tables which are not generated.", notGeneratedTables.size()));
+        log.info(format("there is %s columns which are not generated.", notGeneratedColumns.size()));
 
-        if (notGeneratedTables.isEmpty() && notGeneratedColumns.isEmpty()){
+        if (notGeneratedTables.isEmpty() && notGeneratedColumns.isEmpty()) {
             log.info("The schema is fully compliant with the generated Daobab classes");
         }
         return null;

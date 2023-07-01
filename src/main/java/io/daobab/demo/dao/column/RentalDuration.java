@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface RentalDuration<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface RentalDuration<E extends Entity, F> extends EntityRelationMap<E
     /**
      * table:FILM,type:TINYINT,size:8,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, RentalDuration> colRentalDuration() {
-        return ColumnCache.INSTANCE.getColumn("RentalDuration","RENTAL_DURATION",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("RentalDuration", "RENTAL_DURATION", (Table<?>) this, Integer.class);
     }
 
 

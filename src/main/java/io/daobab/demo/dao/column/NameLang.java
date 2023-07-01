@@ -22,9 +22,9 @@ public interface NameLang<E extends Entity> extends EntityRelationMap<E> {
         return storeParam("Name", val);
     }
 
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, Lang, NameLang> colName() {
-        return ColumnCache.INSTANCE.getColumn("Name","NAME",(Table<?>)this,Lang.class);
+        return ColumnCache.INSTANCE.getColumn("Name", "NAME", (Table<?>) this, Lang.class);
     }
 
 

@@ -23,9 +23,9 @@ public interface FirstName<E extends Entity, F> extends EntityRelationMap<E> {
      * table:CUSTOMER,type:VARCHAR,size:45,nullable:false
      * table:STAFF,type:VARCHAR,size:45,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, FirstName> colFirstName() {
-        return ColumnCache.INSTANCE.getColumn("FirstName","FIRST_NAME",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("FirstName", "FIRST_NAME", (Table<?>) this, String.class);
     }
 
 

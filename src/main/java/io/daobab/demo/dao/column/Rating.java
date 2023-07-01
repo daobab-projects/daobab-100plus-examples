@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Rating<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface Rating<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:FILM,type:VARCHAR,size:5,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Rating> colRating() {
-        return ColumnCache.INSTANCE.getColumn("Rating","RATING",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Rating", "RATING", (Table<?>) this, String.class);
     }
 //
 //    @SuppressWarnings("rawtypes")

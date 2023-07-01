@@ -34,8 +34,8 @@ public class BigQuery extends ServiceBase<List<String>> {
 
 
         return db.select(
-                c.colFirstName(), c.colLastName(), f.colTitle(), city.colCity(), p.colPaymentDate(), p.colAmount(),
-                country.colCountry(), s.colFirstName(), s.colLastName())
+                        c.colFirstName(), c.colLastName(), f.colTitle(), city.colCity(), p.colPaymentDate(), p.colAmount(),
+                        country.colCountry(), s.colFirstName(), s.colLastName())
                 .join(r, c.colCustomerId())
                 .join(i, r.colInventoryId())
                 .join(p, c.colCustomerId(), r.colStaffId())
@@ -48,23 +48,23 @@ public class BigQuery extends ServiceBase<List<String>> {
                 .limitBy(10)
                 .whereEqual(c.colID(), 1)
                 .map(x -> "Customer:" +
-                            x.getValue(c.colFirstName()) +
-                            "," +
-                            x.getValue(c.colLastName()) +
-                            " living in " +
-                            x.getValue(city.colCity()) +
-                            "," +
-                            x.getValue(country.colCountry()) +
-                            " rent on " +
-                            toSting(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH) +
-                            " a movie: " +
-                            x.getValue(f.colTitle()) +
-                            " has paid for it: " +
-                            x.getValue(p.colAmount()) +
-                            " and was served by " +
-                            x.getValue(s.colFirstName()) +
-                            " " +
-                            x.getValue(s.colLastName())
+                        x.getValue(c.colFirstName()) +
+                        "," +
+                        x.getValue(c.colLastName()) +
+                        " living in " +
+                        x.getValue(city.colCity()) +
+                        "," +
+                        x.getValue(country.colCountry()) +
+                        " rent on " +
+                        toSting(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH) +
+                        " a movie: " +
+                        x.getValue(f.colTitle()) +
+                        " has paid for it: " +
+                        x.getValue(p.colAmount()) +
+                        " and was served by " +
+                        x.getValue(s.colFirstName()) +
+                        " " +
+                        x.getValue(s.colLastName())
                 )
                 .findMany();
 

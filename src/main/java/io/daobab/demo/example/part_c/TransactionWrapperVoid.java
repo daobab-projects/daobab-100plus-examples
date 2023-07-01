@@ -27,23 +27,18 @@ public class TransactionWrapperVoid extends ServiceBase<Void> {
     public Void call() {
 
 
-
-        var cat= new Category()
+        var cat = new Category()
                 .setLastUpdate(LocalDateTime.now())
                 .setName("test");
 
-        var anotherCat=db.select(tabCategory).whereEqual(tabCategory.colID(),1).findOne();
+        var anotherCat = db.select(tabCategory).whereEqual(tabCategory.colID(), 1).findOne();
         anotherCat.setName("anotherName");
 
-        db.wrapTransaction( t->{
+        db.wrapTransaction(t -> {
             t.insert(cat).execute();
             t.update(anotherCat).execute(Propagation.REQUIRED_NEW);
             return null;
         });
-
-
-
-
 
 
         //Wrap all operation into single transaction
@@ -55,7 +50,7 @@ public class TransactionWrapperVoid extends ServiceBase<Void> {
                             .insert(transaction);
 
                     //Update entity
-            category.setLastUpdate(LocalDateTime.now())
+                    category.setLastUpdate(LocalDateTime.now())
                             .update(transaction, tabCategory.colLastUpdate());
 
                     //Delete entity

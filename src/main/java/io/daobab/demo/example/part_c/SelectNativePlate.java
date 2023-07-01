@@ -35,11 +35,11 @@ public class SelectNativePlate extends ServiceBase<FlatPlate> {
 
 
         return db.nativeSelect(
-                "select f.title,c.name from film f " +
-                        "join film_category fc on fc.film_id=f.film_id " +
-                        "join category c on c.category_id=fc.category_id " +
-                        "where f.film_id=15",
-                tabFilm.colTitle(), tabCategory.colName())
+                        "select f.title,c.name from film f " +
+                                "join film_category fc on fc.film_id=f.film_id " +
+                                "join category c on c.category_id=fc.category_id " +
+                                "where f.film_id=15",
+                        tabFilm.colTitle(), tabCategory.colName())
                 .findOne().toFlat();
     }
 

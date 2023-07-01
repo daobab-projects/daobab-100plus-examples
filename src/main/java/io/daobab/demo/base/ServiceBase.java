@@ -28,7 +28,7 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
 
     public abstract V call();
 
-    public void beforeCall(){
+    public void beforeCall() {
     }
 
     public V call(Supplier<V> scenario) {
@@ -45,18 +45,18 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
         return rv;
     }
 
-    public void afterCall(V data){
-        if (data==null){
+    public void afterCall(V data) {
+        if (data == null) {
             return;
         }
         log.info("************************************ -= result =- ************************************");
-        if (data instanceof JsonProvider){
-            log.info(((JsonProvider)data).toJson());
-        }else if (data instanceof Collection){
-            ((Collection<?>) data).forEach(o->log.info(o.toString()));
-        }else if (data instanceof Object[]){
-            Arrays.stream(((Object[]) data)).forEach(o->log.info(o.toString()));
-        }else{
+        if (data instanceof JsonProvider) {
+            log.info(((JsonProvider) data).toJson());
+        } else if (data instanceof Collection) {
+            ((Collection<?>) data).forEach(o -> log.info(o.toString()));
+        } else if (data instanceof Object[]) {
+            Arrays.stream(((Object[]) data)).forEach(o -> log.info(o.toString()));
+        } else {
             log.info(data.toString());
         }
     }

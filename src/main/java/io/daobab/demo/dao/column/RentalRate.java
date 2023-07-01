@@ -23,9 +23,9 @@ public interface RentalRate<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:FILM,type:DECIMAL,size:4,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, RentalRate> colRentalRate() {
-        return ColumnCache.INSTANCE.getColumn("RentalRate","RENTAL_RATE",(Table<?>)this,BigDecimal.class);
+        return ColumnCache.INSTANCE.getColumn("RentalRate", "RENTAL_RATE", (Table<?>) this, BigDecimal.class);
     }
 
 

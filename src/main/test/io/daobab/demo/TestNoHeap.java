@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-class TestNonHeap implements SakilaTables {
+class TestNoHeap implements SakilaTables {
 
 
     private final Logger log = LoggerFactory.getLogger("Test");
@@ -23,7 +23,7 @@ class TestNonHeap implements SakilaTables {
     void test01(){
 
         var noHeap=db.select(tabRental)
-                .findMany().toNoHeap();
+                .findMany().toNonHeap();
 
         long start=System.currentTimeMillis();
         var res = noHeap.select(tabRental.colID(), tabRental.colLastUpdate())

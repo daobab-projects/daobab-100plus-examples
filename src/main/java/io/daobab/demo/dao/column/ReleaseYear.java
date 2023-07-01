@@ -22,9 +22,9 @@ public interface ReleaseYear<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:FILM,type:DATE,size:10,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, ReleaseYear> colReleaseYear() {
-        return ColumnCache.INSTANCE.getColumn("ReleaseYear","RELEASE_YEAR",(Table<?>)this,LocalDate.class);
+        return ColumnCache.INSTANCE.getColumn("ReleaseYear", "RELEASE_YEAR", (Table<?>) this, LocalDate.class);
     }
 
 

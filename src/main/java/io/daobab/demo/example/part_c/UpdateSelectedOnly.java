@@ -2,7 +2,6 @@ package io.daobab.demo.example.part_c;
 
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
-import io.daobab.query.base.QueryWhisperer;
 import io.daobab.target.database.query.base.QueryDataBaseWhisperer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;

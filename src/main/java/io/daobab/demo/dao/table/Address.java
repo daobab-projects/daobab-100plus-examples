@@ -1,8 +1,5 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.creation.EntityCreator;
 import io.daobab.demo.dao.column.*;
 import io.daobab.model.*;
 
@@ -12,12 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
 
 @SuppressWarnings("rawtypes")
-@TableName(value="ADDRESS")
+@TableName(value = "ADDRESS")
 public class Address extends Table<Address> implements
         AddressId<Address, Integer>,
         io.daobab.demo.dao.column.Address<Address, String>,
@@ -28,19 +22,18 @@ public class Address extends Table<Address> implements
         Phone<Address, String>,
         LastUpdate<Address, LocalDateTime>,
 
-        PrimaryKey<Address, Integer, AddressId>
-	{
+        PrimaryKey<Address, Integer, AddressId> {
 
 
-		public Address(){
-			super();
-		}
+    public Address() {
+        super();
+    }
 
-		public Address(Map<String,Object> parameters){
-			super(parameters);
-		}
+    public Address(Map<String, Object> parameters) {
+        super(parameters);
+    }
 
-	@Override
+    @Override
     public List<TableColumn> columns() {
         return Arrays.asList(
                 new TableColumn(colAddressId()).primaryKey().size(16),
@@ -52,28 +45,26 @@ public class Address extends Table<Address> implements
                 new TableColumn(colPhone()).size(20),
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
-	}
+    }
 
-	@Override
-	public Column<Address,Integer,AddressId> colID() {
-		return colAddressId();
-	}
+    @Override
+    public Column<Address, Integer, AddressId> colID() {
+        return colAddressId();
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getId());
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)return true;
-		if (obj == null)return false;
-		if (getClass() != obj.getClass())return false;
-		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
-		return Objects.equals(getId(), other.getId());
-	}
-
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        PrimaryKey<?, ?, ?> other = (PrimaryKey<?, ?, ?>) obj;
+        return Objects.equals(getId(), other.getId());
+    }
 
 
 }

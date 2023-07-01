@@ -26,15 +26,15 @@ public class MultiEntity extends ServiceBase<Void> implements MetaDataTables, Fu
     public Void call() {
 
         //Building a multiTarget on three Entities
-        var mt=new MultiEntityTarget(
-                db.select(tabFilmActor).whereEqual(tabFilmActor.colFilmId(),1).findMany(),
-                db.select(tabFilmCategory).whereEqual(tabFilmCategory.colFilmId(),1).findMany(),
-                db.select(tabFilmText).whereEqual(tabFilmText.colFilmId(),1).findMany());
+        var mt = new MultiEntityTarget(
+                db.select(tabFilmActor).whereEqual(tabFilmActor.colFilmId(), 1).findMany(),
+                db.select(tabFilmCategory).whereEqual(tabFilmCategory.colFilmId(), 1).findMany(),
+                db.select(tabFilmText).whereEqual(tabFilmText.colFilmId(), 1).findMany());
 
         //queries...
-        var cn1=mt.select(count(tabFilmActor)).findOne();
-        var cn2=mt.select(count(tabFilmCategory)).findOne();
-        var cn3=mt.select(count(tabFilmText)).findOne();
+        var cn1 = mt.select(count(tabFilmActor)).findOne();
+        var cn2 = mt.select(count(tabFilmCategory)).findOne();
+        var cn3 = mt.select(count(tabFilmText)).findOne();
 
         //results...
         log.info(toString(cn1));

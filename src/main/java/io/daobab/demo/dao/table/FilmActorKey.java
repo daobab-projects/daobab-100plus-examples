@@ -2,7 +2,10 @@ package io.daobab.demo.dao.table;
 
 import io.daobab.demo.dao.column.ActorId;
 import io.daobab.demo.dao.column.FilmId;
-import io.daobab.model.*;
+import io.daobab.model.Composite;
+import io.daobab.model.CompositeColumns;
+import io.daobab.model.Entity;
+import io.daobab.model.TableColumn;
 
 public interface FilmActorKey<E extends Entity & ActorId<E, Integer> & FilmId<E, Integer>>
         extends ActorId<E, Integer>, FilmId<E, Integer>, Composite<E> {

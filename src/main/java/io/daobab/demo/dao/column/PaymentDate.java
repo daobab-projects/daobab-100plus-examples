@@ -24,7 +24,7 @@ public interface PaymentDate<E extends Entity, F> extends EntityRelationMap<E> {
      * table:PAYMENT,type:TIMESTAMP,size:26,nullable:false
      */
     default Column<E, F, PaymentDate> colPaymentDate() {
-        return ColumnCache.INSTANCE.getColumn("PaymentDate","PAYMENT_DATE",(Table<?>)this,LocalDateTime.class);
+        return ColumnCache.INSTANCE.getColumn("PaymentDate", "PAYMENT_DATE", (Table<?>) this, LocalDateTime.class);
     }
 
 //

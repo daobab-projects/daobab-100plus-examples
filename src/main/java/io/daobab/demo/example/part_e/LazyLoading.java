@@ -24,13 +24,13 @@ public class LazyLoading extends ServiceBase<List<ActorLazyLoading>> {
 
     @Override
     public List<ActorLazyLoading> call() {
-        var rv= db.select(tabFilmActor)
+        var rv = db.select(tabFilmActor)
                 .limitBy(3)
                 .map(this::resultCompleter)
                 .findMany();
 
         //pick just one and call a method here to invoke a lazy loading on it
-        var picked=rv.get(1);
+        var picked = rv.get(1);
         log.info(picked.getActor().toJson());
         return rv;
 
@@ -43,8 +43,8 @@ public class LazyLoading extends ServiceBase<List<ActorLazyLoading>> {
             public Actor getActor() {
                 var rv = super.getActor();
                 if (rv == null) {
-                   rv=db.select(tabActor).whereEqual(tabActor.colID(),filmActor.getActorId()).findOne();
-                   setActor(rv);
+                    rv = db.select(tabActor).whereEqual(tabActor.colID(), filmActor.getActorId()).findOne();
+                    setActor(rv);
                 }
                 return rv;
             }

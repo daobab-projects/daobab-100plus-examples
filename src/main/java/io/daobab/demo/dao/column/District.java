@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface District<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface District<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:ADDRESS,type:VARCHAR,size:20,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, District> colDistrict() {
-        return ColumnCache.INSTANCE.getColumn("District","DISTRICT",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("District", "DISTRICT", (Table<?>) this, String.class);
     }
 
 }

@@ -1,8 +1,5 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.creation.EntityCreator;
 import io.daobab.demo.dao.column.ActorId;
 import io.daobab.demo.dao.column.FilmId;
 import io.daobab.demo.dao.column.LastUpdate;
@@ -13,11 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
-
-@TableName(value="FILM_ACTOR")
+@TableName(value = "FILM_ACTOR")
 public class FilmActor extends Table<FilmActor> implements
         FilmActorKey<FilmActor>,
         ActorId<FilmActor, Integer>,
@@ -27,11 +21,11 @@ public class FilmActor extends Table<FilmActor> implements
         PrimaryCompositeKey<FilmActor, FilmActorKey<FilmActor>> {
 
 
-    public FilmActor(){
+    public FilmActor() {
         super();
     }
 
-    public FilmActor(Map<String,Object> parameters){
+    public FilmActor(Map<String, Object> parameters) {
         super(parameters);
     }
 

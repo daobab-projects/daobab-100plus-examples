@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Active<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface Active<E extends Entity, F> extends EntityRelationMap<E> {
      * table:CUSTOMER,type:BOOLEAN,size:1,nullable:false
      * table:STAFF,type:BOOLEAN,size:1,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, Boolean, Active> colActive() {
-        return ColumnCache.INSTANCE.getColumn("Active","ACTIVE",(Table<?>)this,Boolean.class);
+        return ColumnCache.INSTANCE.getColumn("Active", "ACTIVE", (Table<?>) this, Boolean.class);
     }
 
 }

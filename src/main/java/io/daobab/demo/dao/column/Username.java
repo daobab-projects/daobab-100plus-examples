@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Username<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface Username<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:STAFF,type:VARCHAR,size:16,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
-    default Column<E, F, ActorId<E,F>> colUsername() {
-        return ColumnCache.INSTANCE.getColumn("Username","USERNAME",(Table<?>)this,String.class);
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    default Column<E, F, ActorId<E, F>> colUsername() {
+        return ColumnCache.INSTANCE.getColumn("Username", "USERNAME", (Table<?>) this, String.class);
     }
 
 

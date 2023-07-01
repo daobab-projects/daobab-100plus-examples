@@ -23,9 +23,9 @@ public interface RentalId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:PAYMENT,type:INTEGER,size:32,nullable:true
      * table:RENTAL,type:INTEGER,size:32,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, RentalId> colRentalId() {
-        return ColumnCache.INSTANCE.getColumn("RentalId","RENTAL_ID",(Table<?>)this,BigDecimal.class);
+        return ColumnCache.INSTANCE.getColumn("RentalId", "RENTAL_ID", (Table<?>) this, BigDecimal.class);
     }
 
 

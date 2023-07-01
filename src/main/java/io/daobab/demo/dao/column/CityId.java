@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface CityId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -24,9 +23,9 @@ public interface CityId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:ADDRESS,type:SMALLINT,size:16,nullable:false
      * table:CITY,type:SMALLINT,size:16,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, CityId> colCityId() {
-        return ColumnCache.INSTANCE.getColumn("CityId","CITY_ID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("CityId", "CITY_ID", (Table<?>) this, Integer.class);
     }
 
 

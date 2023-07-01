@@ -3,8 +3,8 @@ package io.daobab.demo.base;
 import io.daobab.model.Entity;
 import io.daobab.model.Plate;
 import io.daobab.model.PrimaryKey;
-import io.daobab.target.buffer.single.Entities;
 import io.daobab.result.FlatPlates;
+import io.daobab.target.buffer.single.Entities;
 import io.daobab.target.buffer.single.Plates;
 import org.slf4j.Logger;
 

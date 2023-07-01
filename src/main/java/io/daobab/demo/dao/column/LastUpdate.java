@@ -36,9 +36,9 @@ public interface LastUpdate<E extends Entity, F> extends EntityRelationMap<E> {
      * table:STAFF,type:TIMESTAMP,size:26,nullable:false
      * table:STORE,type:TIMESTAMP,size:26,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, LastUpdate> colLastUpdate() {
-        return ColumnCache.INSTANCE.getColumn("LastUpdate","LAST_UPDATE",(Table<?>)this,LocalDateTime.class);
+        return ColumnCache.INSTANCE.getColumn("LastUpdate", "LAST_UPDATE", (Table<?>) this, LocalDateTime.class);
     }
 
 

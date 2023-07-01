@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
  * Concurrency Safe Delete
  * ---------------------------------------------------------
  * - How to use concurrency safe delete.
- *   In this example each row is deleted into separated transaction.
- *   Records are not locked by big transaction.
+ * In this example each row is deleted into separated transaction.
+ * Records are not locked by big transaction.
  */
 @Component
 public class ConcurrencySafeDelete extends ServiceBase<Void> {

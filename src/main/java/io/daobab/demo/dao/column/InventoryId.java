@@ -23,9 +23,9 @@ public interface InventoryId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:INVENTORY,type:INTEGER,size:32,nullable:false
      * table:RENTAL,type:INTEGER,size:32,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, InventoryId> colInventoryId() {
-        return ColumnCache.INSTANCE.getColumn("InventoryId","INVENTORY_ID",(Table<?>)this,BigDecimal.class);
+        return ColumnCache.INSTANCE.getColumn("InventoryId", "INVENTORY_ID", (Table<?>) this, BigDecimal.class);
     }
 
 

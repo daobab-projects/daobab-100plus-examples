@@ -4,17 +4,11 @@ import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.demo.dao.table.Actor;
 import io.daobab.target.buffer.single.Entities;
-import io.daobab.target.database.query.DataBaseQueryBase;
 import io.daobab.target.database.query.frozen.FrozenDataBaseQueryEntity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.time.Duration;
-import java.time.Period;
 import java.util.List;
-
-import static io.daobab.target.database.query.frozen.DaoParam.param;
 
 /**
  * ---------------------------------------------------------
@@ -39,7 +33,7 @@ public class SelectAll extends ServiceBase<Entities<Actor>> {
     @Override
     public Entities<Actor> call() {
         return prepared
-                .withParameters(List.of(List.of(1,2,3,4,5),List.of("Adam","dupa","jas")))
+                .withParameters(List.of(List.of(1, 2, 3, 4, 5), List.of("Adam", "dupa", "jas")))
                 .findMany();
 
     }

@@ -1,8 +1,5 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.creation.EntityCreator;
 import io.daobab.demo.dao.column.*;
 import io.daobab.model.*;
 
@@ -14,12 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
 
 @SuppressWarnings("rawtypes")
-@TableName(value="FILM")
+@TableName(value = "FILM")
 public class Film extends Table<Film> implements
         FilmId<Film, Integer>,
         Title<Film, String>,
@@ -35,19 +29,18 @@ public class Film extends Table<Film> implements
         SpecialFeatures<Film, String>,
         LastUpdate<Film, LocalDateTime>,
 
-        PrimaryKey<Film, Integer, FilmId>
-	{
+        PrimaryKey<Film, Integer, FilmId> {
 
 
-		public Film(){
-			super();
-		}
+    public Film() {
+        super();
+    }
 
-		public Film(Map<String,Object> parameters){
-			super(parameters);
-		}
+    public Film(Map<String, Object> parameters) {
+        super(parameters);
+    }
 
-	@Override
+    @Override
     public List<TableColumn> columns() {
         return Arrays.asList(
                 new TableColumn(colFilmId()).primaryKey().size(16),
@@ -64,28 +57,26 @@ public class Film extends Table<Film> implements
                 new TableColumn(colSpecialFeatures()).size(54),
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
-	}
+    }
 
-	@Override
-	public Column<Film,Integer,FilmId> colID() {
-		return colFilmId();
-	}
+    @Override
+    public Column<Film, Integer, FilmId> colID() {
+        return colFilmId();
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getId());
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)return true;
-		if (obj == null)return false;
-		if (getClass() != obj.getClass())return false;
-		PrimaryKey<?,?,?> other = (PrimaryKey<?,?,?>) obj;
-		return Objects.equals(getId(), other.getId());
-	}
-
-
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        PrimaryKey<?, ?, ?> other = (PrimaryKey<?, ?, ?>) obj;
+        return Objects.equals(getId(), other.getId());
+    }
 
 
 }

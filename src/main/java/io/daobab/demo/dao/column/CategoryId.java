@@ -21,9 +21,9 @@ public interface CategoryId<E extends Entity, F> extends EntityRelationMap<E> {
      * table:CATEGORY,type:TINYINT,size:8,nullable:false
      * table:FILM_CATEGORY,type:TINYINT,size:8,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, CategoryId> colCategoryId() {
-        return ColumnCache.INSTANCE.getColumn("CategoryId","CATEGORY_ID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("CategoryId", "CATEGORY_ID", (Table<?>) this, Integer.class);
     }
 
 }

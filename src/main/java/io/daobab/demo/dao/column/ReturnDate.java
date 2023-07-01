@@ -24,9 +24,8 @@ public interface ReturnDate<E extends Entity, F> extends EntityRelationMap<E> {
      * table:RENTAL,type:TIMESTAMP,size:26,nullable:true
      */
     default Column<E, F, ReturnDate> colReturnDate() {
-        return ColumnCache.INSTANCE.getColumn("ReturnDate","RETURN_DATE",(Table<?>)this,LocalDateTime.class);
+        return ColumnCache.INSTANCE.getColumn("ReturnDate", "RETURN_DATE", (Table<?>) this, LocalDateTime.class);
     }
-
 
 
 }

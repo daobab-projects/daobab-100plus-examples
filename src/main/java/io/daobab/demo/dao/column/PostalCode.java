@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface PostalCode<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -22,9 +21,9 @@ public interface PostalCode<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:ADDRESS,type:VARCHAR,size:10,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, PostalCode> colPostalCode() {
-        return ColumnCache.INSTANCE.getColumn("PostalCode","POSTAL_CODE",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("PostalCode", "POSTAL_CODE", (Table<?>) this, String.class);
     }
 
 //

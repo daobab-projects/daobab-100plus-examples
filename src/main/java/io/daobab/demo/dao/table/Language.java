@@ -1,8 +1,5 @@
 package io.daobab.demo.dao.table;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import io.daobab.creation.EntityCreator;
 import io.daobab.demo.dao.Lang;
 import io.daobab.demo.dao.column.LanguageId;
 import io.daobab.demo.dao.column.LastUpdate;
@@ -15,12 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
 
 @SuppressWarnings("rawtypes")
-@TableName(value="LANGUAGE")
+@TableName(value = "LANGUAGE")
 public class Language extends Table<Language> implements
         LanguageId<Language, Integer>,
         Name<Language, Lang>,
@@ -29,11 +23,11 @@ public class Language extends Table<Language> implements
         PrimaryKey<Language, Integer, LanguageId> {
 
 
-    public Language(){
+    public Language() {
         super();
     }
 
-    public Language(Map<String,Object> parameters){
+    public Language(Map<String, Object> parameters) {
         super(parameters);
     }
 

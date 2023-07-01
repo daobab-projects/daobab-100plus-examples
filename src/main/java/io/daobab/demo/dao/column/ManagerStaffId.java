@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface ManagerStaffId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface ManagerStaffId<E extends Entity, F> extends EntityRelationMap<E
     /**
      * table:STORE,type:TINYINT,size:8,nullable:false
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, ManagerStaffId> colManagerStaffId() {
-        return ColumnCache.INSTANCE.getColumn("ManagerStaffId","MANAGER_STAFF_ID",(Table<?>)this,Integer.class);
+        return ColumnCache.INSTANCE.getColumn("ManagerStaffId", "MANAGER_STAFF_ID", (Table<?>) this, Integer.class);
     }
 
 

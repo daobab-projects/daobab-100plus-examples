@@ -20,9 +20,9 @@ public interface Amount<E extends Entity, F> extends EntityRelationMap<E> {
     }
 
 
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Amount> colAmount() {
-        return ColumnCache.INSTANCE.getColumn("Amount","AMOUNT",(Table<?>)this,BigDecimal.class);
+        return ColumnCache.INSTANCE.getColumn("Amount", "AMOUNT", (Table<?>) this, BigDecimal.class);
     }
 
 

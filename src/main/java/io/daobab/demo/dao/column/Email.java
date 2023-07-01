@@ -7,7 +7,6 @@ import io.daobab.model.EntityRelationMap;
 import io.daobab.model.Table;
 
 
-
 public interface Email<E extends Entity, F> extends EntityRelationMap<E> {
 
 
@@ -23,9 +22,9 @@ public interface Email<E extends Entity, F> extends EntityRelationMap<E> {
      * table:CUSTOMER,type:VARCHAR,size:50,nullable:true
      * table:STAFF,type:VARCHAR,size:50,nullable:true
      */
-    @SuppressWarnings({"unchecked","rawtypes"})
+    @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, Email> colEmail() {
-        return ColumnCache.INSTANCE.getColumn("Email","EMAIL",(Table<?>)this,String.class);
+        return ColumnCache.INSTANCE.getColumn("Email", "EMAIL", (Table<?>) this, String.class);
     }
 
 }
