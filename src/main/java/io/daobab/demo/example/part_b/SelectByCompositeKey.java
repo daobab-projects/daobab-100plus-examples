@@ -39,15 +39,12 @@ public class SelectByCompositeKey extends ServiceBase<FilmActor> {
     }
 
     static class AnotherEntityHavingTheSameCompositeKeyColumns
-            extends Table implements FilmActorKey<AnotherEntityHavingTheSameCompositeKeyColumns>,
+            extends Table<AnotherEntityHavingTheSameCompositeKeyColumns> implements FilmActorKey<AnotherEntityHavingTheSameCompositeKeyColumns>,
             ActorId<AnotherEntityHavingTheSameCompositeKeyColumns, Integer>,
             FilmId<AnotherEntityHavingTheSameCompositeKeyColumns, Integer>,
             Description<AnotherEntityHavingTheSameCompositeKeyColumns, String>
     {
-        @Override
-        public String getEntityName() {
-            return "AnotherEntityHavingTheSameCompositeKeyColumns";
-        }
+
 
         @Override
         public List<TableColumn> columns() {

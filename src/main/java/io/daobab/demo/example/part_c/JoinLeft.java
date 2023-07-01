@@ -28,7 +28,7 @@ public class JoinLeft extends ServiceBase<List<FlatPlate>> {
     @Override
     public List<FlatPlate> call() {
         var rv = way01();
-        rv.forEach(r -> log.info(r.toString()));
+        //rv.forEach(r -> log.info(r.toString()));
         return rv;
     }
 
@@ -36,6 +36,14 @@ public class JoinLeft extends ServiceBase<List<FlatPlate>> {
     public List<FlatPlate> way01() {
         var c = tabCustomer;
         var a = tabAddress;
+
+        var str= db.select(c.colFirstName(), c.colLastName(), a.colPhone())
+                .join(LEFT_JOIN, a, c.colAddressId())
+                .freezeQuery()
+                .findMany().toJson();
+
+        System.out.println(str);
+
         return db.select(c.colFirstName(), c.colLastName(), a.colPhone())
                 .join(LEFT_JOIN, a, c.colAddressId())
                 .flat()

@@ -4,12 +4,13 @@ import io.daobab.demo.dao.Lang;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.util.Objects;
 
-public interface NameLang<E extends EntityMap> extends EntityRelationMap<E> {
+public interface NameLang<E extends Entity> extends EntityRelationMap<E> {
 
 
     /**
@@ -21,8 +22,7 @@ public interface NameLang<E extends EntityMap> extends EntityRelationMap<E> {
     }
 
     default E setName(Lang val) {
-        setColumnParam("Name", val);
-        return (E) this;
+        return setColumnParam("Name", val);
     }
 
     default Column<E, Lang, NameLang> colName() {
@@ -56,9 +56,9 @@ public interface NameLang<E extends EntityMap> extends EntityRelationMap<E> {
 
 
             @Override
-            public void setValue(NameLang entity, Lang param) {
+            public NameLang setValue(NameLang entity, Lang param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Name");
-                entity.setName(param);
+                return (NameLang) entity.setName(param);
             }
 
             public void setFieldValue(NameLang entity, String param) {
@@ -73,7 +73,7 @@ public interface NameLang<E extends EntityMap> extends EntityRelationMap<E> {
 
             @Override
             public String toString() {
-                return getEntityName() + "." + getFieldName();
+                return getEntityClass().getName() + "." + getFieldName();
             }
 
             @Override

@@ -1,7 +1,10 @@
 package io.daobab.demo.example.part_c;
 
+import io.daobab.clone.EntityDuplicator;
+import io.daobab.converter.duplicator.duplication.EntityDuplication;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
@@ -23,7 +26,7 @@ public class CloningEntity extends ServiceBase<Void> {
         var film1 = db.select(tabFilm)
                 .whereEqual(tabFilm.colID(), 10)
                 .findOne();
-        var film2 = film1.clone();
+        var film2 = EntityDuplicator.cloneEntity(film1);
 
         //make a difference:
         film2.setDescription("this is my change");
@@ -34,19 +37,19 @@ public class CloningEntity extends ServiceBase<Void> {
 
     }
 
-    private void checkClone(EntityMap source, EntityMap clone) {
-        log.info("Entity " + source.getEntityName() + " has " + source.keySet().size() + " fields.");
-        for (var k : source.keySet()) {
-            var objsrc = source.get(k);
-            var objcln = clone.get(k);
-            if (objsrc == null && objcln == null) continue;
-            if (objsrc == null && objcln == null == false) {
-                log.warn("clone has no field " + k);
-            }
-            if (objsrc.equals(objcln) == false) {
-                log.warn("clone has different value of field " + k);
-            }
-        }
+    private void checkClone(Entity source, Entity clone) {
+//        log.info("Entity " + source.getEntityName() + " has " + source.keySet().size() + " fields.");
+//        for (var k : source.keySet()) {
+//            var objsrc = source.get(k);
+//            var objcln = clone.get(k);
+//            if (objsrc == null && objcln == null) continue;
+//            if (objsrc == null && objcln == null == false) {
+//                log.warn("clone has no field " + k);
+//            }
+//            if (objsrc.equals(objcln) == false) {
+//                log.warn("clone has different value of field " + k);
+//            }
+//        }
 
     }
 

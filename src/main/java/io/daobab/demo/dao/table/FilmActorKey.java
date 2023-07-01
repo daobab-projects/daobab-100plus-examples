@@ -2,12 +2,9 @@ package io.daobab.demo.dao.table;
 
 import io.daobab.demo.dao.column.ActorId;
 import io.daobab.demo.dao.column.FilmId;
-import io.daobab.model.Composite;
-import io.daobab.model.CompositeColumns;
-import io.daobab.model.EntityMap;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
-public interface FilmActorKey<E extends EntityMap & ActorId<E, Integer> & FilmId<E, Integer>>
+public interface FilmActorKey<E extends Entity & ActorId<E, Integer> & FilmId<E, Integer>>
         extends ActorId<E, Integer>, FilmId<E, Integer>, Composite<E> {
 
     default CompositeColumns<FilmActorKey<E>> compositeFilmActorKey() {

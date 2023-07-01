@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 
-public interface District<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface District<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getDistrict() {
@@ -19,8 +20,7 @@ public interface District<E extends EntityMap, F> extends EntityRelationMap<E> {
 
     @SuppressWarnings("unchecked")
     default E setDistrict(F val) {
-        setColumnParam("District", val);
-        return (E) this;
+        return setColumnParam("District", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +57,9 @@ public interface District<E extends EntityMap, F> extends EntityRelationMap<E> {
             }
 
             @Override
-            public void setValue(District entity, F param) {
+            public District setValue(District entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "District");
-                entity.setDistrict(param);
+                return (District) entity.setDistrict(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface District<E extends EntityMap, F> extends EntityRelationMap<E> {
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

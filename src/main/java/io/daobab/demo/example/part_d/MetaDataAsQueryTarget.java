@@ -29,7 +29,7 @@ public class MetaDataAsQueryTarget extends ServiceBase<Void> implements MetaData
                 .orderAscBy(t.colTableColumnName())
                 .findMany();
 
-        rs.forEach(c->log.info(c.toJSON()));
+        rs.forEach(c->log.info(c.toJson()));
         return null;
     }
 

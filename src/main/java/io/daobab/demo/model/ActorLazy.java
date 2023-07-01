@@ -4,12 +4,13 @@ import io.daobab.demo.dao.table.Actor;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.util.Objects;
 
-public interface ActorLazy<E extends EntityMap> extends EntityRelationMap<E> {
+public interface ActorLazy<E extends Entity> extends EntityRelationMap<E> {
 
 
     /**

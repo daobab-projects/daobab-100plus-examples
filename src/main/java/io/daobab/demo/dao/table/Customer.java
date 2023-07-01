@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.*;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -19,9 +17,8 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 
 @SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Customer extends Table implements
+@TableName(value="CUSTOMER")
+public class Customer extends Table<Customer> implements
 		CustomerId<Customer, Integer>,
 		StoreId<Customer, Integer>,
 		FirstName<Customer, String>,
@@ -35,10 +32,14 @@ public class Customer extends Table implements
 		PrimaryKey<Customer, Integer, CustomerId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "CUSTOMER";
-	}
+
+		public Customer(){
+			super();
+		}
+
+		public Customer(Map<String,Object> parameters){
+			super(parameters);
+		}
 
 	@Override
     public List<TableColumn> columns() {
@@ -53,11 +54,6 @@ public class Customer extends Table implements
 				new TableColumn(colCreateDate()).size(26).scale(6),
 				new TableColumn(colLastUpdate()).size(26).scale(6)
 		);
-	}
-
-	@Override
-	public Customer clone() {
-		return EntityDuplicator.cloneEntity(this);
 	}
 
 	@Override

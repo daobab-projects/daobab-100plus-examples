@@ -42,7 +42,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-        res.forEach(p->log.info(p.toJSON()));
+        res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
         }
@@ -62,7 +62,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-       // res.forEach(p->log.info(p.toJSON()));
+       // res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
 
@@ -88,7 +88,7 @@ class TestNonHeap implements SakilaTables {
 
         long stop=System.currentTimeMillis();
         log.info("************** TIME:"+(stop-start));
-         res.forEach(p->log.info(p.toJSON()));
+         res.forEach(p->log.info(p.toJson()));
 //        res.forEach(log::info);
 //        log.info(""+res);
 

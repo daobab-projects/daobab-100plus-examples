@@ -8,7 +8,7 @@ import io.daobab.demo.dao.table.Payment;
 public class ActorLazyLoading extends FilmActor implements ActorLazy<FilmActor>{
 
     public ActorLazyLoading(FilmActor filmActor){
-        putAll(filmActor);
+        merge(filmActor);
     }
 
 }

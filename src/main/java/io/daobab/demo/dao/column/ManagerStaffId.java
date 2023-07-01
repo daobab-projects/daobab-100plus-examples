@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 
-public interface ManagerStaffId<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface ManagerStaffId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getManagerStaffId() {
@@ -19,8 +20,7 @@ public interface ManagerStaffId<E extends EntityMap, F> extends EntityRelationMa
 
     @SuppressWarnings("unchecked")
     default E setManagerStaffId(F val) {
-        setColumnParam("ManagerStaffId", val);
-        return (E) this;
+        return setColumnParam("ManagerStaffId", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +57,9 @@ public interface ManagerStaffId<E extends EntityMap, F> extends EntityRelationMa
             }
 
             @Override
-            public void setValue(ManagerStaffId entity, F param) {
+            public ManagerStaffId setValue(ManagerStaffId entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ManagerStaffId");
-                entity.setManagerStaffId(param);
+                return (ManagerStaffId) entity.setManagerStaffId(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface ManagerStaffId<E extends EntityMap, F> extends EntityRelationMa
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

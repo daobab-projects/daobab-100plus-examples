@@ -32,7 +32,7 @@ public class TransactionWrapperVoid extends ServiceBase<Void> {
                 .setLastUpdate(LocalDateTime.now())
                 .setName("test");
 
-        var anotherCat=db.select(tabCategory).whereEqual(tabCategory.colID(),1).findOne().clone();
+        var anotherCat=db.select(tabCategory).whereEqual(tabCategory.colID(),1).findOne();
         anotherCat.setName("anotherName");
 
         db.wrapTransaction( t->{

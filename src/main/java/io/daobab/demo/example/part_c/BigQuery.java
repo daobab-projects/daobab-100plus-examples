@@ -47,30 +47,25 @@ public class BigQuery extends ServiceBase<List<String>> {
                 .orderDescBy(p.colPaymentDate())
                 .limitBy(10)
                 .whereEqual(c.colID(), 1)
-                .map(x -> {
-                    var sb = new StringBuffer()
-                            .append("Customer:")
-                            .append(x.getValue(c.colFirstName()))
-                            .append(",")
-                            .append(x.getValue(c.colLastName()))
-                            .append(" living in ")
-                            .append(x.getValue(city.colCity()))
-                            .append(",")
-                            .append(x.getValue(country.colCountry()))
-                            .append(" rent on ")
-                            .append(toSting(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH))
-                            .append(" a movie: ")
-                            .append(x.getValue(f.colTitle()))
-                            .append(" has paid for it: ")
-                            .append(x.getValue(p.colAmount()))
-                            .append(" and was served by ")
-                            .append(x.getValue(s.colFirstName()))
-                            .append(" ")
-                            .append(x.getValue(s.colLastName())
-
-                            );
-                    return sb.toString();
-                })
+                .map(x -> "Customer:" +
+                            x.getValue(c.colFirstName()) +
+                            "," +
+                            x.getValue(c.colLastName()) +
+                            " living in " +
+                            x.getValue(city.colCity()) +
+                            "," +
+                            x.getValue(country.colCountry()) +
+                            " rent on " +
+                            toSting(x.getValue(p.colPaymentDate()), "EEEE, dd MMMM yyyy (HH:mm)", Locale.ENGLISH) +
+                            " a movie: " +
+                            x.getValue(f.colTitle()) +
+                            " has paid for it: " +
+                            x.getValue(p.colAmount()) +
+                            " and was served by " +
+                            x.getValue(s.colFirstName()) +
+                            " " +
+                            x.getValue(s.colLastName())
+                )
                 .findMany();
 
 

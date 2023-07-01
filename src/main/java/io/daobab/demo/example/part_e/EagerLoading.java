@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ---------------------------------------------------------
@@ -23,16 +24,15 @@ public class EagerLoading extends ServiceBase<List<Payment>> {
 
     @Override
     public List<Payment> call() {
-        var rv = db.select(tabPayment)
+        return db.select(tabPayment)
                 .whereEqual(tabPayment.colAmount(), toBigDecimal(100))
                 .orderAscBy(tabPayment.colPaymentDate())
-                .findMany();
-        rv.forEach(this::resultPostProcessor);
-        return rv;
+                .findMany().stream().map(this::resultPostProcessor).collect(Collectors.toList());
+
     }
 
-    private void resultPostProcessor(Payment payment) {
-        payment.put("relatedCustomer", payment.findRelatedOne(db, tabCustomer));
+    private Payment resultPostProcessor(Payment payment) {
+        return payment.put("relatedCustomer", payment.findRelatedOne(db, tabCustomer));
         //OR
 //        payment.put("relatedCustomer",Select.oneByPK(db,tabCustomer,payment.getCustomerId()));
     }

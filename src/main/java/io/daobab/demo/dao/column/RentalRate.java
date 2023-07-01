@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public interface RentalRate<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface RentalRate<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getRentalRate() {
@@ -18,8 +19,7 @@ public interface RentalRate<E extends EntityMap, F> extends EntityRelationMap<E>
 
     @SuppressWarnings("unchecked")
     default E setRentalRate(F val) {
-        setColumnParam("RentalRate", val);
-        return (E) this;
+        return setColumnParam("RentalRate", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,9 +56,9 @@ public interface RentalRate<E extends EntityMap, F> extends EntityRelationMap<E>
             }
 
             @Override
-            public void setValue(RentalRate entity, F param) {
+            public RentalRate setValue(RentalRate entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalRate");
-                entity.setRentalRate(param);
+                return (RentalRate) entity.setRentalRate(param);
             }
 
             @Override
@@ -68,7 +68,7 @@ public interface RentalRate<E extends EntityMap, F> extends EntityRelationMap<E>
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

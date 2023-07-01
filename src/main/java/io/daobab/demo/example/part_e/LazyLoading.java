@@ -31,7 +31,7 @@ public class LazyLoading extends ServiceBase<List<ActorLazyLoading>> {
 
         //pick just one and call a method here to invoke a lazy loading on it
         var picked=rv.get(1);
-        log.info(picked.getActor().toJSON());
+        log.info(picked.getActor().toJson());
         return rv;
 
     }

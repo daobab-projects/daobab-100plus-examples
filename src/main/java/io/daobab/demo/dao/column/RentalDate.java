@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public interface RentalDate<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface RentalDate<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getRentalDate() {
@@ -18,8 +19,7 @@ public interface RentalDate<E extends EntityMap, F> extends EntityRelationMap<E>
 
     @SuppressWarnings("unchecked")
     default E setRentalDate(F val) {
-        setColumnParam("RentalDate", val);
-        return (E) this;
+        return setColumnParam("RentalDate", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,9 +56,9 @@ public interface RentalDate<E extends EntityMap, F> extends EntityRelationMap<E>
             }
 
             @Override
-            public void setValue(RentalDate entity, F param) {
+            public RentalDate setValue(RentalDate entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalDate");
-                entity.setRentalDate(param);
+                return (RentalDate) entity.setRentalDate(param);
             }
 
             @Override
@@ -68,7 +68,7 @@ public interface RentalDate<E extends EntityMap, F> extends EntityRelationMap<E>
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

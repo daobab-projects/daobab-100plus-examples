@@ -50,7 +50,7 @@ public class Statistic extends ServiceBase<Void> implements MetaDataTables {
 
         log.info(String.valueOf(rs.size()));
 
-        rs.forEach(c->log.info(c.toJSON()));
+        rs.forEach(c->log.info(c.toJson()));
         return null;
     }
 

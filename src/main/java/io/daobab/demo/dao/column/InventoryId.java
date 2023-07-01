@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public interface InventoryId<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface InventoryId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getInventoryId() {
@@ -18,8 +19,7 @@ public interface InventoryId<E extends EntityMap, F> extends EntityRelationMap<E
 
     @SuppressWarnings("unchecked")
     default E setInventoryId(F val) {
-        setColumnParam("InventoryId", val);
-        return (E) this;
+        return setColumnParam("InventoryId", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +57,9 @@ public interface InventoryId<E extends EntityMap, F> extends EntityRelationMap<E
             }
 
             @Override
-            public void setValue(InventoryId entity, F param) {
+            public InventoryId setValue(InventoryId entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "InventoryId");
-                entity.setInventoryId(param);
+                return (InventoryId) entity.setInventoryId(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface InventoryId<E extends EntityMap, F> extends EntityRelationMap<E
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

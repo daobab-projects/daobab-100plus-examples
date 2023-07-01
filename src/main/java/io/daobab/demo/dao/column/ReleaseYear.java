@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public interface ReleaseYear<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface ReleaseYear<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getReleaseYear() {
@@ -18,8 +19,7 @@ public interface ReleaseYear<E extends EntityMap, F> extends EntityRelationMap<E
 
     @SuppressWarnings("unchecked")
     default E setReleaseYear(F val) {
-        setColumnParam("ReleaseYear", val);
-        return (E) this;
+        return setColumnParam("ReleaseYear", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,9 +56,9 @@ public interface ReleaseYear<E extends EntityMap, F> extends EntityRelationMap<E
             }
 
             @Override
-            public void setValue(ReleaseYear entity, F param) {
+            public ReleaseYear setValue(ReleaseYear entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReleaseYear");
-                entity.setReleaseYear(param);
+                return (ReleaseYear) entity.setReleaseYear(param);
             }
 
             @Override
@@ -68,7 +68,7 @@ public interface ReleaseYear<E extends EntityMap, F> extends EntityRelationMap<E
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

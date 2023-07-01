@@ -18,30 +18,30 @@ public interface TestHelper {
 
     default <E extends EntityMap & PrimaryKey> void validation(E entity) {
         check(entity);
-        getLog().info("Result: entity " + entity.getEntityName());
-        getLog().info(entity.toJSON());
+        getLog().info("Result: entity " + entity.getEntityClass().getName());
+        getLog().info(entity.toJson());
     }
 
     default <E extends EntityMap & PrimaryKey> void validation(Entities<E> entity) {
         check(entity);
-        getLog().info(entity.toJSON());
+        getLog().info(entity.toJson());
     }
 
 
     default void validation(Plate entity) {
         check(entity);
-        getLog().info(entity.toJSON());
+        getLog().info(entity.toJson());
     }
 
     default void validation(Plates entity) {
         check(entity);
-        getLog().info(entity.toJSON());
+        getLog().info(entity.toJson());
     }
 
 
     default void validation(FlatPlates entity) {
         check(entity);
-        getLog().info(entity.toJSON());
+        getLog().info(entity.toJson());
     }
 
     default <F> void validation(List<F> entity) {

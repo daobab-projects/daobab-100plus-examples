@@ -32,9 +32,9 @@ public class QueryMultiEntity extends ServiceBase<Void> implements MetaDataTable
         mt.register(db.select(tabFilmText).whereEqual(tabFilmText.colFilmId(),1));
 
         //queries...
-        var c1=mt.select(tabFilmActor).countAny();
-        var c2=mt.select(tabFilmCategory).countAny();
-        var c3=mt.select(tabFilmText).countAny();
+        var c1=mt.select(count(tabFilmActor)).findOne();
+        var c2=mt.select(count(tabFilmCategory)).findOne();
+        var c3=mt.select(count(tabFilmText)).findOne();
 
         //results...
         log.info(toString(c1));

@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 
-public interface OriginalLanguageId<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface OriginalLanguageId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getOriginalLanguageId() {
@@ -19,8 +20,7 @@ public interface OriginalLanguageId<E extends EntityMap, F> extends EntityRelati
 
     @SuppressWarnings("unchecked")
     default E setOriginalLanguageId(F val) {
-        setColumnParam("OriginalLanguageId", val);
-        return (E) this;
+        return setColumnParam("OriginalLanguageId", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -58,10 +58,10 @@ public interface OriginalLanguageId<E extends EntityMap, F> extends EntityRelati
             }
 
             @Override
-            public void setValue(OriginalLanguageId entity, F param) {
+            public OriginalLanguageId setValue(OriginalLanguageId entity, F param) {
                 if (entity == null)
                     throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "OriginalLanguageId");
-                entity.setOriginalLanguageId(param);
+                return (OriginalLanguageId) entity.setOriginalLanguageId(param);
             }
 
             @Override
@@ -71,7 +71,7 @@ public interface OriginalLanguageId<E extends EntityMap, F> extends EntityRelati
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

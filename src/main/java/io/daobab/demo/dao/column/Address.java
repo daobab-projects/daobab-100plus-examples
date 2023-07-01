@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,17 +11,15 @@ import java.util.Objects;
 
 
 
-public interface Address<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface Address<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getAddress() {
         return getColumnParam("Address");
     }
 
-    @SuppressWarnings("unchecked")
     default E setAddress(F val) {
-        setColumnParam("Address", val);
-        return (E) this;
+        return setColumnParam("Address", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +56,9 @@ public interface Address<E extends EntityMap, F> extends EntityRelationMap<E> {
             }
 
             @Override
-            public void setValue(Address entity, F param) {
+            public Address setValue(Address entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Address");
-                entity.setAddress(param);
+                return (Address) entity.setAddress(param);
             }
 
             @Override
@@ -69,7 +68,7 @@ public interface Address<E extends EntityMap, F> extends EntityRelationMap<E> {
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

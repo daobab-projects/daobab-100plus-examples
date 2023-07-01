@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 
-public interface SpecialFeatures<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface SpecialFeatures<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getSpecialFeatures() {
@@ -19,8 +20,7 @@ public interface SpecialFeatures<E extends EntityMap, F> extends EntityRelationM
 
     @SuppressWarnings("unchecked")
     default E setSpecialFeatures(F val) {
-        setColumnParam("SpecialFeatures", val);
-        return (E) this;
+        return setColumnParam("SpecialFeatures", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,10 +57,10 @@ public interface SpecialFeatures<E extends EntityMap, F> extends EntityRelationM
             }
 
             @Override
-            public void setValue(SpecialFeatures entity, F param) {
+            public SpecialFeatures setValue(SpecialFeatures entity, F param) {
                 if (entity == null)
                     throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "SpecialFeatures");
-                entity.setSpecialFeatures(param);
+                return (SpecialFeatures) entity.setSpecialFeatures(param);
             }
 
             @Override
@@ -70,7 +70,7 @@ public interface SpecialFeatures<E extends EntityMap, F> extends EntityRelationM
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

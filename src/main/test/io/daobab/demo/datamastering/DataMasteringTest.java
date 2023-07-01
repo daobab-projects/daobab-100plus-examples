@@ -75,7 +75,7 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
                 .limitBy(1)
                 .findOne();
 
-        log.info(rs.toJSON());
+        log.info(rs.toJson());
     }
 
     //Is 'Academy Dinosaur' available for rent from Store 1?
@@ -177,7 +177,7 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
                 .orderDescBy("Length")
                 .findMany();
 
-        log.info(rs.toJSON());
+        log.info(rs.toJson());
     }
 
     @Test

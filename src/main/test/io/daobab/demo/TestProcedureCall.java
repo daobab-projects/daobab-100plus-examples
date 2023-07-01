@@ -49,7 +49,7 @@ class TestProcedureCall implements MetaDataTables, FunctionWhispererH2, SakilaTa
                 .findMany();
 
         res2.forEach(c->log.info(c.toString()));
-//        log.info(res.toJSON());
+//        log.info(res.toJson());
     }
 
 
@@ -86,13 +86,13 @@ class TestProcedureCall implements MetaDataTables, FunctionWhispererH2, SakilaTa
 
         var optmeta=db.getMetaData().getMetaColumn(tabFilm.colFilmId());
 
-        optmeta.ifPresent(c->log.info(c.toJSON()));
+        optmeta.ifPresent(c->log.info(c.toJson()));
 
         db.getMetaData().select(tabMetaIndex)
                 .where(and()
                         .equal(tabMetaIndex.colColumnName(),tabFilm.colFilmId().getColumnName())
                         .equal(tabMetaIndex.colTableName(),tabFilm.colFilmId().getEntityName()))
-                    .findMany().forEach(c->log.info(c.toJSON()));
+                    .findMany().forEach(c->log.info(c.toJson()));
 
 
 

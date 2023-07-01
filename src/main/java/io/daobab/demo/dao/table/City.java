@@ -6,14 +6,12 @@ import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.CityId;
 import io.daobab.demo.dao.column.CountryId;
 import io.daobab.demo.dao.column.LastUpdate;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -21,9 +19,8 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 
 @SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class City extends Table implements
+@TableName(value="CITY")
+public class City extends Table<City> implements
         CityId<City, Integer>,
         io.daobab.demo.dao.column.City<City, String>,
         CountryId<City, Integer>,
@@ -32,10 +29,14 @@ public class City extends Table implements
         PrimaryKey<City, Integer, CityId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "CITY";
-	}
+
+		public City(){
+			super();
+		}
+
+		public City(Map<String,Object> parameters){
+			super(parameters);
+		}
 
 	@Override
     public List<TableColumn> columns() {
@@ -45,11 +46,6 @@ public class City extends Table implements
                 new TableColumn(colCountryId()).size(16),
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
-	}
-
-	@Override
-	public City clone() {
-		return EntityDuplicator.cloneEntity(this);
 	}
 
 	@Override

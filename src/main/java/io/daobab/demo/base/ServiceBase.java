@@ -1,13 +1,9 @@
 package io.daobab.demo.base;
 
-import io.daobab.converter.JsonHandler;
+import io.daobab.converter.JsonProvider;
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaRemote;
 import io.daobab.demo.dao.SakilaTables;
-import io.daobab.model.Entity;
-import io.daobab.model.EntityMap;
-import io.daobab.target.buffer.single.Entities;
-import io.daobab.target.buffer.single.Plates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +50,8 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
             return;
         }
         log.info("************************************ -= result =- ************************************");
-        if (data instanceof JsonHandler){
-            log.info(((JsonHandler)data).toJSON());
+        if (data instanceof JsonProvider){
+            log.info(((JsonProvider)data).toJson());
         }else if (data instanceof Collection){
             ((Collection<?>) data).forEach(o->log.info(o.toString()));
         }else if (data instanceof Object[]){

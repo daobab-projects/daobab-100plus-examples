@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public interface RentalId<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface RentalId<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getRentalId() {
@@ -18,8 +19,7 @@ public interface RentalId<E extends EntityMap, F> extends EntityRelationMap<E> {
 
     @SuppressWarnings("unchecked")
     default E setRentalId(F val) {
-        setColumnParam("RentalId", val);
-        return (E) this;
+        return setColumnParam("RentalId", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +57,9 @@ public interface RentalId<E extends EntityMap, F> extends EntityRelationMap<E> {
             }
 
             @Override
-            public void setValue(RentalId entity, F param) {
+            public RentalId setValue(RentalId entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "RentalId");
-                entity.setRentalId(param);
+                return (RentalId) entity.setRentalId(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface RentalId<E extends EntityMap, F> extends EntityRelationMap<E> {
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

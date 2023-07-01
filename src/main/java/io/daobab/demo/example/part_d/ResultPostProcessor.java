@@ -32,12 +32,12 @@ public class ResultPostProcessor extends ServiceBase<List<Payment>> {
                 .orderAscBy(tabPayment.colPaymentDate())
                 .findMany()
                 .stream()
-                .peek(this::myPostProcess)
+                .map(this::myPostProcess)
                 .collect(Collectors.toList());
     }
 
-    private void myPostProcess(Payment payment) {
-        payment.put("amount_GT_200", payment.getAmount().compareTo(_200) > 0);
+    private Payment myPostProcess(Payment payment) {
+        return payment.put("amount_GT_200", payment.getAmount().compareTo(_200) > 0);
     }
 
 }

@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public interface ReturnDate<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface ReturnDate<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getReturnDate() {
@@ -18,8 +19,7 @@ public interface ReturnDate<E extends EntityMap, F> extends EntityRelationMap<E>
 
     @SuppressWarnings("unchecked")
     default E setReturnDate(F val) {
-        setColumnParam("ReturnDate", val);
-        return (E) this;
+        return setColumnParam("ReturnDate", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,9 +56,9 @@ public interface ReturnDate<E extends EntityMap, F> extends EntityRelationMap<E>
             }
 
             @Override
-            public void setValue(ReturnDate entity, F param) {
+            public ReturnDate setValue(ReturnDate entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReturnDate");
-                entity.setReturnDate(param);
+                return (ReturnDate) entity.setReturnDate(param);
             }
 
             @Override
@@ -68,7 +68,7 @@ public interface ReturnDate<E extends EntityMap, F> extends EntityRelationMap<E>
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

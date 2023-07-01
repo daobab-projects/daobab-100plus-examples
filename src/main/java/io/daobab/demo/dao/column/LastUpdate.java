@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public interface LastUpdate<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface LastUpdate<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getLastUpdate() {
@@ -18,8 +19,7 @@ public interface LastUpdate<E extends EntityMap, F> extends EntityRelationMap<E>
 
     @SuppressWarnings("unchecked")
     default E setLastUpdate(F val) {
-        setColumnParam("LastUpdate", val);
-        return (E) this;
+        return setColumnParam("LastUpdate", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -70,9 +70,9 @@ public interface LastUpdate<E extends EntityMap, F> extends EntityRelationMap<E>
             }
 
             @Override
-            public void setValue(LastUpdate entity, F param) {
+            public LastUpdate setValue(LastUpdate entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "LastUpdate");
-                entity.setLastUpdate(param);
+                return (LastUpdate) entity.setLastUpdate(param);
             }
 
             @Override
@@ -82,7 +82,7 @@ public interface LastUpdate<E extends EntityMap, F> extends EntityRelationMap<E>
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

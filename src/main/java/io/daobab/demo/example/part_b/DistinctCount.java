@@ -19,13 +19,13 @@ public class DistinctCount extends ServiceBase<Long> implements FunctionWhispere
     }
 
     @Override
-    public Long call() {
-        return db.select(tabCustomer.colFirstName())
-                .distinct()
-                .countAny();
-    }
+//    public Long call() {
+//        return db.select(tabCustomer.colFirstName())
+//                .distinct()
+//                .countAny();
+//    }
 
-    public Long way02() {
+    public Long call() {
         return db.select(count(distinct(tabCustomer.colFirstName()))).findOne();
     }
 

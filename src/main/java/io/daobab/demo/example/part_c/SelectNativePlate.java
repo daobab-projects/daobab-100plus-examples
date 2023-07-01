@@ -40,7 +40,7 @@ public class SelectNativePlate extends ServiceBase<FlatPlate> {
                         "join category c on c.category_id=fc.category_id " +
                         "where f.film_id=15",
                 tabFilm.colTitle(), tabCategory.colName())
-                .findOneAsFlat();
+                .findOne().toFlat();
     }
 
 

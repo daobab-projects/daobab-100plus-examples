@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.*;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
@@ -19,9 +17,8 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 
 @SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Address extends Table implements
+@TableName(value="ADDRESS")
+public class Address extends Table<Address> implements
         AddressId<Address, Integer>,
         io.daobab.demo.dao.column.Address<Address, String>,
         Address2<Address, String>,
@@ -34,10 +31,14 @@ public class Address extends Table implements
         PrimaryKey<Address, Integer, AddressId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "ADDRESS";
-	}
+
+		public Address(){
+			super();
+		}
+
+		public Address(Map<String,Object> parameters){
+			super(parameters);
+		}
 
 	@Override
     public List<TableColumn> columns() {
@@ -51,11 +52,6 @@ public class Address extends Table implements
                 new TableColumn(colPhone()).size(20),
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
-	}
-
-	@Override
-	public Address clone() {
-		return EntityDuplicator.cloneEntity(this);
 	}
 
 	@Override

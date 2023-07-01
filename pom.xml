@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>io.daobab</groupId>
 			<artifactId>daobab-core</artifactId>
-			<version>1.6</version>
+			<version>1.7</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -62,6 +62,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.22</version>
 		</dependency>
+
 
 	</dependencies>
 

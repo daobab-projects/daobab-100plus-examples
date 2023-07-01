@@ -6,22 +6,19 @@ import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.CategoryId;
 import io.daobab.demo.dao.column.FilmId;
 import io.daobab.demo.dao.column.LastUpdate;
-import io.daobab.model.CompositeColumns;
-import io.daobab.model.PrimaryCompositeKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class FilmCategory extends Table implements
+@TableName(value="FILM_CATEGORY")
+public class FilmCategory extends Table<FilmCategory> implements
         FilmCategoryKey<FilmCategory>,
         FilmId<FilmCategory, Integer>,
         CategoryId<FilmCategory, Integer>,
@@ -29,9 +26,13 @@ public class FilmCategory extends Table implements
 
         PrimaryCompositeKey<FilmCategory, FilmCategoryKey<FilmCategory>> {
 
-    @Override
-    public String getEntityName() {
-        return "FILM_CATEGORY";
+
+    public FilmCategory(){
+        super();
+    }
+
+    public FilmCategory(Map<String,Object> parameters){
+        super(parameters);
     }
 
     @Override
@@ -47,11 +48,5 @@ public class FilmCategory extends Table implements
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
     }
-
-    @Override
-    public FilmCategory clone() {
-        return EntityDuplicator.cloneEntity(this);
-    }
-
 
 }

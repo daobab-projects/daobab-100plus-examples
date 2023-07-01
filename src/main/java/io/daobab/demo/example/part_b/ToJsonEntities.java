@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * ---------------------------------------------------------
  * Entities To JSon
  * ---------------------------------------------------------
- * - How to use internal toJSON() method into Entities
+ * - How to use internal toJson() method into Entities
  */
 @Component
 public class ToJsonEntities extends ServiceBase<Void> {
@@ -24,7 +24,7 @@ public class ToJsonEntities extends ServiceBase<Void> {
                 .select(tabFilm)
                 .whereLess(tabFilm.colID(), 10)
                 .findMany();
-        log.info(film.toJSON());
+        log.info(film.toJson());
         return null;
     }
 

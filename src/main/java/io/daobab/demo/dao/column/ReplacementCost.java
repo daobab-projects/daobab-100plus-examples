@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface ReplacementCost<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getReplacementCost() {
@@ -18,8 +19,7 @@ public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationM
 
     @SuppressWarnings("unchecked")
     default E setReplacementCost(F val) {
-        setColumnParam("ReplacementCost", val);
-        return (E) this;
+        return setColumnParam("ReplacementCost", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,10 +56,10 @@ public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationM
             }
 
             @Override
-            public void setValue(ReplacementCost entity, F param) {
+            public ReplacementCost setValue(ReplacementCost entity, F param) {
                 if (entity == null)
                     throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "ReplacementCost");
-                entity.setReplacementCost(param);
+                return (ReplacementCost) entity.setReplacementCost(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface ReplacementCost<E extends EntityMap, F> extends EntityRelationM
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

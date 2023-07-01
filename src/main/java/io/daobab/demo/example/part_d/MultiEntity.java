@@ -32,9 +32,9 @@ public class MultiEntity extends ServiceBase<Void> implements MetaDataTables, Fu
                 db.select(tabFilmText).whereEqual(tabFilmText.colFilmId(),1).findMany());
 
         //queries...
-        var cn1=mt.select(tabFilmActor).countAny();
-        var cn2=mt.select(tabFilmCategory).countAny();
-        var cn3=mt.select(tabFilmText).countAny();
+        var cn1=mt.select(count(tabFilmActor)).findOne();
+        var cn2=mt.select(count(tabFilmCategory)).findOne();
+        var cn3=mt.select(count(tabFilmText)).findOne();
 
         //results...
         log.info(toString(cn1));

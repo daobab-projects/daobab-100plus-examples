@@ -3,6 +3,7 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 
 
-public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface PostalCode<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getPostalCode() {
@@ -19,8 +20,7 @@ public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E>
 
     @SuppressWarnings("unchecked")
     default E setPostalCode(F val) {
-        setColumnParam("PostalCode", val);
-        return (E) this;
+        return setColumnParam("PostalCode", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -57,9 +57,9 @@ public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E>
             }
 
             @Override
-            public void setValue(PostalCode entity, F param) {
+            public PostalCode setValue(PostalCode entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PostalCode");
-                entity.setPostalCode(param);
+                return (PostalCode) entity.setPostalCode(param);
             }
 
             @Override
@@ -69,7 +69,7 @@ public interface PostalCode<E extends EntityMap, F> extends EntityRelationMap<E>
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override

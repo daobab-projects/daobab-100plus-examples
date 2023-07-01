@@ -6,24 +6,17 @@ import io.daobab.clone.EntityDuplicator;
 import io.daobab.demo.dao.column.CategoryId;
 import io.daobab.demo.dao.column.LastUpdate;
 import io.daobab.demo.dao.column.Name;
-import io.daobab.model.Column;
-import io.daobab.model.PrimaryKey;
-import io.daobab.model.Table;
-import io.daobab.model.TableColumn;
+import io.daobab.model.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
-
-
 @SuppressWarnings("rawtypes")
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonAutoDetect(fieldVisibility = ANY, getterVisibility = NONE, setterVisibility = NONE)
-public class Category extends Table implements
+@TableName(value="CATEGORY")
+public class Category extends Table<Category> implements
         CategoryId<Category, Integer>,
         Name<Category, String>,
         LastUpdate<Category, LocalDateTime>,
@@ -31,10 +24,14 @@ public class Category extends Table implements
         PrimaryKey<Category, Integer, CategoryId>
 	{
 
-	@Override
-	public String getEntityName() {
-		return "CATEGORY";
-	}
+
+		public Category(){
+			super();
+		}
+
+		public Category(Map<String,Object> parameters){
+			super(parameters);
+		}
 
 	@Override
     public List<TableColumn> columns() {
@@ -43,11 +40,6 @@ public class Category extends Table implements
                 new TableColumn(colName()).size(25),
                 new TableColumn(colLastUpdate()).size(26).scale(6)
         );
-	}
-
-	@Override
-	public Category clone() {
-		return EntityDuplicator.cloneEntity(this);
 	}
 
 	@Override

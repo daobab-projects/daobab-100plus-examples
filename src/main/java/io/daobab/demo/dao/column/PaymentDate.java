@@ -3,13 +3,14 @@ package io.daobab.demo.dao.column;
 import io.daobab.error.AttemptToReadFromNullEntityException;
 import io.daobab.error.AttemptToWriteIntoNullEntityException;
 import io.daobab.model.Column;
+import io.daobab.model.Entity;
 import io.daobab.model.EntityMap;
 import io.daobab.model.EntityRelationMap;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public interface PaymentDate<E extends EntityMap, F> extends EntityRelationMap<E> {
+public interface PaymentDate<E extends Entity, F> extends EntityRelationMap<E> {
 
 
     default F getPaymentDate() {
@@ -18,8 +19,7 @@ public interface PaymentDate<E extends EntityMap, F> extends EntityRelationMap<E
 
     @SuppressWarnings("unchecked")
     default E setPaymentDate(F val) {
-        setColumnParam("PaymentDate", val);
-        return (E) this;
+        return setColumnParam("PaymentDate", val);
     }
 
     @SuppressWarnings("rawtypes")
@@ -56,9 +56,9 @@ public interface PaymentDate<E extends EntityMap, F> extends EntityRelationMap<E
             }
 
             @Override
-            public void setValue(PaymentDate entity, F param) {
+            public PaymentDate setValue(PaymentDate entity, F param) {
                 if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "PaymentDate");
-                entity.setPaymentDate(param);
+                return (PaymentDate) entity.setPaymentDate(param);
             }
 
             @Override
@@ -68,7 +68,7 @@ public interface PaymentDate<E extends EntityMap, F> extends EntityRelationMap<E
 
             @Override
             public String toString(){
-                return getEntityName()+"."+getFieldName();
+                return getEntityClass().getName()+"."+getFieldName();
             }
 
             @Override
