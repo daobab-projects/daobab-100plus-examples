@@ -1,13 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.model.Column;
-import io.daobab.model.Entity;
-import io.daobab.model.EntityRelationMap;
-import io.daobab.model.Table;
+import io.daobab.model.*;
 
 
-public interface Username<E extends Entity, F> extends EntityRelationMap<E> {
+public interface Username<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
 
     default F getUsername() {
@@ -21,7 +18,7 @@ public interface Username<E extends Entity, F> extends EntityRelationMap<E> {
     /**
      * table:STAFF,type:VARCHAR,size:16,nullable:false
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked"})
     default Column<E, F, ActorId<E, F>> colUsername() {
         return ColumnCache.INSTANCE.getColumn("Username", "USERNAME", (Table<?>) this, String.class);
     }

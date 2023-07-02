@@ -26,16 +26,10 @@ public class SelectAll extends ServiceBase<Entities<Actor>> {
         SpringApplication.run(DemoApplication.class, SelectAll.class.getName());
     }
 
-    FrozenDataBaseQueryEntity<Actor> prepared;
-
-
     //Classic usage - no 'where' clause
     @Override
     public Entities<Actor> call() {
-        return prepared
-                .withParameters(List.of(List.of(1, 2, 3, 4, 5), List.of("Adam", "dupa", "jas")))
-                .findMany();
-
+        return db.select(tabActor).findMany();
     }
 
     //Shortest usage with 'findAll' method

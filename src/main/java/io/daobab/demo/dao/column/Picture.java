@@ -1,13 +1,10 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.model.Column;
-import io.daobab.model.Entity;
-import io.daobab.model.EntityRelationMap;
-import io.daobab.model.Table;
+import io.daobab.model.*;
 
 
-public interface Picture<E extends Entity, F> extends EntityRelationMap<E> {
+public interface Picture<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
 
     default F getPicture() {
@@ -26,63 +23,5 @@ public interface Picture<E extends Entity, F> extends EntityRelationMap<E> {
         return ColumnCache.INSTANCE.getColumn("Picture", "PICTURE", (Table<?>) this, byte[].class);
     }
 
-//
-//    @SuppressWarnings("rawtypes")
-//
-//    default Column<E, F, Picture> colPicture() {
-//        return new Column<E, F, Picture>() {
-//
-//            @Override
-//            public String getColumnName() {
-//                return "PICTURE";
-//            }
-//
-//            @Override
-//            public String getFieldName() {
-//                return "Picture";
-//            }
-//
-//            @Override
-//            public E getInstance(){
-//                return getEntity();
-//            }
-//
-//            @Override
-//            public Class getFieldClass() {
-//                return byte[].class;
-//            }
-//
-//            @Override
-//            public F getValue(Picture entity) {
-//                if (entity == null) throw new AttemptToReadFromNullEntityException(getEntityClass(), "Picture");
-//                return (F) entity.getPicture();
-//            }
-//
-//            @Override
-//            public Picture setValue(Picture entity, F param) {
-//                if (entity == null) throw new AttemptToWriteIntoNullEntityException(getEntityClass(), "Picture");
-//                return (Picture) entity.setPicture(param);
-//            }
-//
-//            @Override
-//            public int hashCode() {
-//                return toString().hashCode();
-//            }
-//
-//            @Override
-//            public String toString(){
-//                return getEntityClass().getName()+"."+getFieldName();
-//            }
-//
-//            @Override
-//            public boolean equals(Object obj) {
-//                if (this == obj)return true;
-//                if (obj == null)return false;
-//                if (getClass() != obj.getClass())return false;
-//                Column other = (Column) obj;
-//                return Objects.equals(hashCode(), other.hashCode());
-//            }
-//        };
-//    }
 
 }

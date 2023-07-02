@@ -1,20 +1,16 @@
 package io.daobab.demo.dao.column;
 
 import io.daobab.creation.ColumnCache;
-import io.daobab.model.Column;
-import io.daobab.model.Entity;
-import io.daobab.model.EntityRelationMap;
-import io.daobab.model.Table;
+import io.daobab.model.*;
 
 
-public interface Address2<E extends Entity, F> extends EntityRelationMap<E> {
+public interface Address2<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
 
     default F getAddress2() {
         return readParam("Address2");
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     default E setAddress2(F val) {
         return storeParam("Address2", val);
     }

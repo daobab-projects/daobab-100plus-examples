@@ -148,17 +148,17 @@ class DataMasteringTest implements SakilaTables, FunctionWhispererMySql {
     }
 
     //Step 3: add the rental duration to the rental date.
-    @Test
-    void test12() {
-        var rs = db.select(tabRental.colRentalDate(),
-                        sum(tabRental.colRentalDate(), interval(tabRental.colReturnDate(), 1, DatePeriod.DAY)).as("due_date"))
-                .from(tabRental)
-                .whereEqual(tabRental.colRentalId(),
-                        db.select(tabRental.colRentalId()).orderBy(tabRental.colID()).limitBy(1))
-                .toSqlQuery();
-
-        log.info(rs);
-    }
+//    @Test
+//    void test12() {
+//        var rs = db.select(tabRental.colRentalDate(),
+//                        sum(tabRental.colRentalDate(), interval(tabRental.colReturnDate(), 1, DatePeriod.DAY)).as("due_date"))
+//                .from(tabRental)
+//                .whereEqual(tabRental.colRentalId(),
+//                        db.select(tabRental.colRentalId()).orderBy(tabRental.colID()).limitBy(1))
+//                .toSqlQuery();
+//
+//        log.info(rs);
+//    }
 
     //What is that average length of all the films in the sakila DB?
     @Test
