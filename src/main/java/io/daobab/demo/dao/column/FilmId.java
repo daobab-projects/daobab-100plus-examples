@@ -24,7 +24,7 @@ public interface FilmId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E>
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, FilmId> colFilmId() {
-        return ColumnCache.INSTANCE.getColumn("FilmId", "FILMID", (Table<?>) this, Integer.class);
+        return ColumnCache.INSTANCE.getColumn("FilmId", "FILM_ID", (Table<?>) this, Integer.class);
     }
 
 }

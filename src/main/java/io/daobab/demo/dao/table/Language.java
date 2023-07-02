@@ -4,6 +4,7 @@ import io.daobab.demo.dao.Lang;
 import io.daobab.demo.dao.column.LanguageId;
 import io.daobab.demo.dao.column.LastUpdate;
 import io.daobab.demo.dao.column.Name;
+import io.daobab.demo.dao.column.NameLang;
 import io.daobab.model.*;
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ import java.util.Objects;
 @TableName(value = "LANGUAGE")
 public class Language extends Table<Language> implements
         LanguageId<Language, Integer>,
-        Name<Language, Lang>,
+        NameLang<Language>,
         LastUpdate<Language, LocalDateTime>,
 
         PrimaryKey<Language, Integer, LanguageId> {
