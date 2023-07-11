@@ -15,7 +15,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "LANGUAGE")
+@TableInformation(name = "LANGUAGE")
 public class Language extends Table<Language> implements
         LanguageId<Language, Integer>,
         NameLang<Language>,

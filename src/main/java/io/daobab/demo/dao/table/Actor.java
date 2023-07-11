@@ -14,7 +14,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "ACTOR")
+@TableInformation(name = "ACTOR")
 public class Actor extends Table<Actor> implements
         ActorId<Actor, Integer>,
         FirstName<Actor, String>,

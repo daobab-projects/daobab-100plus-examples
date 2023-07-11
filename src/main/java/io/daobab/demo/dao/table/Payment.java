@@ -12,7 +12,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "PAYMENT")
+@TableInformation(name = "PAYMENT")
 public class Payment extends Table<Payment> implements
         PaymentId<Payment, Integer>,
         CustomerId<Payment, Integer>,

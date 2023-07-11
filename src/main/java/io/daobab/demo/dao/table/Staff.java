@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "STAFF")
+@TableInformation(name = "STAFF")
 public class Staff extends Table<Staff> implements
         StaffId<Staff, Integer>,
         FirstName<Staff, String>,

@@ -12,7 +12,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "FILM_TEXT")
+@TableInformation(name = "FILM_TEXT")
 public class FilmText extends Table<FilmText> implements
         FilmId<FilmText, Integer>,
         Title<FilmText, String>,

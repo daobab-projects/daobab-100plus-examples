@@ -4,6 +4,7 @@ import io.daobab.creation.ColumnCache;
 import io.daobab.model.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface ReleaseYear<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
@@ -21,7 +22,7 @@ public interface ReleaseYear<E extends Entity, F> extends RelatedTo<E>, MapHandl
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, F, ReleaseYear> colReleaseYear() {
-        return ColumnCache.INSTANCE.getColumn("ReleaseYear", "RELEASE_YEAR", (Table<?>) this, LocalDate.class);
+        return ColumnCache.INSTANCE.getColumn("ReleaseYear", "RELEASE_YEAR", (Table<?>) this, LocalDateTime.class);
     }
 
 

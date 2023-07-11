@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@TableName(value = "FILM_CATEGORY")
+@TableInformation(name = "FILM_CATEGORY")
 public class FilmCategory extends Table<FilmCategory> implements
         FilmCategoryKey<FilmCategory>,
         FilmId<FilmCategory, Integer>,

@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "CATEGORY")
+@TableInformation(name = "CATEGORY", idGenerator = IdGeneratorType.SEQUENCE, sequenceName = "CATEGORY_SEQ")
 public class Category extends Table<Category> implements
         CategoryId<Category, Integer>,
         Name<Category, String>,

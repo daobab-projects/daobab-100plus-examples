@@ -12,7 +12,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "RENTAL")
+@TableInformation(name = "RENTAL")
 public class Rental extends Table<Rental> implements
         RentalId<Rental, BigDecimal>,
         RentalDate<Rental, LocalDateTime>,

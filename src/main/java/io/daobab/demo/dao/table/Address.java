@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "ADDRESS")
+@TableInformation(name = "ADDRESS")
 public class Address extends Table<Address> implements
         AddressId<Address, Integer>,
         io.daobab.demo.dao.column.Address<Address, String>,

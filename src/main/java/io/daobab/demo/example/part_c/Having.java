@@ -24,7 +24,7 @@ public class Having extends ServiceBase<List<FlatPlate>> implements FunctionWhis
     @Override
     public List<FlatPlate> call() {
         var c = tabFilm;
-        return db.select(c.colRating(), count(c.colID()).as("cnt"))
+        return db.select(c.colRating(), count(c.colID()).as("cnt",Long.class))
                 .groupBy(c.colRating())
                 .logQuery()
                 .havingGreater("cnt", 200)

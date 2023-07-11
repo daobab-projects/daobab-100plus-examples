@@ -13,12 +13,12 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "FILM")
+@TableInformation(name = "FILM")
 public class Film extends Table<Film> implements
         FilmId<Film, Integer>,
         Title<Film, String>,
         Description<Film, String>,
-        ReleaseYear<Film, LocalDate>,
+        ReleaseYear<Film, LocalDateTime>,
         LanguageId<Film, Integer>,
         OriginalLanguageId<Film, Integer>,
         RentalDuration<Film, Integer>,
@@ -45,7 +45,7 @@ public class Film extends Table<Film> implements
         return Arrays.asList(
                 new TableColumn(colFilmId()).primaryKey().size(16),
                 new TableColumn(colTitle()).size(255),
-                new TableColumn(colDescription()).size(1000000000),
+                new TableColumn(colDescription()).size(1000),
                 new TableColumn(colReleaseYear()).size(10),
                 new TableColumn(colLanguageId()).size(8),
                 new TableColumn(colOriginalLanguageId()).size(8),

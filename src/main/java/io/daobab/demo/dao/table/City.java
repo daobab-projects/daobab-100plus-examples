@@ -13,7 +13,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "CITY")
+@TableInformation(name = "CITY")
 public class City extends Table<City> implements
         CityId<City, Integer>,
         io.daobab.demo.dao.column.City<City, String>,

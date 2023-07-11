@@ -23,11 +23,10 @@ public class RemoteSelectManyCells extends ServiceBase<List<String>> {
     @Override
     public List<String> call() {
         var t = tabFilm;
-//        return remote.select(t.colTitle())
-//                .whereLess(t.colID(), 30)
+        return remote.select(t.colTitle())
+                .whereLess(t.colID(), 30)
 //                .orderDescBy(t.colTitle())
-//                .findMany();
-        return null;
+                .findMany();
     }
 
 

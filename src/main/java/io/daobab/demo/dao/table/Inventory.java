@@ -15,7 +15,7 @@ import java.util.Objects;
 
 
 @SuppressWarnings("rawtypes")
-@TableName(value = "INVENTORY")
+@TableInformation(name = "INVENTORY")
 public class Inventory extends Table<Inventory> implements
         InventoryId<Inventory, BigDecimal>,
         FilmId<Inventory, Integer>,

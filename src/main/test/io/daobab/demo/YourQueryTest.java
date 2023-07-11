@@ -30,7 +30,7 @@ class YourQueryTest implements SakilaTables, TestHelper, DummyColumnTemplate, Fu
 
         Entities<FilmActor> result2 = db.select(tabFilmActor)
                 .join(tabFilm, tabFilmActor.colFilmId(),
-                        and().equal(tabFilm.colReleaseYear(), LocalDate.of(2020,1,1)))
+                        and().equal(tabFilm.colReleaseYear(), LocalDate.of(2020,1,1).atStartOfDay()))
                 .findMany();
     }
 

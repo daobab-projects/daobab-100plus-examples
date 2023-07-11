@@ -45,7 +45,7 @@ public class ManyPlatesManyTables extends ServiceBase<Plates> {
 
     private void logResult(Plate plate, Column<?, ?, ?>... col) {
         for (var c : col) {
-            log.info("entity:" + c.getEntityClass().getSimpleName() + ",column:" + c.getColumnName() + ",value:" + plate.getValue(c));
+            log.info("entity:" + c.entityClass().getSimpleName() + ",column:" + c.getColumnName() + ",value:" + plate.getValue(c));
         }
     }
 

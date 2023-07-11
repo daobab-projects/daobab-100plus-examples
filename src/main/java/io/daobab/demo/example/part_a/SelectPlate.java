@@ -44,7 +44,7 @@ public class SelectPlate extends ServiceBase<Plate> {
 
     private void logResult(Plate plate, Column<?, ?, ?>... col) {
         for (var c : col) {
-            log.info(format("entity:%s ,column:%s ,value:%s", c.getEntityClass().getSimpleName(), c.getColumnName(), plate.getValue(c)));
+            log.info(format("entity:%s ,column:%s ,value:%s", c.entityClass().getSimpleName(), c.getColumnName(), plate.getValue(c)));
         }
     }
 

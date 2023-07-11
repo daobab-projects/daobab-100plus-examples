@@ -4,7 +4,7 @@ import io.daobab.demo.dao.table.Actor;
 import io.daobab.demo.dao.table.Customer;
 import io.daobab.demo.dao.table.FilmActor;
 import io.daobab.demo.dao.table.Payment;
-import io.daobab.model.TableName;
+import io.daobab.model.TableInformation;
 
 import java.util.Map;
 

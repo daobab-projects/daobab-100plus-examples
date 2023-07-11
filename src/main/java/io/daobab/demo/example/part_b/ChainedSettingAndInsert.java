@@ -6,7 +6,6 @@ import io.daobab.demo.dao.table.Film;
 import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -27,7 +26,7 @@ public class ChainedSettingAndInsert extends ServiceBase<Film> {
                 .setFilmId(3999)
                 .setLastUpdate(LocalDateTime.now())
                 .setDescription("Description")
-                .setReleaseYear(LocalDate.now())
+                .setReleaseYear(LocalDateTime.now())
                 .setReplacementCost(toBD(10.10))
                 .setRentalDuration(10)
                 .setRentalRate(toBD(1))
