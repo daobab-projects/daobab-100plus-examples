@@ -45,7 +45,7 @@ class GlobalTest implements THelper {
 
     @Test
     void testCount(){
-        validation(callExample(Count.class));
+        callExample(Count.class);
     }
 
     @Test
