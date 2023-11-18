@@ -1,27 +1,23 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.creation.ColumnCache;
+import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
 public interface District<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
+	default F getDistrict(){
+		return readParam("District");
+	}
 
-    default F getDistrict() {
-        return readParam("District");
-    }
-
-    default E setDistrict(F val) {
-        return storeParam("District", val);
-    }
-
-
+	default E setDistrict(F val){
+		return storeParam("District",val);
+	}
     /**
-     * table:ADDRESS,type:VARCHAR,size:20,nullable:false
+     * table:ADDRESS, type:VARCHAR, size:20, nullable:false
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    default Column<E, F, District> colDistrict() {
-        return ColumnCache.INSTANCE.getColumn("District", "DISTRICT", (Table<?>) this, String.class);
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, F,District> colDistrict(){
+		return DaobabCache.getColumn("District", "DISTRICT", (Table<?>) this, String.class);
+	}
 }

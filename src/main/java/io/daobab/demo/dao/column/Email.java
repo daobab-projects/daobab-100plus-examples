@@ -1,27 +1,24 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.creation.ColumnCache;
+import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
 public interface Email<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
+	default F getEmail(){
+		return readParam("Email");
+	}
 
-    default F getEmail() {
-        return readParam("Email");
-    }
-
-    default E setEmail(F val) {
-        return storeParam("Email", val);
-    }
-
+	default E setEmail(F val){
+		return storeParam("Email",val);
+	}
     /**
-     * table:CUSTOMER,type:VARCHAR,size:50,nullable:true
-     * table:STAFF,type:VARCHAR,size:50,nullable:true
+     * table:CUSTOMER, type:VARCHAR, size:50, nullable:true
+     * table:STAFF, type:VARCHAR, size:50, nullable:true
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    default Column<E, F, Email> colEmail() {
-        return ColumnCache.INSTANCE.getColumn("Email", "EMAIL", (Table<?>) this, String.class);
-    }
-
+	@SuppressWarnings({"rawtypes","unchecked"})
+	default Column<E, F,Email> colEmail(){
+		return DaobabCache.getColumn("Email", "EMAIL", (Table<?>) this, String.class);
+	}
 }

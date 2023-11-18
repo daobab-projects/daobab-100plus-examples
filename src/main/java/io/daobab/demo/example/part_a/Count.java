@@ -1,5 +1,6 @@
 package io.daobab.demo.example.part_a;
 
+import io.daobab.annotation.Test;
 import io.daobab.demo.DemoApplication;
 import io.daobab.demo.base.ServiceBase;
 import io.daobab.statement.function.FunctionWhispererH2;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  * - How to count
  * ---------------------------------------------------------
  */
+@Test
 @Component
 public class Count extends ServiceBase<Long> implements FunctionWhispererH2 {
 

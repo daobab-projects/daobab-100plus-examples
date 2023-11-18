@@ -63,6 +63,15 @@
 			<version>8.0.22</version>
 		</dependency>
 
+		<dependency>
+				<groupId>io.daobab</groupId>
+				<artifactId>untitled-annotation-processor</artifactId>
+				<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+
+
+
 
 	</dependencies>
 
@@ -79,12 +88,21 @@
 				</configuration>
 			</plugin>
 
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<release>${java.version}</release>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>io.daobab</groupId>
+							<artifactId>untitled-annotation-processor</artifactId>
+							<version>1.0-SNAPSHOT</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 		</plugins>

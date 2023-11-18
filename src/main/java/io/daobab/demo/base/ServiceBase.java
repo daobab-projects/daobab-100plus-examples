@@ -1,6 +1,5 @@
 package io.daobab.demo.base;
 
-import io.daobab.converter.JsonProvider;
 import io.daobab.demo.dao.SakilaDataBase;
 import io.daobab.demo.dao.SakilaRemote;
 import io.daobab.demo.dao.SakilaTables;
@@ -50,9 +49,9 @@ public abstract class ServiceBase<V> implements SakilaTables, ToTableConverter {
             return;
         }
         log.info("************************************ -= result =- ************************************");
-        if (data instanceof JsonProvider) {
-            log.info(((JsonProvider) data).toJson());
-        } else if (data instanceof Collection) {
+//        if (data instanceof JsonProvider) {
+//            log.info(((JsonProvider) data).toJson());
+         if (data instanceof Collection) {
             ((Collection<?>) data).forEach(o -> log.info(o.toString()));
         } else if (data instanceof Object[]) {
             Arrays.stream(((Object[]) data)).forEach(o -> log.info(o.toString()));

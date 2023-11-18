@@ -1,6 +1,6 @@
 package io.daobab.demo.dao.column;
 
-import io.daobab.creation.ColumnCache;
+import io.daobab.creation.DaobabCache;
 import io.daobab.demo.dao.Lang;
 import io.daobab.model.*;
 
@@ -21,7 +21,7 @@ public interface NameLang<E extends Entity> extends RelatedTo<E>, MapHandler<E> 
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     default Column<E, Lang, NameLang> colName() {
-        return ColumnCache.INSTANCE.getColumn("Name", "NAME", (Table<?>) this, Lang.class);
+        return DaobabCache.getColumn("Name", "NAME", (Table<?>) this, Lang.class);
     }
 
 
