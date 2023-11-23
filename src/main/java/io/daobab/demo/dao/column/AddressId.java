@@ -4,15 +4,17 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface AddressId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface AddressId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getAddressId(){
+	default Integer getAddressId(){
 		return readParam("AddressId");
 	}
 
-	default E setAddressId(F val){
+	default E setAddressId(Integer val){
 		return storeParam("AddressId",val);
 	}
+
     /**
      * table:ADDRESS, type:SMALLINT, size:16, nullable:false
      * table:CUSTOMER, type:SMALLINT, size:16, nullable:false
@@ -20,7 +22,7 @@ public interface AddressId<E extends Entity, F> extends RelatedTo<E>, MapHandler
      * table:STORE, type:SMALLINT, size:16, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,AddressId> colAddressId(){
+	default Column<E, Integer,AddressId> colAddressId(){
 		return DaobabCache.getColumn("AddressId", "ADDRESS_ID", (Table<?>) this, Integer.class);
 	}
 }

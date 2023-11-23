@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface Picture<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface Picture<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getPicture(){
+	default byte[] getPicture(){
 		return readParam("Picture");
 	}
 
-	default E setPicture(F val){
+	default E setPicture(byte[] val){
 		return storeParam("Picture",val);
 	}
+
     /**
      * table:STAFF, type:VARBINARY, size:1000000000, nullable:true
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,Picture> colPicture(){
+	default Column<E, byte[],Picture> colPicture(){
 		return DaobabCache.getColumn("Picture", "PICTURE", (Table<?>) this, byte[].class);
 	}
 }

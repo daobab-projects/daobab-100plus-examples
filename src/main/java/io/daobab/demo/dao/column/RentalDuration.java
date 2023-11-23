@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface RentalDuration<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface RentalDuration<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getRentalDuration(){
+	default Integer getRentalDuration(){
 		return readParam("RentalDuration");
 	}
 
-	default E setRentalDuration(F val){
+	default E setRentalDuration(Integer val){
 		return storeParam("RentalDuration",val);
 	}
+
     /**
      * table:FILM, type:TINYINT, size:8, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,RentalDuration> colRentalDuration(){
+	default Column<E, Integer,RentalDuration> colRentalDuration(){
 		return DaobabCache.getColumn("RentalDuration", "RENTAL_DURATION", (Table<?>) this, Integer.class);
 	}
 }

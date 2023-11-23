@@ -4,15 +4,17 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface StoreId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface StoreId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getStoreId(){
+	default Integer getStoreId(){
 		return readParam("StoreId");
 	}
 
-	default E setStoreId(F val){
+	default E setStoreId(Integer val){
 		return storeParam("StoreId",val);
 	}
+
     /**
      * table:CUSTOMER, type:TINYINT, size:8, nullable:false
      * table:INVENTORY, type:TINYINT, size:8, nullable:false
@@ -20,7 +22,7 @@ public interface StoreId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E
      * table:STORE, type:TINYINT, size:8, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,StoreId> colStoreId(){
+	default Column<E, Integer,StoreId> colStoreId(){
 		return DaobabCache.getColumn("StoreId", "STORE_ID", (Table<?>) this, Integer.class);
 	}
 }

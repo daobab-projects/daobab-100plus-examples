@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface Rating<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface Rating<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getRating(){
+	default String getRating(){
 		return readParam("Rating");
 	}
 
-	default E setRating(F val){
+	default E setRating(String val){
 		return storeParam("Rating",val);
 	}
+
     /**
      * table:FILM, type:VARCHAR, size:5, nullable:true
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,Rating> colRating(){
+	default Column<E, String,Rating> colRating(){
 		return DaobabCache.getColumn("Rating", "RATING", (Table<?>) this, String.class);
 	}
 }

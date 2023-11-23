@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface Phone<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface Phone<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getPhone(){
+	default String getPhone(){
 		return readParam("Phone");
 	}
 
-	default E setPhone(F val){
+	default E setPhone(String val){
 		return storeParam("Phone",val);
 	}
+
     /**
      * table:ADDRESS, type:VARCHAR, size:20, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,Phone> colPhone(){
+	default Column<E, String,Phone> colPhone(){
 		return DaobabCache.getColumn("Phone", "PHONE", (Table<?>) this, String.class);
 	}
 }

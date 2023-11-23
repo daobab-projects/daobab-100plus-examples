@@ -4,15 +4,17 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface FilmId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface FilmId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getFilmId(){
+	default Integer getFilmId(){
 		return readParam("FilmId");
 	}
 
-	default E setFilmId(F val){
+	default E setFilmId(Integer val){
 		return storeParam("FilmId",val);
 	}
+
     /**
      * table:FILM, type:SMALLINT, size:16, nullable:false
      * table:FILM_ACTOR, type:SMALLINT, size:16, nullable:false
@@ -21,7 +23,7 @@ public interface FilmId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E>
      * table:INVENTORY, type:SMALLINT, size:16, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,FilmId> colFilmId(){
+	default Column<E, Integer,FilmId> colFilmId(){
 		return DaobabCache.getColumn("FilmId", "FILM_ID", (Table<?>) this, Integer.class);
 	}
 }

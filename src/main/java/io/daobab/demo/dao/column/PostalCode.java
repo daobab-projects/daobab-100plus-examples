@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface PostalCode<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface PostalCode<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getPostalCode(){
+	default String getPostalCode(){
 		return readParam("PostalCode");
 	}
 
-	default E setPostalCode(F val){
+	default E setPostalCode(String val){
 		return storeParam("PostalCode",val);
 	}
+
     /**
      * table:ADDRESS, type:VARCHAR, size:10, nullable:true
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,PostalCode> colPostalCode(){
+	default Column<E, String,PostalCode> colPostalCode(){
 		return DaobabCache.getColumn("PostalCode", "POSTAL_CODE", (Table<?>) this, String.class);
 	}
 }

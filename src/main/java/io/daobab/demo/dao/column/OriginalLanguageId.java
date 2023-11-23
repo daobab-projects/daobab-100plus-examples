@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface OriginalLanguageId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface OriginalLanguageId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getOriginalLanguageId(){
+	default Integer getOriginalLanguageId(){
 		return readParam("OriginalLanguageId");
 	}
 
-	default E setOriginalLanguageId(F val){
+	default E setOriginalLanguageId(Integer val){
 		return storeParam("OriginalLanguageId",val);
 	}
+
     /**
      * table:FILM, type:TINYINT, size:8, nullable:true
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,OriginalLanguageId> colOriginalLanguageId(){
+	default Column<E, Integer,OriginalLanguageId> colOriginalLanguageId(){
 		return DaobabCache.getColumn("OriginalLanguageId", "ORIGINAL_LANGUAGE_ID", (Table<?>) this, Integer.class);
 	}
 }

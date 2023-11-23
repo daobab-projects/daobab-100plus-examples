@@ -15,7 +15,7 @@ import java.util.Map;
 
 @TableInformation(name = "CITY")
 public class CountryCity extends City implements
-        io.daobab.demo.dao.column.Country<City, Integer>,
+        io.daobab.demo.dao.column.Country<City>,
         EnhancedEntity {
 
     private static final Country tabCountry = new Country();

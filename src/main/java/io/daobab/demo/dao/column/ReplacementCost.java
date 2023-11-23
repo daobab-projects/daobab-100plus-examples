@@ -2,22 +2,24 @@ package io.daobab.demo.dao.column;
 
 import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
-
 import java.math.BigDecimal;
-public interface ReplacementCost<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getReplacementCost(){
+@SuppressWarnings("unused")
+public interface ReplacementCost<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
+
+	default BigDecimal getReplacementCost(){
 		return readParam("ReplacementCost");
 	}
 
-	default E setReplacementCost(F val){
+	default E setReplacementCost(BigDecimal val){
 		return storeParam("ReplacementCost",val);
 	}
+
     /**
      * table:FILM, type:DECIMAL, size:5, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,ReplacementCost> colReplacementCost(){
+	default Column<E, BigDecimal,ReplacementCost> colReplacementCost(){
 		return DaobabCache.getColumn("ReplacementCost", "REPLACEMENT_COST", (Table<?>) this, BigDecimal.class);
 	}
 }

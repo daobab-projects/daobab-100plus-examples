@@ -4,22 +4,24 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface StaffId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface StaffId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getStaffId(){
+	default Integer getStaffId(){
 		return readParam("StaffId");
 	}
 
-	default E setStaffId(F val){
+	default E setStaffId(Integer val){
 		return storeParam("StaffId",val);
 	}
+
     /**
      * table:PAYMENT, type:TINYINT, size:8, nullable:false
      * table:RENTAL, type:TINYINT, size:8, nullable:false
      * table:STAFF, type:TINYINT, size:8, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,StaffId> colStaffId(){
+	default Column<E, Integer,StaffId> colStaffId(){
 		return DaobabCache.getColumn("StaffId", "STAFF_ID", (Table<?>) this, Integer.class);
 	}
 }

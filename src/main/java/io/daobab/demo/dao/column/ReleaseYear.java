@@ -2,22 +2,25 @@ package io.daobab.demo.dao.column;
 
 import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
-
 import java.time.LocalDate;
-public interface ReleaseYear<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+import java.time.LocalDateTime;
 
-	default F getReleaseYear(){
+@SuppressWarnings("unused")
+public interface ReleaseYear<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
+
+	default LocalDateTime getReleaseYear(){
 		return readParam("ReleaseYear");
 	}
 
-	default E setReleaseYear(F val){
+	default E setReleaseYear(LocalDateTime val){
 		return storeParam("ReleaseYear",val);
 	}
+
     /**
      * table:FILM, type:DATE, size:10, nullable:true
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,ReleaseYear> colReleaseYear(){
+	default Column<E, LocalDate,ReleaseYear> colReleaseYear(){
 		return DaobabCache.getColumn("ReleaseYear", "RELEASE_YEAR", (Table<?>) this, LocalDate.class);
 	}
 }

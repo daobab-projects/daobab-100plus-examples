@@ -4,21 +4,23 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface Name<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface Name<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getName(){
+	default String getName(){
 		return readParam("Name");
 	}
 
-	default E setName(F val){
+	default E setName(String val){
 		return storeParam("Name",val);
 	}
+
     /**
      * table:CATEGORY, type:VARCHAR, size:25, nullable:false
      * table:LANGUAGE, type:VARCHAR, size:20, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,Name> colName(){
+	default Column<E, String,Name> colName(){
 		return DaobabCache.getColumn("Name", "NAME", (Table<?>) this, String.class);
 	}
 }

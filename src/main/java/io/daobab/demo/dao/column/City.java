@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface City<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface City<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getCity(){
+	default String getCity(){
 		return readParam("City");
 	}
 
-	default E setCity(F val){
+	default E setCity(String val){
 		return storeParam("City",val);
 	}
+
     /**
      * table:CITY, type:VARCHAR, size:50, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,City> colCity(){
+	default Column<E, String,City> colCity(){
 		return DaobabCache.getColumn("City", "CITY", (Table<?>) this, String.class);
 	}
 }

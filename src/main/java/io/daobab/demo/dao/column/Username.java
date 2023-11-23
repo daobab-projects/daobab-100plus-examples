@@ -4,20 +4,22 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface Username<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface Username<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getUsername(){
+	default String getUsername(){
 		return readParam("Username");
 	}
 
-	default E setUsername(F val){
+	default E setUsername(String val){
 		return storeParam("Username",val);
 	}
+
     /**
      * table:STAFF, type:VARCHAR, size:16, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,Username> colUsername(){
+	default Column<E, String,Username> colUsername(){
 		return DaobabCache.getColumn("Username", "USERNAME", (Table<?>) this, String.class);
 	}
 }

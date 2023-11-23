@@ -2,17 +2,19 @@ package io.daobab.demo.dao.column;
 
 import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
-
 import java.time.LocalDateTime;
-public interface LastUpdate<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getLastUpdate(){
+@SuppressWarnings("unused")
+public interface LastUpdate<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
+
+	default LocalDateTime getLastUpdate(){
 		return readParam("LastUpdate");
 	}
 
-	default E setLastUpdate(F val){
+	default E setLastUpdate(LocalDateTime val){
 		return storeParam("LastUpdate",val);
 	}
+
     /**
      * table:ACTOR, type:TIMESTAMP, size:26, nullable:false
      * table:ADDRESS, type:TIMESTAMP, size:26, nullable:false
@@ -31,7 +33,7 @@ public interface LastUpdate<E extends Entity, F> extends RelatedTo<E>, MapHandle
      * table:STORE, type:TIMESTAMP, size:26, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,LastUpdate> colLastUpdate(){
+	default Column<E, LocalDateTime,LastUpdate> colLastUpdate(){
 		return DaobabCache.getColumn("LastUpdate", "LAST_UPDATE", (Table<?>) this, LocalDateTime.class);
 	}
 }

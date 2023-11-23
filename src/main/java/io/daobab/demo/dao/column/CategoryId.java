@@ -4,21 +4,23 @@ import io.daobab.creation.DaobabCache;
 import io.daobab.model.*;
 
 
-public interface CategoryId<E extends Entity, F> extends RelatedTo<E>, MapHandler<E> {
+@SuppressWarnings("unused")
+public interface CategoryId<E extends Entity> extends RelatedTo<E>, MapHandler<E> {
 
-	default F getCategoryId(){
+	default Integer getCategoryId(){
 		return readParam("CategoryId");
 	}
 
-	default E setCategoryId(F val){
+	default E setCategoryId(Integer val){
 		return storeParam("CategoryId",val);
 	}
+
     /**
      * table:CATEGORY, type:TINYINT, size:8, nullable:false
      * table:FILM_CATEGORY, type:TINYINT, size:8, nullable:false
      */
 	@SuppressWarnings({"rawtypes","unchecked"})
-	default Column<E, F,CategoryId> colCategoryId(){
+	default Column<E, Integer,CategoryId> colCategoryId(){
 		return DaobabCache.getColumn("CategoryId", "CATEGORY_ID", (Table<?>) this, Integer.class);
 	}
 }
